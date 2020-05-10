@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://pavan1739:pavan1739@workplace-pduxm.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://pavan1739:pavan1739@workplace-pduxm.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }
