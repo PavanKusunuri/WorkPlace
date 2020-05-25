@@ -8,7 +8,9 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-froms/CreateProfile";
 import EditProfile from "./components/profile-froms/EditProfile";
+import AddExperience from "./components/profile-froms/AddExperience";
 import PrivateRoute from "./components/routing/PrivateRoute";
+
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -45,6 +47,11 @@ const App = () => {
                 exact
                 path="/edit-profile"
                 component={EditProfile}
+              />
+              <PrivateRoute
+                exact
+                path="/add-experience"
+                component={AddExperience}
               />
             </Switch>
           </section>
