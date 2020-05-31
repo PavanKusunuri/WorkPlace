@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addPost } from "react-redux";
+import { addPost } from "../../actions/post";
 
 const PostForm = ({ addPost }) => {
   const [text, setText] = useState("");
@@ -24,7 +24,7 @@ const PostForm = ({ addPost }) => {
           rows="5"
           placeholder="Create a post"
           value={text}
-          onChange={(e) => settext(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
           required
         ></textarea>
         <input type="submit" class="btn btn-dark my-1" value="Submit" />

@@ -12,6 +12,7 @@ import AddEducation from "../profile-froms/AddEducation";
 import PrivateRoute from "../routing/PrivateRoute";
 import Profile from "../profile/Profile";
 import Posts from "../posts/Posts";
+import Post from "../post/Post";
 import NotFound from "../layout/NotFound";
 
 export const Routes = () => {
@@ -30,6 +31,8 @@ export const Routes = () => {
         <PrivateRoute exact path="/add-experience" component={AddExperience} />
         <PrivateRoute exact path="/add-education" component={AddEducation} />
         <PrivateRoute exact path="/posts" component={Posts} />
+        <PrivateRoute exact path="/posts/:id" component={Post} />
+
         <Route component={NotFound} />
       </Switch>
     </section>
