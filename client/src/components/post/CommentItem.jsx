@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -6,6 +6,7 @@ import Moment from "react-moment";
 import { deleteComment } from "../../actions/post";
 
 const CommentItem = ({
+  auth,
   postId,
   comment: { _id, name, text, avatar, user, date },
   deleteComment,
@@ -27,9 +28,9 @@ const CommentItem = ({
           <button
             type="button"
             className="btn btn-danger"
-            onClick={(e) => deleteComment(postId, _id)}
+            onClick={() => deleteComment(postId, _id)}
           >
-            <i className="fas fas-times"></i>
+            <i className="fas fa-times"></i>
           </button>
         )}
       </div>
@@ -41,6 +42,7 @@ CommentItem.propTypes = {
   postId: PropTypes.number.isRequired,
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  deleteComment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
