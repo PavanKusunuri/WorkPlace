@@ -8,7 +8,7 @@ import store from "./store";
 import "./App.css";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
-
+import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
 // Lazy Imports
 
 const LandingPage = lazy(() => import("./components/layout/Landing"));
@@ -28,10 +28,12 @@ const App = () => {
         <Fragment>
           <Navbar />
           <Switch>
-            <Suspense fallback={<div>...Loading</div>}>
-              <Route exact path="/" component={LandingPage} />
-              <Route component={Routes} />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<div>...Loading</div>}>
+                <Route exact path="/" component={LandingPage} />
+                <Route component={Routes} />
+              </Suspense>
+            </ErrorBoundary>
           </Switch>
         </Fragment>
       </Router>
