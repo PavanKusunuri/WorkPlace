@@ -1,39 +1,50 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import Register from "../auth/Register";
-import Login from "../auth/Login";
 import Alert from "../layout/Alert";
-import Dashboard from "../dashboard/Dashboard";
-import CreateProfile from "../profile-froms/CreateProfile";
-import EditProfile from "../profile-froms/EditProfile";
-import Profiles from "../profiles/Profiles";
-import AddExperience from "../profile-froms/AddExperience";
-import AddEducation from "../profile-froms/AddEducation";
-import PrivateRoute from "../routing/PrivateRoute";
-import Profile from "../profile/Profile";
-import Posts from "../posts/Posts";
-import Post from "../post/Post";
-import NotFound from "../layout/NotFound";
+
+const Register = lazy(() => import("../auth/Register"));
+const Login = lazy(() => import("../auth/Login"));
+const Dashboard = lazy(() => import("../dashboard/Dashboard"));
+const CreateProfile = lazy(() => import("../profile-froms/CreateProfile"));
+const EditProfile = lazy(() => import("../profile-froms/EditProfile"));
+const Profiles = lazy(() => import("../profiles/Profiles"));
+const AddExperience = lazy(() => import("../profile-froms/AddExperience"));
+const AddEducation = lazy(() => import("../profile-froms/AddEducation"));
+const PrivateRoute = lazy(() => import("../routing/PrivateRoute"));
+const Profile = lazy(() => import("../profile/Profile"));
+const Posts = lazy(() => import("../posts/Posts"));
+const Post = lazy(() => import("../post/Post"));
+const NotFound = lazy(() => import("../layout/NotFound"));
 
 export const Routes = () => {
   return (
     <section className="container">
       <Alert />
       <Switch>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profiles" component={Profiles} />
-        <Route exact path="/profile/:id" component={Profile} />
+        <Suspense fallback={<div>...Loading</div>}>
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/profiles" component={Profiles} />
+          <Route exact path="/profile/:id" component={Profile} />
 
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/create-profile" component={CreateProfile} />
-        <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-        <PrivateRoute exact path="/add-experience" component={AddExperience} />
-        <PrivateRoute exact path="/add-education" component={AddEducation} />
-        <PrivateRoute exact path="/posts" component={Posts} />
-        <PrivateRoute exact path="/posts/:id" component={Post} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute
+            exact
+            path="/create-profile"
+            component={CreateProfile}
+          />
+          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+          <PrivateRoute
+            exact
+            path="/add-experience"
+            component={AddExperience}
+          />
+          <PrivateRoute exact path="/add-education" component={AddEducation} />
+          <PrivateRoute exact path="/posts" component={Posts} />
+          <PrivateRoute exact path="/posts/:id" component={Post} />
 
-        <Route component={NotFound} />
+          <Route component={NotFound} />
+        </Suspense>
       </Switch>
     </section>
   );
