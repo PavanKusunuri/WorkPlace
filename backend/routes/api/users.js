@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken"
 import config from "config";
 import { check, validationResult } from "express-validator";
 
-import User from "../../models/User";
+import User from "../../models/User.js";
 
 // @route   GET api/users
 // @desc    Register user
@@ -81,4 +81,4 @@ router.post(
   }
 );
 
-export default Router;
+export default router;

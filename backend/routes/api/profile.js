@@ -2,11 +2,11 @@ import express from "express";
 import request from "request";
 import config from "config";
 const router = express.Router();
-import auth from "../../middleware/auth";
-import { check, validationResult } from "express-validator/check";
+import auth from "../../middleware/auth.js";
+import { check, validationResult } from "express-validator";
 
-import Profile from "../../models/Profile";
-import User from "../../models/User";
+import Profile from "../../models/Profile.js";
+import User from "../../models/User.js";
 // @route  GET api/profile/me
 // @desc   Get current users Profile
 // @access Public

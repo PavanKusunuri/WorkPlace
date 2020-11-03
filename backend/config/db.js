@@ -1,15 +1,13 @@
-import mongoose from ("mongoose");
-import config from ("config");
-const db = config.get("mongoURI");
+import mongoose from "mongoose";
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(db, {
-            useNewUrlParser: true,
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
             useUnifiedTopology: true,
+            useNewUrlParser: true,
             useCreateIndex: true,
         });
-        console.log("MongoDB Connected ...");
+        console.log(`MONGODB connected: ${conn.connection.host}`.cyan.underline)
     } catch (err) {
         console.log(err.message);
         //Exit process with failure
