@@ -1,5 +1,12 @@
-const express = require("express");
-const connectDB = require("./config/db");
+import express from "express"
+import connectDB from "./config/db.js"
+
+// Route Imports
+import users from './routes/api/users.js'
+import profile from './routes/api/profile.js'
+import posts from './routes/api/posts.js'
+import auth from './routes/api/auth.js'
+
 const app = express();
 
 // Connect DB
@@ -11,10 +18,10 @@ app.use(express.json({ extended: false }));
 app.get("/", (req, res) => res.send("API Running"));
 
 // Define Routes
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/profile", require("./routes/api/profile"));
-app.use("/api/posts", require("./routes/api/posts"));
-app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
+app.use("/api/auth", auth);
 
 const PORT = process.env.PORT || 5000;
 
