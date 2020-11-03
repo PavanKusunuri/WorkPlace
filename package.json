@@ -1,12 +1,13 @@
 {
   "name": "workplace",
   "version": "1.0.0",
-  "description": "Social Network for Developers",
+  "description": "It's a job portal website for developers looking for Job change and Companies looking for Developers",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
-    "client": "npm start --prefix client",
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Pavan Kusunuri",
