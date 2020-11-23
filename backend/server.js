@@ -1,3 +1,6 @@
+import path from 'path'
+import dotenv from 'dotenv'
+import colors from 'colors'
 import express from "express"
 import connectDB from "./config/db.js"
 
@@ -7,10 +10,12 @@ import profile from './routes/api/profile.js'
 import posts from './routes/api/posts.js'
 import auth from './routes/api/auth.js'
 
-const app = express();
+dotenv.config()
 
 // Connect DB
 connectDB();
+
+const app = express();
 
 // Init Middleware
 app.use(express.json({ extended: false }));
