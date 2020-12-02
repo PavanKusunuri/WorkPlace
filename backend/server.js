@@ -10,7 +10,7 @@ import profile from './routes/api/profile.js'
 import posts from './routes/api/posts.js'
 import auth from './routes/api/auth.js'
 
-dotenv.config()
+dotenv.config({ path: "./backend/config/config.env" });
 
 // Connect DB
 connectDB();
