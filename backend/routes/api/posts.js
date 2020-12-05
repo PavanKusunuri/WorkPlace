@@ -1,11 +1,11 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import { check, validationResult } from "express-validator";
-import auth from "../../middleware/auth.js";
+const { check, validationResult } = require("express-validator/check");
+const auth = require("../../middleware/auth.js");
 
-import Post from "../../models/Post.js";
-import Profile from "../../models/Profile.js";
-import User from "../../models/User.js";
+const Post = require("../../models/Post.js");
+const Profile = require("../../models/Profile.js");
+const User = require("../../models/User.js");
 
 // @route  POST api/posts
 // @desc   Create a post
@@ -233,4 +233,4 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -1,13 +1,14 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import gravatar from "gravatar";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken"
-import config from "config";
-import { check, validationResult } from "express-validator";
+const gravatar = require("gravatar");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
+const config = require("config");
+const { check, validationResult } = require('express-validator/check');
 
-import User from "../../models/User.js";
+const User = require("../../models/User.js");
 
+// const { check, validationResult } = validator
 // @route   GET api/users
 // @desc    Register user
 // @access  Public
@@ -81,4 +82,4 @@ router.post(
   }
 );
 
-export default router;
+module.exports = router;

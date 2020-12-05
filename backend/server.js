@@ -1,15 +1,9 @@
-import path from 'path'
-import express from "express"
-import colors from 'colors'
+const express = require('express');
+const colors = require('colors');
+const path = require('path');
+const connectDB = require('./config/db');
+const dotenv = require('dotenv')
 
-import dotenv from 'dotenv'
-import connectDB from "./config/db.js"
-
-// Route Imports
-import users from './routes/api/users.js'
-import profile from './routes/api/profile.js'
-import posts from './routes/api/posts.js'
-import auth from './routes/api/auth.js'
 
 dotenv.config();
 
@@ -17,6 +11,19 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// // Init Middleware
+// app.use(express.json({ extended: false }));
+
+
+// Route Imports
+const users = require('./routes/api/users.js')
+const profile = require('./routes/api/profile.js')
+const posts = require('./routes/api/posts.js')
+const auth = require('./routes/api/auth.js')
+
+
+
 
 // Init Middleware
 app.use(express.json({ extended: false }));
