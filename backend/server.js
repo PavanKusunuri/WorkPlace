@@ -3,6 +3,7 @@ const colors = require('colors');
 const path = require('path');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv')
+const cors = require('cors')
 
 
 dotenv.config();
@@ -28,7 +29,10 @@ const auth = require('./routes/api/auth.js')
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-// app.get("/", (req, res) => res.send("API Running"));
+
+app.use(cors())
+
+app.get("/", (req, res) => res.send("API Running"));
 
 // Define Routes
 app.use("/api/users", users);

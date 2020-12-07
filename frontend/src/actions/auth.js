@@ -11,14 +11,17 @@ import {
   CLEAR_PROFILE,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
+import { backendUrl } from '../config/apiconfig';
 
+
+console.log(backendUrl)
 //  Load User
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get(`http://localhost:5000/api/auth`);
+    const res = await axios.get(`${backendUrl}/api/auth`);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -40,7 +43,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 
   const body = JSON.stringify({ name, email, password });
   try {
-    const res = await axios.post(`api/users`, body, config);
+    const res = await axios.post(`${backendUrl}/api/users`, body, config);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
@@ -72,21 +75,21 @@ export const login = (email, password) => async (dispatch) => {
 
   const body = JSON.stringify({ email, password });
   try {
-    const res = await axios.post(`http://localhost:5000/api/auth/`, body, config);
+    const res = await axios.post(`${backendUrl}/api/auth/`, body, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
     dispatch(loadUser());
   } catch (err) {
-    // const errors = err.response.data.errors;
+    const errors = err.response.data.errors;
     console.log(err)
-    // if (errors) {
-    //   errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    // }
-    // dispatch({
-    //   type: LOGIN_FAIL,
-    // });
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+    dispatch({
+      type: LOGIN_FAIL,
+    });
   }
 };
 

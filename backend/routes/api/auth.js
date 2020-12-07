@@ -41,7 +41,9 @@ router.post(
     const { email, password } = req.body;
 
     try {
+      console.log(email)
       let user = await User.findOne({ email });
+      console.log(user)
 
       if (!user) {
         return res
@@ -50,11 +52,11 @@ router.post(
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
-
+      console.log(isMatch)
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ msg: "Invalid Credentials" }] });
+          .json({ errors: [{ msg: "dentials" }] });
       }
 
       const payload = {
@@ -65,7 +67,8 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        process.env.jwtSecret,
+        // config.get("jwtSecret"),
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
