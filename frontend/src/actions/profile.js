@@ -35,6 +35,8 @@ export const getProfiles = () => async (dispatch) => {
   try {
     const res = await axios.get(`${backendUrl}/api/profile`);
 
+
+
     dispatch({
       type: GET_PROFILES,
       payload: res.data,
