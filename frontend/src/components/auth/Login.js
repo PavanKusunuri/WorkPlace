@@ -25,6 +25,9 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  margin: {
+    margin: 20,
+  }
 });
 
 const Login = ({ login, isAuthenticated }) => {
@@ -75,7 +78,9 @@ const Login = ({ login, isAuthenticated }) => {
             </div>
           </form>
         </CardContent>
-        <input type="submit" className="btn btn-primary" value="Login" />
+        <Button variant="outlined" onClick={onSubmit} size="medium" color="primary" className={classes.margin}>
+          Login
+        </Button>
         <p className="my-1">Don't have an account? <Link to="/register">Register</Link></p>
       </Card>
     </Fragment>

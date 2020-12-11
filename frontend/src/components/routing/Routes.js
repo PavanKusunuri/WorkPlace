@@ -4,7 +4,7 @@ import Alert from "../layout/Alert";
 
 const Register = lazy(() => import("../auth/Register"));
 const Login = lazy(() => import("../auth/Login"));
-const Dashboard = lazy(() => import("../dashboard/Dashboard"));
+const Home = lazy(() => import("../dashboard/Dashboard"));
 const CreateProfile = lazy(() => import("../profile-froms/CreateProfile"));
 const EditProfile = lazy(() => import("../profile-froms/EditProfile"));
 const Profiles = lazy(() => import("../profiles/Profiles"));
@@ -27,7 +27,7 @@ export const Routes = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/profiles" component={Profiles} />
           <Route exact path="/profile/:id" component={Profile} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/home" component={Home} />
           <PrivateRoute exact path="/employers" component={EmployersDashboard} />
           <PrivateRoute
             exact
