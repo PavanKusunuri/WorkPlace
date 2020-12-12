@@ -1,42 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './spinner.scss';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
 
-const Spinner = () => {
-    return (
-        large ?
-        <>
-        {
-            active ?
-            <div className={styles.showSpinner}>
-<div className={styles.loader}>
-    <svg className={styles.circular} viewBox="25 25 50 50">
-        <circle className={styles.path} cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10" />
+export default function CircularIndeterminate() {
+  const classes = useStyles();
 
-
-    </svg>
-</div>
-            </div>: ''
-        }
-        </>
-        : <>
-        <div className={`${className} ${styles.spinner} ${active ? styles.active : ''}`} />
-        </>
-    )
+  return (
+    <div className={classes.root}>
+      <CircularProgress />
+    </div>
+  );
 }
-
-Spinner.propTypes = {
-  active: PropTypes.bool,
-  size:PropTypes.string,
-  className: PropTypes.string
-}
-
-Spinner.defaultProps = {
-  active: false,
-  size: '20px',
-  className: '',
-  large: false
-}
-
-export default Spinner;
