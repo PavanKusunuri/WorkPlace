@@ -44,7 +44,7 @@ export const Routes = () => {
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
 
-          <Route component={NotFound} />
+          {/* <Route component={NotFound} /> */}
         </Suspense>
       </Switch>
     </section>
