@@ -6,7 +6,6 @@
     "axios": "0.18.0",
     "bootstrap": "4.5.3",
     "moment": "2.24.0",
-    "node-sass": "5.0.0",
     "react": "16.8.6",
     "react-bootstrap": "1.4.0",
     "react-dom": "16.8.6",
