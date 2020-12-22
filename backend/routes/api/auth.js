@@ -14,12 +14,11 @@ const User = require("../../models/User.js");
 // @access Public
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+    const user = await User.findById(req.user.id)
   } catch (err) {
-    console.error(err.message);
     res.status(500).send("Server Error");
   }
+  sendTokenResponse(user, 200, res);
 });
 
 //  @route POST api/auth
@@ -41,10 +40,7 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      console.log(email)
       let user = await User.findOne({ email });
-      console.log(user)
-
       if (!user) {
         return res
           .status(400)
@@ -52,7 +48,6 @@ router.post(
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
-      console.log(isMatch)
       if (!isMatch) {
         return res
           .status(400)
@@ -68,7 +63,6 @@ router.post(
       jwt.sign(
         payload,
         process.env.jwtSecret,
-        // config.get("jwtSecret"),
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
@@ -76,10 +70,33 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
       res.status(500).send("Server error");
     }
   }
 );
+
+
+// Get token from model, create cookie and send response
+const sendTokenResponse = (user, statusCode, res) => {
+  // Create token
+  const token = user.getSignedJwtToken();
+
+  const options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === "production") {
+    options.secure = true;
+  }
+
+  res.status(statusCode).cookie("token", token, options).json({
+    success: true,
+    token,
+  });
+};
+
 
 module.exports = router;
