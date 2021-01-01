@@ -1,11 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const gravatar = require("gravatar");
+// const express = require("express");
+// const router = express.Router();
+// const gravatar = require("gravatar");
 const config = require("config");
+const generateToken = require("../utils/generateToken.js")
+const User = require("../models/userModel.js");
 
-const User = require("../../models/User.js");
-
-// const { check, validationResult } = validator
 // @route   GET api/users
 // @desc    Register user
 // @access  Public
