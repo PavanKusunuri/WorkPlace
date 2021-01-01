@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
@@ -54,4 +55,4 @@ const PostSchema = new Schema({
 
 const Post = mongoose.model('Post', PostSchema)
 
-module.exports = Post;
+export default Post
