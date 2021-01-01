@@ -1,8 +1,9 @@
 {
-  "name": "devconnector",
+  "name": "workplace_backend",
   "version": "1.0.0",
   "description": "Social network for developers",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",

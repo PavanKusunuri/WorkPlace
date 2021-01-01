@@ -1,10 +1,15 @@
-const express = require('express');
-const colors = require('colors');
-const path = require('path');
-const connectDB = require('./config/db');
-const dotenv = require('dotenv')
-const cors = require('cors')
+import express from 'express'
+import colors from 'colors'
+import path from 'path'
+import connectDB from "./config/db.js"
+import dotenv from 'dotenv'
+import cors from 'cors'
+import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
+import userRoutes from './routes/api/users.js';
+import postRoutes from './routes/api/posts.js';
+import authRoutes from './routes/api/auth.js';
+import profileRoutes from './routes/api/profile.js';
 
 dotenv.config();
 
@@ -13,32 +18,20 @@ connectDB();
 
 const app = express();
 
-// // Init Middleware
-// app.use(express.json({ extended: false }));
-
-
-// Route Imports
-const users = require('./routes/api/users.js')
-const profile = require('./routes/api/profile.js')
-const posts = require('./routes/api/posts.js')
-const auth = require('./routes/api/auth.js')
-
-
-
+app.use(cors())
 
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-
-app.use(cors())
-
 app.get("/", (req, res) => res.send("API Running"));
 
-// Define Routes
-app.use("/api/users", users);
-app.use("/api/profile", profile);
-app.use("/api/posts", posts);
-app.use("/api/auth", auth);
+app.use("/api/users", userRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/auth", authRoutes);
+
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;
 

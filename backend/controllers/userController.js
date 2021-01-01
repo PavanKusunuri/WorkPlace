@@ -1,6 +1,8 @@
 // const express = require("express");
 // const router = express.Router();
 // const gravatar = require("gravatar");
+const express = require('express');
+const asyncHandler = require('express-async-handler')
 const config = require("config");
 const generateToken = require("../utils/generateToken.js")
 const User = require("../models/userModel.js");
@@ -31,7 +33,6 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Invalid User Data')
     }
-
 })
 
-
+module.exports = registerUser;
