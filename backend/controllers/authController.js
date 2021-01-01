@@ -1,3 +1,6 @@
+import asyncHandler from 'express-async-handler';
+
+
 // @route GET api/auth
 // @desc  Test route
 // @access Public

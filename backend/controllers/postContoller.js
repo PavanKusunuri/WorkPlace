@@ -28,7 +28,9 @@ const createPost = asyncHandler(async (req, res) => {
 // @route  GET api/posts
 // @desc   GET all posts
 // @access Private
-router.get("/", auth, async (req, res) => {
+
+const getAllPosts = asyncHandler(async (req, res) => {
+    // router.get("/", auth, async (req, res) => {
     try {
         const posts = await Post.find().sort({ date: -1 });
         res.json(posts);
@@ -37,12 +39,17 @@ router.get("/", auth, async (req, res) => {
     }
 });
 
+// }
+// )
+
 
 
 // @route  GET api/posts/:id
 // @desc   GET post by ID
 // @access Private
-router.get("/:id", auth, async (req, res) => {
+
+const getPostsById = asyncHandler(async (req, res) => {
+    // router.get("/:id", auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -58,6 +65,8 @@ router.get("/:id", auth, async (req, res) => {
         res.status(500).server("Server Error");
     }
 });
+// })
+
 
 
 
@@ -65,7 +74,8 @@ router.get("/:id", auth, async (req, res) => {
 //  @desc    Delete a Post
 //  @access  Private
 
-router.delete("/:id", auth, async (req, res) => {
+const deletePost = asyncHandler(async (req, res) => {
+    // router.delete("/:id", auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -90,11 +100,16 @@ router.delete("/:id", auth, async (req, res) => {
     }
 });
 
+// })
+
+
 
 // @route  PUT api/posts/like/:id
 // @desc   Like a post
 // @access Private
-router.put("/like/:id", auth, async (req, res) => {
+
+const likePost = asyncHandler(async (req, res) => {
+    // router.put("/like/:id", auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -116,10 +131,14 @@ router.put("/like/:id", auth, async (req, res) => {
     }
 });
 
+// })
+
 // @route  PUT api/posts/unlike/:id
 // @desc   Like a post
 // @access Private
-router.put("/unlike/:id", auth, async (req, res) => {
+
+const unLikePost = asyncHandler(async (req, res) => {
+    // router.put("/unlike/:id", auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -147,45 +166,52 @@ router.put("/unlike/:id", auth, async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+// })
+
 
 // @route  POST api/posts/comment/:id
 // @desc   Comment a post
 // @access Private
-router.post(
-    "/comment/:id",
-    [auth, [check("text", "Text is required").not().isEmpty()]],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        try {
-            const user = await User.findById(req.user.id).select("-password");
-            const post = await Post.findById(req.params.id);
 
-            const newComment = {
-                text: req.body.text,
-                name: user.name,
-                avatar: user.avatar,
-                user: req.user.id,
-            };
+const addCommentOnPost = asyncHandler(async (req, res) => {
+    // router.post(
+    //     "/comment/:id",
+    //     [auth, [check("text", "Text is required").not().isEmpty()]],
+    // async (req, res) => {
+    //     const errors = validationResult(req);
+    //     if (!errors.isEmpty()) {
+    //         return res.status(400).json({ errors: errors.array() });
+    //     }
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+        const post = await Post.findById(req.params.id);
 
-            post.comments.unshift(newComment);
+        const newComment = {
+            text: req.body.text,
+            name: user.name,
+            avatar: user.avatar,
+            user: req.user.id,
+        };
 
-            await post.save();
+        post.comments.unshift(newComment);
 
-            res.json(post.comments);
-        } catch (err) {
-            res.status(500).send("Server Error");
-        }
+        await post.save();
+
+        res.json(post.comments);
+    } catch (err) {
+        res.status(500).send("Server Error");
     }
+}
 );
+// })
+
 
 // @route   DELETE api/posts/comment/:id/:comment_id
 // @desc    Delete comment
 // @access  Private
 
-router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+const deleteCommentOnPost = asyncHandler(async (req, res) => {
+    // router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -217,5 +243,16 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+// })
 
-export { createPost }
+
+export {
+    createPost,
+    getAllPosts,
+    deleteCommentOnPost,
+    unLikePost,
+    likePost,
+    deletePost,
+    getPostsById,
+    addCommentOnPost
+}

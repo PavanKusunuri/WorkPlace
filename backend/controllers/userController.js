@@ -1,11 +1,11 @@
 // const express = require("express");
 // const router = express.Router();
 // const gravatar = require("gravatar");
-const express = require('express');
-const asyncHandler = require('express-async-handler')
-const config = require("config");
-const generateToken = require("../utils/generateToken.js")
-const User = require("../models/userModel.js");
+// const express = require('express');
+import asyncHandler from 'express-async-handler'
+// const config = require("config");
+import generateToken from "../utils/generateToken.js"
+import User from "../models/userModel.js";
 
 // @route   GET api/users
 // @desc    Register user
