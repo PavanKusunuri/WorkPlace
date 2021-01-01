@@ -19,7 +19,7 @@ const Login = ({ login, isAuthenticated }) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     login(email, password);
   };
@@ -51,7 +51,7 @@ const Login = ({ login, isAuthenticated }) => {
                 value={password}
                 onChange={(e) => handleChange(e)} />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={(e) => onSubmit(e)}>
               Login
   </Button>
             <p className="my-1">Don't have an account? <Link to="/register">Register</Link></p>

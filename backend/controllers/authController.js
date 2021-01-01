@@ -1,5 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import config from 'config'
 
 // @route GET api/auth
 // @desc  Test route
@@ -8,10 +11,10 @@ import User from '../models/userModel.js'
 const getAuthentication = asyncHandler(async (req, res) => {
     try {
         const user = await User.findById(req.user.id)
+        sendTokenResponse(user, 200, res);
     } catch (err) {
         res.status(500).send("Server Error");
     }
-    sendTokenResponse(user, 200, res);
 })
 
 

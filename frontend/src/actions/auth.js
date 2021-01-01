@@ -17,6 +17,7 @@ import { backendUrl } from '../config/apiconfig';
 console.log(backendUrl)
 //  Load User
 export const loadUser = () => async (dispatch) => {
+  console.log("load User is called...")
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }

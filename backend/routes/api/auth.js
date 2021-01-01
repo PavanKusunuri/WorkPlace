@@ -4,6 +4,7 @@ const router = express.Router();
 // const bcrypt = require("bcryptjs");
 // const jwt = require("jsonwebtoken");
 // const { check, validationResult } = require('express-validator/check');
+// import { protect } from '../../middleware/authMiddleware.js'
 import { getAuthentication, postAuthenticatedUser } from '../../controllers/authController.js';
 
 
