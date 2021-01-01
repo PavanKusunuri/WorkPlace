@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator/check");
-const auth = require("../../middleware/auth.js");
+import { protect } from '../../middleware/authMiddleware';
 
 const Post = require("../../models/postModel.js");
 const Profile = require("../../models/profileModel.js");
@@ -12,7 +12,7 @@ const User = require("../../models/userModel.js");
 // @access Private
 router.post(
   "/",
-  [auth, [check("text", "Text is required").not().isEmpty()]],
+  [protect, [check("text", "Text is required").not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
