@@ -56,10 +56,12 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark"
+      <Navbar
+        bg="dark"
         variant="dark"
         expand="lg"
-        collapseOnSelect>
+        collapseOnSelect
+        style={{ height: 100 }}>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>Work Place</Navbar.Brand>
