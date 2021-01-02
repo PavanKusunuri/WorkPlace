@@ -28,6 +28,7 @@ export default function (state = initialState, action) {
         user: payload,
       };
     case LOGIN_SUCCESS:
+      console.log("payload" + payload)
       localStorage.setItem("token", payload.token);
       return {
         ...state,

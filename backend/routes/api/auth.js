@@ -6,7 +6,7 @@ const router = express.Router();
 // const { check, validationResult } = require('express-validator/check');
 // import { protect } from '../../middleware/authMiddleware.js'
 import { getAuthentication, postAuthenticatedUser } from '../../controllers/authController.js';
-
+import { protect } from '../../middleware/authMiddleware.js'
 
 
 router.route('/').get(getAuthentication)

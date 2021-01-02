@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import "./sass/main.scss";
 import setAuthToken from "./utils/setAuthToken";
-// import { loadUser } from "./actions/auth";
+import { loadUser } from "./actions/auth";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
 // Lazy Imports
 
@@ -19,9 +19,9 @@ if (localStorage.token) {
 }
 
 const App = () => {
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // }, []);
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
     <Provider store={store}>
       <Router>
