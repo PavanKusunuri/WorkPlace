@@ -14,7 +14,11 @@ import {
 import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAIL
+  USER_REGISTER_FAIL,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAIL,
+  USER_LOGOUT
 } from '../constants/userConstants';
 
 // import setAuthToken from "../utils/setAuthToken";
@@ -41,6 +45,45 @@ console.log(backendUrl)
 //     });
 //   }
 // };
+
+
+export const login = (email, password) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_LOGIN_REQUEST
+    })
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+    const { data } = await axios.post(
+      '/api/users/login',
+      { email, password },
+      config
+    )
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data
+    })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload: error.response && error.response.data.message ?
+        error.response.data.message : error.response
+    })
+  }
+}
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT })
+  // dispatch({ type: USER_DETAIL_RESET })
+  // dispatch({ type: ORDER_LIST_MY_RESET })
+}
+
 
 //  Register user
 export const register = (name, email, password) => async (dispatch) => {
@@ -77,31 +120,31 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 }
 
-// Login User
-export const login = (email, password) => async dispatch => {
-  const body = { email, password };
+// // Login User
+// export const login = (email, password) => async dispatch => {
+//   const body = { email, password };
 
-  try {
-    const res = await axios.post(`${backendUrl}/api/auth/`, body);
+//   try {
+//     const res = await axios.post(`${backendUrl}/api/auth/`, body);
 
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data
-    });
+//     dispatch({
+//       type: LOGIN_SUCCESS,
+//       payload: res.data
+//     });
 
-    // dispatch(loadUser());
-  } catch (err) {
-    const errors = err.response.data.errors;
+//     // dispatch(loadUser());
+//   } catch (err) {
+//     const errors = err.response.data.errors;
 
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-    }
+//     if (errors) {
+//       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+//     }
 
-    dispatch({
-      type: LOGIN_FAIL
-    });
-  }
-};
+//     dispatch({
+//       type: LOGIN_FAIL
+//     });
+//   }
+// };
 // const body = JSON.stringify({ name, email, password });
 // try {
 //   console.log(res)
@@ -164,7 +207,7 @@ export const login = (email, password) => async dispatch => {
 
 //  Logout / Clear profile
 
-export const logout = () => (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
-  dispatch({ type: LOGOUT });
-};
+// export const logout = () => (dispatch) => {
+//   dispatch({ type: CLEAR_PROFILE });
+//   dispatch({ type: LOGOUT });
+// };
