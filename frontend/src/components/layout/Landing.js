@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 
-const Landing = ({ isAuthenticated }) => {
-  if (isAuthenticated) {
+const Landing = () => {
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+  if (!userInfo) {
     return <Redirect to="/dashboard" />;
   }
   return (
@@ -29,8 +31,4 @@ const Landing = ({ isAuthenticated }) => {
   );
 };
 
-const mapStateToPorps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToPorps, null)(Landing);
+export default Landing;

@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import Alert from "../layout/Alert";
+// import Alert from "../layout/Alert";
 
 const Register = lazy(() => import("../auth/Register"));
 const Login = lazy(() => import("../auth/Login"));
@@ -20,7 +20,7 @@ const NotFound = lazy(() => import("../layout/NotFound"));
 export const Routes = () => {
   return (
     <section className="container">
-      <Alert />
+      {/* <Alert /> */}
       <Switch>
         <Suspense fallback={<div>...Loading</div>}>
           <Route exact path="/register" component={Register} />
@@ -44,7 +44,7 @@ export const Routes = () => {
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
 
-          {/* <Route component={NotFound} /> */}
+          <Route component={NotFound} />
         </Suspense>
       </Switch>
     </section>

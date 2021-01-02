@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
@@ -30,9 +30,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
+  console.log("this needs to be..")
+
+  // if (isAuthenticated) {
+  //   return <Redirect to="/dashboard" />;
+  // }
   return (
     <Fragment>
       <Card>
@@ -89,13 +91,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   );
 };
 
-Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-};
+// Register.propTypes = {
+//   setAlert: PropTypes.func.isRequired,
+//   register: PropTypes.func.isRequired,
+// };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
+// const mapStateToProps = (state) => ({
+//   isAuthenticated: state.auth.isAuthenticated,
+// });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default Register;

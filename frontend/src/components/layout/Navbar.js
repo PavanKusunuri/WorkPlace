@@ -101,14 +101,14 @@ const Header = () => {
                       Developers
                 </NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/profiles">
+                  <LinkContainer to="/register">
                     <NavDropdown.Item>
-                      For Employers
+                      Register
                 </NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/profiles">
+                  <LinkContainer to="/login">
                     <NavDropdown.Item>
-                      Posts
+                      Login
                 </NavDropdown.Item>
                   </LinkContainer>
                 </>
