@@ -2,6 +2,8 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import generateToken from '../utils/generateToken';
+
 import config from 'config'
 
 // @route GET api/auth
@@ -9,11 +11,16 @@ import config from 'config'
 // @access Public
 
 const getAuthentication = asyncHandler(async (req, res) => {
+    console.log(req.user)
+    console.log("getAuthentication is called")
     try {
-        const user = await User.findById(req.user.id)
-        sendTokenResponse(user, 200, res);
+        const user = await User.findById(req.user.id);
+        console.log(req.user.id)
+        console.log(user)
+        // await sendTokenResponse(user, 200, res);
     } catch (err) {
-        res.status(500).send("Server Error");
+        console.log(err)
+        res.status(500).send("Server Error 123");
     }
 })
 
@@ -23,70 +30,46 @@ const getAuthentication = asyncHandler(async (req, res) => {
 //  @access Public
 
 const postAuthenticatedUser = asyncHandler(async (req, res) => {
-
-
     const { email, password } = req.body;
-
-    try {
-        let user = await User.findOne({ email });
-        if (!user) {
-            return res
-                .status(400)
-                .json({ errors: [{ msg: "Invalid Credentials" }] });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res
-                .status(400)
-                .json({ errors: [{ msg: "dentials" }] });
-        }
-
-        const payload = {
-            user: {
-                id: user.id,
-            },
-        };
-
-        jwt.sign(
-            payload,
-            process.env.jwtSecret,
-            { expiresIn: 360000 },
-            (err, token) => {
-                if (err) throw err;
-                res.json({ token });
-            }
-        );
-    } catch (err) {
-        res.status(500).send("Server error");
+    const user = await User.findOne({ email: email });
+    if (user && (await user.matchPassword(password))) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user._id),
+        })
+    } else {
+        res.status(401)
+        throw new Error('Invalid email or password')
     }
-}
-);
+})
 
 
 
 
 
-// Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
-    // Create token
-    const token = user.getSignedJwtToken();
 
-    const options = {
-        expires: new Date(
-            Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-        ),
-        httpOnly: true,
-    };
+// // Get token from model, create cookie and send response
+// const sendTokenResponse = (user, statusCode, res) => {
+//     // Create token
+//     const token = user.getSignedJwtToken();
 
-    if (process.env.NODE_ENV === "production") {
-        options.secure = true;
-    }
+//     const options = {
+//         expires: new Date(
+//             Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+//         ),
+//         httpOnly: true,
+//     };
 
-    res.status(statusCode).cookie("token", token, options).json({
-        success: true,
-        token,
-    });
-};
+//     if (process.env.NODE_ENV === "production") {
+//         options.secure = true;
+//     }
+
+//     res.status(statusCode).cookie("token", token, options).json({
+//         success: true,
+//         token,
+//     });
+// };
 
 export { getAuthentication, postAuthenticatedUser }
