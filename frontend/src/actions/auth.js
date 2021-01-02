@@ -10,33 +10,33 @@ import {
   LOGOUT,
   CLEAR_PROFILE,
 } from "./types";
-import setAuthToken from "../utils/setAuthToken";
+// import setAuthToken from "../utils/setAuthToken";
 import { backendUrl } from '../config/apiconfig';
 
 
 console.log(backendUrl)
 //  Load User
-export const loadUser = () => async (dispatch) => {
-  console.log("load User is called...")
-  // if (localStorage.token) {
-  //   setAuthToken(localStorage.token);
-  // }
-  try {
-    const res = await axios.get(`${backendUrl}/api/auth`);
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.log(err)
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
-};
+// export const loadUser = () => async (dispatch) => {
+//   console.log("load User is called...")
+//   // if (localStorage.token) {
+//   //   setAuthToken(localStorage.token);
+//   // }
+//   try {
+//     const res = await axios.get(`${backendUrl}/api/auth`);
+//     dispatch({
+//       type: USER_LOADED,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     console.log(err)
+//     dispatch({
+//       type: AUTH_ERROR,
+//     });
+//   }
+// };
 
 //  Register user
-export const register = (formData) => async (dispatch) => {
+export const register = (name, email, password) => async (dispatch) => {
   // const config = {
   //   headers: {
   //     "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const register = (formData) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    dispatch(loadUser());
+    // dispatch(loadUser());
   }
   catch (err) {
     console.log(err)
@@ -77,7 +77,7 @@ export const login = (email, password) => async dispatch => {
       payload: res.data
     });
 
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
