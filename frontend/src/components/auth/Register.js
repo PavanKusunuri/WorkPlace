@@ -7,7 +7,7 @@ import { Card } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from 'react-redux';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = () => {
 
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       setAlert("Passwords do not match", "danger");
       //   console.log("Passwords donot Match");
     } else {
-      dispatch(register({ name, email, password }));
+      dispatch(register(name, email, password));
       console.log("SUCCESS");
     }
   };
