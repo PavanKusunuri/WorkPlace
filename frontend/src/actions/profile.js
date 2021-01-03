@@ -14,9 +14,18 @@ import {
 import { backendUrl } from '../config/apiconfig'
 //  Get current users profile
 
-export const getCurrentProfile = () => async (dispatch) => {
+export const getCurrentProfile = () => async (dispatch, getState) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
   try {
-    const res = await axios.get(`${backendUrl}/api/profile/me`);
+    const res = await axios.get(`${backendUrl}/api/profile/me`, config);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
@@ -30,13 +39,19 @@ export const getCurrentProfile = () => async (dispatch) => {
 };
 
 //  Get all profiles
-export const getProfiles = () => async (dispatch) => {
+export const getProfiles = () => async (dispatch, getState) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
   dispatch({ type: CLEAR_PROFILE });
   try {
-    const res = await axios.get(`${backendUrl}/api/profile`);
-
-
-
+    const res = await axios.get(`${backendUrl}/api/profile`, config);
     dispatch({
       type: GET_PROFILES,
       payload: res.data,
@@ -50,9 +65,18 @@ export const getProfiles = () => async (dispatch) => {
 };
 
 //  Get all profile by Id
-export const getProfileById = (userId) => async (dispatch) => {
+export const getProfileById = (userId) => async (dispatch, getState) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
   try {
-    const res = await axios.get(`${backendUrl}/api/profile/user/${userId}`);
+    const res = await axios.get(`${backendUrl}/api/profile/user/${userId}`, config);
 
     dispatch({
       type: GET_PROFILE,
@@ -68,8 +92,17 @@ export const getProfileById = (userId) => async (dispatch) => {
 
 //  Get Github repos
 export const getGithubRepos = (username) => async (dispatch) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
   try {
-    const res = await axios.get(`${backendUrl}/api/profile/github/${username}`);
+    const res = await axios.get(`${backendUrl}/api/profile/github/${username}`, config);
 
     dispatch({
       type: GET_REPOS,
@@ -86,14 +119,19 @@ export const getGithubRepos = (username) => async (dispatch) => {
 //  Create or Update Profile
 
 export const createProfile = (formData, history, edit = false) => async (
-  dispatch
+  dispatch, getState
 ) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+
     const res = await axios.post(`${backendUrl}/api/profile`, formData, config);
     dispatch({
       type: GET_PROFILE,
@@ -118,13 +156,17 @@ export const createProfile = (formData, history, edit = false) => async (
 };
 
 //  Add Experience
-export const addExperience = (formData, history) => async (dispatch) => {
+export const addExperience = (formData, history) => async (dispatch, getState) => {
   try {
+    const {
+      userLogin: { userInfo },
+    } = getState()
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
       },
-    };
+    }
 
     const res = await axios.put(`${backendUrl}/api/profile/experience`, formData, config);
 
@@ -152,14 +194,17 @@ export const addExperience = (formData, history) => async (dispatch) => {
 };
 
 //  Add Education
-export const addEducation = (formData, history) => async (dispatch) => {
+export const addEducation = (formData, history) => async (dispatch, getState) => {
   try {
+    const {
+      userLogin: { userInfo },
+    } = getState()
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
       },
-    };
-
+    }
     const res = await axios.put(`${backendUrl}/api/profile/education`, formData, config);
 
     dispatch({
@@ -187,9 +232,18 @@ export const addEducation = (formData, history) => async (dispatch) => {
 
 //  Delete Experience
 
-export const deleteExperience = (id) => async (dispatch) => {
+export const deleteExperience = (id) => async (dispatch, getState) => {
   try {
-    const res = await axios.delete(`${backendUrl}/api/profile/experience/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.delete(`${backendUrl}/api/profile/experience/${id}`, config);
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -207,9 +261,18 @@ export const deleteExperience = (id) => async (dispatch) => {
 
 //  Delete Experience
 
-export const deleteEducation = (id) => async (dispatch) => {
+export const deleteEducation = (id) => async (dispatch, getState) => {
   try {
-    const res = await axios.delete(`${backendUrl}/api/profile/education/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.delete(`${backendUrl}/api/profile/education/${id}`, getState);
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -227,10 +290,19 @@ export const deleteEducation = (id) => async (dispatch) => {
 
 //  Delete account & profile
 
-export const deleteAccount = () => async (dispatch) => {
+export const deleteAccount = () => async (dispatch, getState) => {
   if (window.confirm("Are you sure ? This can not be undone!")) {
     try {
-      await axios.delete(`${backendUrl}/api/profile`);
+      const {
+        userLogin: { userInfo },
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      await axios.delete(`${backendUrl}/api/profile`, config);
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
