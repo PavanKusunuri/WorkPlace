@@ -5,10 +5,10 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { addLike, removeLike, deletePost } from "../../actions/post";
 const PostItem = ({
+  userLogin,
   addLike,
   removeLike,
   deletePost,
-  auth,
   showActions,
   post: { _id, text, name, avatar, user, likes, comments, date },
 }) => (
@@ -47,7 +47,7 @@ const PostItem = ({
               <span class="comment-count">{comments.length}</span>
             )}
           </Link>
-          {!auth.loading && user === auth.user._id && (
+          {!userLogin.userInfo && user === userLogin.userInfo.user._id && (
             <button
               onClick={(e) => deletePost(_id)}
               type="button"
@@ -75,7 +75,7 @@ PostItem.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  userLogin: state.userLogin,
 });
 export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
   PostItem

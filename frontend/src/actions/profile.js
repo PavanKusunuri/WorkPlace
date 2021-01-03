@@ -91,7 +91,7 @@ export const getProfileById = (userId) => async (dispatch, getState) => {
 };
 
 //  Get Github repos
-export const getGithubRepos = (username) => async (dispatch) => {
+export const getGithubRepos = (username) => async (dispatch, getState) => {
   const {
     userLogin: { userInfo },
   } = getState()
