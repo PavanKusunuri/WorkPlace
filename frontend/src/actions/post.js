@@ -13,9 +13,18 @@ import {
 import { backendUrl } from '../config/apiconfig'
 
 //  Get Posts
-export const getPosts = () => async (dispatch) => {
+export const getPosts = () => async (dispatch, getState) => {
   try {
-    const res = await axios.get(`${backendUrl}/api/posts`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.get(`${backendUrl}/api/posts`, config);
 
     dispatch({
       type: GET_POSTS,
