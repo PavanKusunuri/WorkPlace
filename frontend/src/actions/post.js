@@ -42,9 +42,18 @@ export const getPosts = () => async (dispatch, getState) => {
 };
 
 //  Add Like
-export const addLike = (id) => async (dispatch) => {
+export const addLike = (id) => async (dispatch, getState) => {
   try {
-    const res = await axios.put(`${backendUrl}/api/posts/like/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.put(`${backendUrl}/api/posts/like/${id}`, config);
 
     dispatch({
       type: UPDATE_LIKES,
@@ -81,9 +90,18 @@ export const removeLike = (id) => async (dispatch) => {
 };
 
 //  Delete Post
-export const deletePost = (id) => async (dispatch) => {
+export const deletePost = (id) => async (dispatch, getState) => {
   try {
-    const res = await axios.delete(`${backendUrl}/api/posts/unlike/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.delete(`${backendUrl}/api/posts/unlike/${id}`, config);
 
     dispatch({
       type: DELETE_POST,
@@ -102,12 +120,16 @@ export const deletePost = (id) => async (dispatch) => {
 };
 
 //  Add Post
-export const addPost = (formData) => async (dispatch) => {
+export const addPost = (formData) => async (dispatch, getState) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
     },
-  };
+  }
 
   try {
     const res = await axios.post(`${backendUrl}/api/posts/`, formData, config);
@@ -129,9 +151,18 @@ export const addPost = (formData) => async (dispatch) => {
 };
 
 //  Get Post
-export const getPost = (id) => async (dispatch) => {
+export const getPost = (id) => async (dispatch, getState) => {
   try {
-    const res = await axios.get(`${backendUrl}/api/posts/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.get(`${backendUrl}/api/posts/${id}`, config);
 
     dispatch({
       type: GET_POST,
@@ -149,12 +180,17 @@ export const getPost = (id) => async (dispatch) => {
 };
 
 //  Add Comment
-export const addComment = (postId, formData) => async (dispatch) => {
+export const addComment = (postId, formData) => async (dispatch, getState) => {
+  const {
+    userLogin: { userInfo },
+  } = getState()
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
     },
-  };
+  }
+
 
   try {
     const res = await axios.post(
@@ -180,9 +216,18 @@ export const addComment = (postId, formData) => async (dispatch) => {
 };
 
 //  Delete Comment
-export const deleteComment = (postId, commentId) => async (dispatch) => {
+export const deleteComment = (postId, commentId) => async (dispatch, getState) => {
   try {
-    const res = await axios.delete(`${backendUrl}/api/posts/comment/${postId}/${commentId}`);
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    const res = await axios.delete(`${backendUrl}/api/posts/comment/${postId}/${commentId}`, config);
 
     dispatch({
       type: REMOVE_COMMENT,
