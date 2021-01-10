@@ -15,7 +15,6 @@ const Profile = lazy(() => import("../profile/Profile"));
 const Posts = lazy(() => import("../posts/Posts"));
 const Post = lazy(() => import("../post/Post"));
 const EmployersDashboard = lazy(() => import('../../modules/employers/Employers'))
-const NotFound = lazy(() => import("../layout/NotFound"));
 
 export const Routes = () => {
   return (
@@ -44,7 +43,6 @@ export const Routes = () => {
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
 
-          {/* <Route component={NotFound} /> */}
         </Suspense>
       </Switch>
     </section>
