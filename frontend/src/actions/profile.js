@@ -43,6 +43,8 @@ export const getProfiles = () => async (dispatch, getState) => {
   const {
     userLogin: { userInfo },
   } = getState()
+
+  console.log(userInfo)
   const config = {
     headers: {
       'Content-Type': 'application/json',
