@@ -5,7 +5,7 @@ import Navbar from "./components/layout/Navbar";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
-import "./sass/main.scss";
+import "./App.scss";
 import setAuthToken from "./utils/setAuthToken";
 // import { loadUser } from "./actions/auth";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary";

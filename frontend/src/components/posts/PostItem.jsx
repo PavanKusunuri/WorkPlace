@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { addLike, removeLike, deletePost } from "../../actions/post";
-import './posts.scss';
+import styles from './posts.module.scss';
 
 const PostItem = ({
   userLogin,
@@ -23,7 +23,7 @@ const PostItem = ({
     </div>
     <div>
       <p class="my-1">{text}</p>
-      <p className="post-date">
+      <p className={styles.postDate}>
         Posted on <Moment format="YYYY/MM/DD">{date}</Moment>{" "}
       </p>
       {showActions && (

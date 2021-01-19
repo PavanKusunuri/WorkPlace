@@ -24,7 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -36,6 +37,17 @@
       "not dead",
       "not op_mini all"
     ],
+    "jest": {
+      "collectCoverageFrom": [
+        "**/*.{js,jsx,ts,tsx}",
+        "!**/node_modules/**",
+        "!**/build/**",
+        "!**/definitionfiles/**",
+        "!**/WebWorkers/**",
+        "!**/*/mock.ts",
+        "!src/setupTests.ts"
+      ]
+    },
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
