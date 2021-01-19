@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, NavDropdown } from 'react-bootstrap';
 import { logout } from "../../actions/auth";
 
 const Header = () => {
@@ -21,62 +21,60 @@ const Header = () => {
         variant="dark"
         expand="lg"
         collapseOnSelect
-        style={{ height: 100 }}>
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>Work Place</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Collapse id="basic-navbar-nav">
-            {userInfo ? (
-              <>
+        style={{ height: 50 }}>
+        <LinkContainer to="/">
+          <Navbar.Brand>Work Place</Navbar.Brand>
+        </LinkContainer>
+        <Navbar.Collapse id="basic-navbar-nav">
+          {userInfo ? (
+            <>
+              <NavDropdown.Item>
+                {userInfo.name}
+              </NavDropdown.Item>
+              <LinkContainer to="/profiles">
                 <NavDropdown.Item>
-                  {userInfo.name}
+                  Developers
                 </NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/employers">
+                <NavDropdown.Item>
+                  For Employers
+                </NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/posts">
+                <NavDropdown.Item>
+                  Posts
+                </NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/home">
+                <NavDropdown.Item>
+                  Home
+                </NavDropdown.Item>
+              </LinkContainer>
+              <NavDropdown.Item onClick={logoutHandler}>
+                Logout
+                </NavDropdown.Item>
+            </>
+          ) : (
+              <>
                 <LinkContainer to="/profiles">
                   <NavDropdown.Item>
                     Developers
                 </NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/employers">
+                <LinkContainer to="/register">
                   <NavDropdown.Item>
-                    For Employers
+                    Register
                 </NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/posts">
+                <LinkContainer to="/login">
                   <NavDropdown.Item>
-                    Posts
+                    Login
                 </NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/home">
-                  <NavDropdown.Item>
-                    Home
-                </NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
               </>
-            ) : (
-                <>
-                  <LinkContainer to="/profiles">
-                    <NavDropdown.Item>
-                      Developers
-                </NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/register">
-                    <NavDropdown.Item>
-                      Register
-                </NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavDropdown.Item>
-                      Login
-                </NavDropdown.Item>
-                  </LinkContainer>
-                </>
-              )}
-          </Navbar.Collapse>
-        </Container>
+            )}
+        </Navbar.Collapse>
       </Navbar>
     </header>
   )
