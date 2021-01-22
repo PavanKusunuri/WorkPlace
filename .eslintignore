@@ -1,0 +1,5 @@
+**/src/index.js
+**/build/**
+**/config/**
+**/node_modules/**
+**/__tests__/**
