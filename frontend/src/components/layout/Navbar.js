@@ -43,7 +43,7 @@ const Header = () => {
               </LinkContainer>
               <LinkContainer to="/posts">
                 <NavDropdown.Item>
-                  Posts
+                  NewsFeed
                 </NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/home">
