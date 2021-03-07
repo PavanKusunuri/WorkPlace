@@ -23,7 +23,7 @@ const Header = () => {
         collapseOnSelect
         style={{ height: 50 }}>
         <LinkContainer to="/">
-          <Navbar.Brand>Work Place</Navbar.Brand>
+          <Navbar.Brand>Workplace</Navbar.Brand>
         </LinkContainer>
         <Navbar.Collapse id="basic-navbar-nav">
           {userInfo ? (
@@ -56,24 +56,24 @@ const Header = () => {
                 </NavDropdown.Item>
             </>
           ) : (
-              <>
-                <LinkContainer to="/profiles">
-                  <NavDropdown.Item>
-                    Developers
+            <>
+              <LinkContainer to="/profiles">
+                <NavDropdown.Item>
+                  Developers
                 </NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/register">
-                  <NavDropdown.Item>
-                    Register
+              </LinkContainer>
+              <LinkContainer to="/register">
+                <NavDropdown.Item>
+                  Register
                 </NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/login">
-                  <NavDropdown.Item>
-                    Login
+              </LinkContainer>
+              <LinkContainer to="/login">
+                <NavDropdown.Item>
+                  Login
                 </NavDropdown.Item>
-                </LinkContainer>
-              </>
-            )}
+              </LinkContainer>
+            </>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </header>

@@ -40,7 +40,7 @@ const Register = () => {
     <Fragment>
         <section className={styles.registerContent}>
         <div className={styles.companyIntro}>
-          <div> Work Place</div>
+          <div> Workplace</div>
           <p>
             The main objective of this application is to reduce the gap between developers and companies to build the Next thing much faster.
           </p>
@@ -87,10 +87,10 @@ const Register = () => {
                 onChange={(e) => onChange(e)}
               />
             </div>
-            <Button onClick={onSubmit} className="btn btn-primary">Agree & Submit </Button>
+            <Button className={styles.registerButton} onClick={onSubmit} className="btn btn-primary">Agree & Submit </Button>
           </form>
           <p className="my-1">
-            Already have an account? <Link to="/login">Login</Link>
+            Already on WorkPlace ? <Link to="/login">Login</Link>
           </p>
         </Card.Body>
       </Card>
