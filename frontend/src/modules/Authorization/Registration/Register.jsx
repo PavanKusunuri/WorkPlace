@@ -39,6 +39,9 @@ const Register = () => {
   // }
   return (
     <Fragment>
+        <div className={styles.registerHeading}>
+            <span className={styles.headingText}> Work Place</span>
+        </div>
       <Card>
         <Card.Body>
           <h3 className={styles.intro}>Tell us about your self</h3>

@@ -1,3 +1,14 @@
+.registerHeading {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px 0px;
+    .headingText{
+        color: #000080;
+        font-size: 25px;
+        font-weight: 600;
+    }
+}
 .intro {
     color: orange;
     font-size: 25px;
