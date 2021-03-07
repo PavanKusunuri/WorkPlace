@@ -2,8 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 // import Alert from "../layout/Alert";
 
-const Register = lazy(() => import("../auth/Register"));
-const Login = lazy(() => import("../auth/Login"));
+const Register = lazy(() => import("../../modules/Authorization/Registration"));
+const Login = lazy(() => import("../../modules/Authorization/Login"));
 const Home = lazy(() => import("../dashboard/Dashboard"));
 const CreateProfile = lazy(() => import("../profile-froms/CreateProfile"));
 const EditProfile = lazy(() => import("../profile-froms/EditProfile"));

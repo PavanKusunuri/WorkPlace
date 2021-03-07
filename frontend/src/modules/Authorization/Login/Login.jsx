@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../../actions/auth";
+import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
 import { Card, Form, Button } from 'react-bootstrap';
-import { userLoginReducer } from "../../reducers/auth";
+import { userLoginReducer } from "../../../reducers/auth";
 
 
 const Login = () => {

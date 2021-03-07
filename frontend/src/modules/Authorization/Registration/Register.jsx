@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
 // import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { setAlert } from "../../actions/alert";
-import { register } from "../../actions/auth";
+import { setAlert } from "../../../actions/alert";
+import { register } from "../../../actions/auth";
 import { Card } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from 'react-redux';
