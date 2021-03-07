@@ -6,6 +6,7 @@ import { register } from "../../actions/auth";
 import { Card } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from 'react-redux';
+import styles from './register.module.scss';
 
 const Register = () => {
 
@@ -29,11 +30,9 @@ const Register = () => {
       //   console.log("Passwords donot Match");
     } else {
       dispatch(register(name, email, password));
-      console.log("SUCCESS");
     }
   };
 
-  console.log("this needs to be..")
 
   // if (isAuthenticated) {
   //   return <Redirect to="/dashboard" />;
@@ -42,7 +41,7 @@ const Register = () => {
     <Fragment>
       <Card>
         <Card.Body>
-          <h3 className="small">Tell us about your self</h3>
+          <h3 className={styles.intro}>Tell us about your self</h3>
           <form className="form" onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
               <input
