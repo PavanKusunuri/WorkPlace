@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './register.module.scss';
@@ -27,8 +27,7 @@ const Register = () => {
     e.preventDefault();
     if (password !== password2) {
       setAlert("Passwords do not match", "danger");
-      //   console.log("Passwords donot Match");
-    } else {
+        } else {
       dispatch(register(name, email, password));
     }
   };
@@ -39,13 +38,17 @@ const Register = () => {
   // }
   return (
     <Fragment>
-        <div className={styles.registerHeading}>
-            <span className={styles.headingText}> Work Place</span>
-        </div>
-      <Card>
+        <section className={styles.registerContent}>
+        <div className={styles.companyIntro}>
+          <div> Work Place</div>
+          <p>
+            The main objective of this application is to reduce the gap between developers and companies to build the Next thing much faster.
+          </p>
+          </div>
+      <Card className={styles.registerCard}>
         <Card.Body>
-          <h3 className={styles.intro}>Tell us about your self</h3>
-          <form className="form" onSubmit={(e) => onSubmit(e)}>
+          <h3 className={styles.intro}>Register</h3>
+          <form className="form">
             <div className="form-group">
               <input
                 type="text"
@@ -84,14 +87,14 @@ const Register = () => {
                 onChange={(e) => onChange(e)}
               />
             </div>
-            <input type="submit" className="btn btn-primary" value="Register" />
+            <Button onClick={onSubmit} className="btn btn-primary">Agree & Submit </Button>
           </form>
           <p className="my-1">
-            Already have an account? <Link to="/login">Sign In</Link>
+            Already have an account? <Link to="/login">Login</Link>
           </p>
         </Card.Body>
       </Card>
-
+</section>
     </Fragment>
   );
 };
