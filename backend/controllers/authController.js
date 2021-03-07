@@ -11,15 +11,10 @@ import config from 'config'
 // @access Public
 
 const getAuthentication = asyncHandler(async (req, res) => {
-    console.log(req.user)
-    console.log("getAuthentication is called")
     try {
         const user = await User.findById(req.user.id);
-        console.log(req.user.id)
-        console.log(user)
         await sendTokenResponse(user, 200, res);
     } catch (err) {
-        console.log(err)
         res.status(500).send("Server Error 123");
     }
 })
@@ -33,7 +28,6 @@ const postAuthenticatedUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
     if (user && (await user.matchPassword(password))) {
-        console.log("If bloack")
         console.log("user" + user)
         res.json({
             _id: user._id,
@@ -42,7 +36,6 @@ const postAuthenticatedUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id),
         })
     } else {
-        console.log("Else Block")
         res.status(401)
         throw new Error('Invalid email or password')
     }
