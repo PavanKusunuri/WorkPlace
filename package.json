@@ -1,7 +1,7 @@
 {
-  "name": "workplace_backend",
+  "name": "way2work_backend",
   "version": "1.0.0",
-  "description": "Social network for developers",
+  "description": "A website which bridges the gap between companies and employees to build their amazing next thing!!",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -13,22 +13,22 @@
   "author": "Pavan Kusunuri",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "colors": "^1.4.0",
-    "config": "^3.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.16.4",
-    "express-async-handler": "^1.1.4",
-    "express-validator": "^5.3.1",
-    "gravatar": "^1.8.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.5",
-    "path": "^0.12.7",
-    "request": "^2.88.0"
+    "bcryptjs": "2.4.3",
+    "colors": "1.4.0",
+    "config": "3.1.0",
+    "cors": "2.8.5",
+    "dotenv": "8.2.0",
+    "express": "4.16.4",
+    "express-async-handler": "1.1.4",
+    "express-validator": "5.3.1",
+    "gravatar": "1.8.0",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "5.7.5",
+    "path": "0.12.7",
+    "request": "2.88.0"
   },
   "devDependencies": {
-    "concurrently": "^4.1.2",
-    "nodemon": "^1.18.11"
+    "concurrently": "4.1.2",
+    "nodemon": "1.18.11"
   }
 }

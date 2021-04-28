@@ -23,7 +23,7 @@ const Header = () => {
         collapseOnSelect
         style={{ height: 50 }}>
         <LinkContainer to="/">
-          <Navbar.Brand>Workplace</Navbar.Brand>
+          <Navbar.Brand>Way2Work</Navbar.Brand>
         </LinkContainer>
         <Navbar.Collapse id="basic-navbar-nav">
           {userInfo ? (

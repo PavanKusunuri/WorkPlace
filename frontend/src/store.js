@@ -9,7 +9,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
   profile: profile,
-  post: post
+  post: post,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?

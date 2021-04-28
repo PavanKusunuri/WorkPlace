@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
@@ -36,14 +36,15 @@ const Register = () => {
   // if (isAuthenticated) {
   //   return <Redirect to="/dashboard" />;
   // }
+
   return (
     <Fragment>
         <section className={styles.registerContent}>
         <div className={styles.companyIntro}>
-          <div> Workplace</div>
-          <p>
-            The main objective of this application is to reduce the gap between developers and companies to build the Next thing much faster.
-          </p>
+          <div> Way2Work</div>
+          <div className={styles.companyObjective}>
+          Way2Work objective is to reduce the gap between developers and companies to build the next thing much faster !!
+          </div>
           </div>
       <Card className={styles.registerCard}>
         <Card.Body>
@@ -90,7 +91,7 @@ const Register = () => {
             <Button className={styles.registerButton} onClick={onSubmit} className="btn btn-primary">Agree & Submit </Button>
           </form>
           <p className="my-1">
-            Already on WorkPlace ? <Link to="/login">Login</Link>
+            Already on Way2Work ? <Link to="/login">Login</Link>
           </p>
         </Card.Body>
       </Card>
