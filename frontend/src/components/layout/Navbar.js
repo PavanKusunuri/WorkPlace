@@ -55,25 +55,8 @@ const Header = () => {
                 Logout
                 </NavDropdown.Item>
             </>
-          ) : (
-            <>
-              <LinkContainer to="/profiles">
-                <NavDropdown.Item>
-                  Developers
-                </NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/register">
-                <NavDropdown.Item>
-                  Register
-                </NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/login">
-                <NavDropdown.Item>
-                  Login
-                </NavDropdown.Item>
-              </LinkContainer>
-            </>
-          )}
+          )
+            : ''}
         </Navbar.Collapse>
       </Navbar>
     </header>

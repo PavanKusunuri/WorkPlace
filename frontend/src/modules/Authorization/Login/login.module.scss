@@ -1,0 +1,34 @@
+.loginCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Card {
+        width: 35%;
+        .signInHeading{
+            font-size: 28px;
+            font-weight: 500;
+            color: black;
+            font-family: 'Open Sans', sans-serif;
+        }
+    }
+    .loginButton {
+        width: 100%;
+    }
+}
+
+.newToText {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-top: 20px;
+}
+
+.footer  {
+    position: absolute;
+    bottom: 15px;
+    left:150px;
+    .footerItem {
+        margin: 10px;
+    }
+}
+

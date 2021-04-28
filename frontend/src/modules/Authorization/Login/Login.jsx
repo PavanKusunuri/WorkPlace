@@ -5,6 +5,7 @@ import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
 import { Card, Form, Button } from 'react-bootstrap';
 import { userLoginReducer } from "../../../reducers/auth";
+import styles from './login.module.scss';
 
 
 const Login = () => {
@@ -35,20 +36,18 @@ const Login = () => {
   }
   return (
     <Fragment>
-      <Card>
+        <div className={styles.loginCard}>
+      <Card className={styles.Card}>
         <Card.Body>
-          <h1 className="medium">Login</h1>
+          <h1 className={styles.signInHeading}>Sign in</h1>
+          <p>Explore our community to find your community</p>
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" name="email"
+              <Form.Control type="email" placeholder="Email or Phone" name="email"
                 value={email}
                 onChange={(e) => handleChange(e)} />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-    </Form.Text>
             </Form.Group>
-
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" name="password"
@@ -56,34 +55,24 @@ const Login = () => {
                 value={password}
                 onChange={(e) => handleChange(e)} />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={(e) => onSubmit(e)}>
-              Login
+            <Button className={styles.loginButton} variant="primary" type="submit" onClick={(e) => onSubmit(e)}>
+              Sign in
   </Button>
-            <p className="my-1">Don't have an account? <Link to="/register">Register</Link></p>
           </Form>
-          {/* <form className="form" onSubmit={(e) => onSubmit(e)}>
-            <div className="form-group">
-              <input
-                type="email"
-                placeholder="Email Address"
-                name="email"
-                value={email}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              minLength="6"
-              value={password}
-              onChange={(e) => handleChange(e)}
-            />
-          </form>
-          <p className="my-1">Don't have an account? <Link to="/register">Register</Link></p> */}
         </Card.Body>
       </Card>
+</div>
+      <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
+<div className={styles.footer}>
+<span className={styles.footerItem}>Workplace@2021</span>
+<span className={styles.footerItem}>User Agreement</span>
+<span className={styles.footerItem}>Privacy Policy</span>
+<span className={styles.footerItem}>Community Guidelines</span>
+<span className={styles.footerItem}>Cookie Policy</span>
+<span className={styles.footerItem}>CopyRight Policy</span>
+<span className={styles.footerItem}>Send Feedback</span>
 
+</div>
     </Fragment >
   );
 };
