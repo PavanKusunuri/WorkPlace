@@ -42,6 +42,7 @@ const Register = () => {
         <section className={styles.registerContent}>
         <div className={styles.companyIntro}>
           <div> Way2Work</div>
+          <h2 className={styles.welcomeMessage}> Welcome to your professional world</h2>
           <div className={styles.companyObjective}>
           Way2Work objective is to reduce the gap between developers and companies to build the next thing much faster !!
           </div>

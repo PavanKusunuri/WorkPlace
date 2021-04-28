@@ -9,6 +9,10 @@
         font-weight: 600;
     }
 }
+.welcomeMessage {
+    color: #2977c9;
+    font-size: 56px;
+}
 .registerContent {
 display: flex;
 padding: 0px 45px;
@@ -30,7 +34,7 @@ padding: 0px 45px;
 }
 
 .companyObjective {
-    border: 1px solid red;
+    border: 1px solid #C0C0C0;
     box-shadow: 10px 11px 7px -1px rgba(0,0,0,0.54);
 -webkit-box-shadow: 10px 11px 7px -1px rgba(0,0,0,0.54);
 -moz-box-shadow: 10px 11px 7px -1px rgba(0,0,0,0.54);
