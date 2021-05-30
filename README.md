@@ -13,7 +13,7 @@ Way2Work is a platform for Developers, Students to get into their dream companie
     Adding Likes, comment, share option to post.
 
 
-Technologies used in creating Way2Work
+Technologies used in creating Way2Work /n
 Frontend: React.js, Redux, ReactBootstrap Javascript
 Backend:  Node.js, Express.js
 Database: MongoDB
