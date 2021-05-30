@@ -37,7 +37,7 @@ const Login = () => {
 
   return (
     <Fragment>
-        <div className={styles.loginCard}>
+      <div className={styles.loginCard}>
       <Card className={styles.Card}>
         <Card.Body>
           <h1 className={styles.signInHeading}>Log in</h1>

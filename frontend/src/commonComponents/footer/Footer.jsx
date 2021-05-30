@@ -1,16 +1,16 @@
 import React from 'react'
 import styles from './footer.module.scss';
 
-const Footer = ({ props }) => {
+const Footer = () => {
     return (
-        <div>
-            <span className={styles.footerItem}  onClick={props.history.push('/')}>Way2Work@2021</span>
-            <span className={styles.footerItem} onClick={props.history.push('/userAgreement')}>User Agreement</span>
-            <span className={styles.footerItem} onClick={props.history.push('/privacyPolicy')}>Privacy Policy</span>
-            <span className={styles.footerItem} onClick={props.history.push('/communityGuidelines')}>Community Guidelines</span>
-            <span className={styles.footerItem} onClick={props.history.push('/CookiePolicy')}>Cookie Policy</span>
-            <span className={styles.footerItem} onClick={props.history.push('/copyRightPolicy')}>CopyRight Policy</span>
-            <span className={styles.footerItem} onClick={props.history.push('/sendFeedBack')}>Send Feedback</span>
+        <div className={styles.footerSection}>
+            <span className={styles.footerItem}>Way2Work@2021</span>
+            <span className={styles.footerItem}>User Agreement</span>
+            <span className={styles.footerItem}>Privacy Policy</span>
+            <span className={styles.footerItem}>Community Guidelines</span>
+            <span className={styles.footerItem}>Cookie Policy</span>
+            <span className={styles.footerItem}>CopyRight Policy</span>
+            <span className={styles.footerItem}>Send Feedback</span>
         </div>
     )
 }

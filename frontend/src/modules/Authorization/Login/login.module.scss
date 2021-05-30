@@ -3,6 +3,9 @@
     justify-content: center;
     align-items: center;
     .Card {
+        position: absolute;
+        top: 16%;
+        right: 15px;
         width: 35%;
         .signInHeading{
             font-size: 28px;
@@ -17,16 +20,16 @@
 }
 
 .newToText {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    position: absolute;
+    bottom: 20%;
+    right: 15%;
     padding-top: 20px;
 }
 
 .footer  {
     position: absolute;
-    bottom: 15px;
-    left:150px;
+    width: 100%;
+    bottom: 0px;
     .footerItem {
         margin: 10px;
     }

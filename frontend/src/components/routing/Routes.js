@@ -18,7 +18,7 @@ const EmployersDashboard = lazy(() => import('../../modules/employers/Employers'
 
 export const Routes = () => {
   return (
-    <section className="container">
+    <section>
       {/* <Alert /> */}
       <Switch>
         <Suspense fallback={<div>...Loading</div>}>
