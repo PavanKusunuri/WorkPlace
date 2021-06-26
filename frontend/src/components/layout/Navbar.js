@@ -5,15 +5,12 @@ import { Navbar, NavDropdown } from 'react-bootstrap';
 import { logout } from "../../actions/auth";
 
 const Header = () => {
-
   const dispatch = useDispatch();
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
-
   const logoutHandler = () => {
     dispatch(logout())
   }
-
   return (
     <header>
       <Navbar
