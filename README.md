@@ -1,6 +1,6 @@
-Way2Work
+Workplace
 
-Way2Work is a platform for Developers, Students to get into their dream companies and the same manner it is useful for companies to find rightful employees to acheive their goals.
+Workplace is a platform for Developers, Students to get into their dream companies and the same manner it is useful for companies to find rightful employees to acheive their goals.
     Present in Application it is possible for a new user to register, login and add user's education details, previous experience details and able to post his ideas.
     Other users can view the post and they have the option to like it or comment on it.
     
@@ -13,7 +13,7 @@ Way2Work is a platform for Developers, Students to get into their dream companie
     Adding Likes, comment, share option to post.
 
 
-Technologies used in creating Way2Work <br />
+Technologies used in creating Workplace <br />
 Frontend: React.js, Redux, ReactBootstrap Javascript <br />
-Backend:  Node.js, Express.js  <br />
+Backend:  Node.js, Express.js <br />
 Database: MongoDB  <br />

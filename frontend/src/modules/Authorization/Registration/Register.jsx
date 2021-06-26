@@ -41,10 +41,10 @@ const Register = () => {
     <Fragment>
         <section className={styles.registerContent}>
         <div className={styles.companyIntro}>
-          <div> Way2Work</div>
+          <div> Workplace</div>
           <h2 className={styles.welcomeMessage}> Welcome to your professional world</h2>
           <div className={styles.companyObjective}>
-          Way2Work objective is to reduce the gap between developers and companies to build the next thing much faster !!
+          Workplace objective is to reduce the gap between developers and companies to build the next thing much faster !!
           </div>
           </div>
       <Card className={styles.registerCard}>
@@ -92,7 +92,7 @@ const Register = () => {
             <Button className={styles.registerButton} onClick={onSubmit} className="btn btn-primary">Agree & Submit </Button>
           </form>
           <p className="my-1">
-            Already on Way2Work ? <Link to="/login">Login</Link>
+            Already on Workplace ? <Link to="/login">Login</Link>
           </p>
         </Card.Body>
       </Card>

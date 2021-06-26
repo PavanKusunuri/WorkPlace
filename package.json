@@ -1,5 +1,5 @@
 {
-  "name": "way2work_backend",
+  "name": "workplace_backend",
   "version": "1.0.0",
   "description": "A website which bridges the gap between companies and employees to build their amazing next thing!!",
   "main": "server.js",

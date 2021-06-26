@@ -63,7 +63,7 @@ const Login = () => {
         </Card.Body>
       </Card>
 </div>
-      <p className={styles.newToText}>New to Way2Work ? <Link to="/register">Join now</Link></p>
+      <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
 <div className={styles.footer}>
   <Footer />
 </div>
