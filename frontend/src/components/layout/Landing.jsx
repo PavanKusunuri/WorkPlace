@@ -16,34 +16,41 @@ const Landing = () => {
             <div className={styles.headline}>
               Welcome to your professional community
             </div>
-            <div>
+            <div className={styles.intentModule}>
               <ul>
-                <li>Search for a job</li>
-                <li>Find a person you know</li>
-                <li> Learn a new skill</li>
+                <li className={styles.linkButton}>Search for a job</li>
+                <li className={styles.linkButton}>Find a person you know</li>
+                <li className={styles.linkButton}> Learn a new skill</li>
               </ul>
             </div>
             <div>
-
             </div>
           </section>
-          <section className={`${styles.openJobs} ${styles.section}`}>
-            <div>
-               Find open jobs and internships
+          <section className={`${styles.openJobs} ${styles.section} ${styles.noMinHeight}`}>
+            <div className={styles.search}>
+            <div className={styles.jobFinder}>
+               <h2 className={styles.jobFinderHeader}>Find open jobs and internships</h2>
+       </div>        
+       <div className={styles.suggestedSearch}>
+         <div className={styles.suggestSearchList}>
+         <h2 className={styles.suggestedSearchHeader}>SUGGESTED SEARCHES</h2>
+         <ul className={styles.suggestedList}>
+           <li className={styles.suggestedListItem}>      <span className={styles.item}>Enginnering</span>     
+</li>
+         </ul>
+          Business Development
+          Finance
+          Administative Assistant
+          Retail Associate
+          Customer Service
+          Operations
+          Information Technology
+          Marketing
+          Human Resources 
+          Show More...
+         </div>
+         
        </div>
-       <div>
-SUGGESTED SEARCHES
-Enginnering 
-Business Development
-Finance
-Administative Assistant
-Retail Associate
-Customer Service
-Operations
-Information Technology
-Marketing
-Human Resources 
-Show More...
        </div>
   </section>
 

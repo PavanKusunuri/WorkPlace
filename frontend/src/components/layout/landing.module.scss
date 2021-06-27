@@ -1,4 +1,5 @@
 .landingPage{
+    font-family: sans-serif;
  .nav {
     padding: 12px 0 16px;
     display: -webkit-box;
@@ -131,6 +132,110 @@
        line-height: 70px;
         }
     }
+    .intentModule {
+        display:flex;
+        flex-direction: row;
+    }
+    .linkButtonList {
+        width: 100%;
+    }
+    .linkButton {
+        font-size: 20px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: rgba(0,0,0,0.9);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 56px;
+    width: 408px;
+    line-height: 25px;
+    background-color: #fff;
+    padding: 16px 16px;
+    border-radius: 5px;
+    font-size: 2rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: rgba(0,0,0,0.9);
+    // box-shadow: 0px -1px 1px rgb(0 0 0 / 8%), 1px 0px 1px rgb(0 0 0 / 8%), -1px 0px 1px rgb(0 0 0 / 8%), 0px 1px 1px rgb(0 0 0 / 8%);
+    // -webkit-box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 0px 0px 2px rgb(0 0 0 / 15%);
+    // box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 0px 0px 2px rgb(0 0 0 / 15%);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+//  Open Job Styles 
+.openJobs {
+    padding-top: 60px;
+    padding-bottom: 120px;
+    .search {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        .jobFinder {
+            min-width:408px;
+            margin-right:72px;
+            align-self: flex-start;
+            .jobFinderHeader {
+                font-size: 48px;
+                font-weight: 200;
+                color: rgba(0,0,0,0.9);
+                line-height: 60px;
+            }
+        }
+        .suggestedSearch {
+            .suggestSearchList {
+                .suggestedSearchHeader {
+                    font-size: 1.6rem;
+                    line-height: 1.5;
+                    font-weight: 600;
+                    color: rgba(0,0,0,0.6);
+                    text-transform: uppercase;
+                    line-height: 20px;
+                }
+                .suggestedList {
+                    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+                    .suggestedListItem {
+                        .item {
+                            font-size: 2rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: rgba(0,0,0,0.6);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: left;
+    min-height: 56px;
+    height: auto;
+    width: auto;
+    float: left;
+    background-color: rgba(0,0,0,0.08);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 28px;
+    padding: 8px 20px;
+    margin-bottom: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
  }
 
 
@@ -167,4 +272,8 @@
         }
     }
 }
+}
+
+.noMinHeight {
+    min-height: 0;
 }
