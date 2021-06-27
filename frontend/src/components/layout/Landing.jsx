@@ -35,46 +35,87 @@ const Landing = () => {
          <div className={styles.suggestSearchList}>
          <h2 className={styles.suggestedSearchHeader}>SUGGESTED SEARCHES</h2>
          <ul className={styles.suggestedList}>
-           <li className={styles.suggestedListItem}>      <span className={styles.item}>Enginnering</span>     
-</li>
+           <li className={styles.suggestedListItem}>
+             <span className={styles.item}>Enginnering</span>
+             </li>
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>Business Development</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>Finance</span>
+             </li>
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>  Administative Assistant</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>            Retail Associate
+</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>         Customer Service
+</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>            Operations
+</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>            Information Technology
+</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>            Marketing
+</span>
+             </li>
+
+             <li className={styles.suggestedListItem}>
+             <span className={styles.item}>            Human Resources
+</span>
+             </li>
+
          </ul>
-          Business Development
-          Finance
-          Administative Assistant
-          Retail Associate
-          Customer Service
-          Operations
-          Information Technology
-          Marketing
-          Human Resources 
-          Show More...
+
+    
+          <span className={styles.showMore}>Show More...</span>
          </div>
          
        </div>
        </div>
   </section>
 
-  <section className={`${styles.section} ${styles.postJob}`}>
-    <div>
-      Post your job and find the people you need 
-       <button>Post a job</button>
+  <section className={`${styles.section} ${styles.postJob} ${styles.sectionFull}`}>
+    <div className={styles.talentFinder}>
+     <h2 className={styles.talentFinderHeader}>
+     Post your job and find the people you need 
+     </h2>
+       <button className={styles.item}>Post a job</button>
     </div>
   </section>
 
   <section className={`${styles.section} ${styles.openToWork}`}>
+    <div className={styles.testimonials}>
+<h2 className={styles.testimonialsHeader}>Let the right people know you're open to work</h2>
+<div className={styles.tesimonialsContent}> With the Open To Work feature, you can privately tell recruiters or publicly share with the LinkedIn community that you are looking for new job opportunities</div>
+    </div>
     </section>
 
 
     <section className={`${styles.section} ${styles.connectAndLearn}`}>
    
-   <div>
-     <div>
-       Connect with people who can help
-       <button>Find people you know</button>
+   <div className={styles.connectContainer}>
+     <div className={styles.connectPeople}>
+      <h2 className={styles.connectPeopleHeader}>Connect with people who can help</h2> 
+       <button className={styles.item}>Find people you know</button>
      </div>
-     <div>
+     <div className={styles.learnSkills}>
        Learn the skills that can help you know
-       <button> Choose a topic to learn about</button>
+       <button className={styles.item}> Choose a topic to learn about</button>
      </div>
      </div>
       </section>
