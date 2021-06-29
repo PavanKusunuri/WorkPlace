@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './landing.module.scss';
+import Footer from '../../commonComponents/footer/Footer';
 
 const Landing = ({ history }) => {
   return (
@@ -124,21 +125,7 @@ const Landing = ({ history }) => {
       </section>
    
   </main>
-  <footer className={styles.footer}>
-  <ul className={`${styles.footerList}`}>
-<li className={styles.footerItem}>Workplace @2021</li>
-<li className={styles.footerItem}>About</li>
-<li className={styles.footerItem}>Accessibility</li>
-<li className={styles.footerItem}>User Agreement</li>
-<li className={styles.footerItem}>Privacy Policy</li>
-<li className={styles.footerItem}>Cookie Policy</li>
-<li className={styles.footerItem}>Copyright Policy</li>
-<li className={styles.footerItem}>Brand Policy</li>
-<li className={styles.footerItem}>Guest Controls</li>
-<li className={styles.footerItem}> Community Guidelines</li>
-<li className={styles.footerItem}>Language</li>
-      </ul>
-  </footer>
+<Footer/>
   </div>
   );
 };

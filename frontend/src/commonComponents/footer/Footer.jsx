@@ -3,15 +3,21 @@ import styles from './footer.module.scss';
 
 const Footer = () => {
     return (
-        <div className={styles.footerSection}>
-            <span className={styles.footerItem}>Workplace@2021</span>
-            <span className={styles.footerItem}>User Agreement</span>
-            <span className={styles.footerItem}>Privacy Policy</span>
-            <span className={styles.footerItem}>Community Guidelines</span>
-            <span className={styles.footerItem}>Cookie Policy</span>
-            <span className={styles.footerItem}>CopyRight Policy</span>
-            <span className={styles.footerItem}>Send Feedback</span>
-        </div>
+        <footer className={styles.footer}>
+        <ul className={`${styles.footerList}`}>
+      <li className={styles.footerItem}>Workplace @2021</li>
+      <li className={styles.footerItem}>About</li>
+      <li className={styles.footerItem}>Accessibility</li>
+      <li className={styles.footerItem}>User Agreement</li>
+      <li className={styles.footerItem}>Privacy Policy</li>
+      <li className={styles.footerItem}>Cookie Policy</li>
+      <li className={styles.footerItem}>Copyright Policy</li>
+      <li className={styles.footerItem}>Brand Policy</li>
+      <li className={styles.footerItem}>Guest Controls</li>
+      <li className={styles.footerItem}> Community Guidelines</li>
+      <li className={styles.footerItem}>Language</li>
+            </ul>
+        </footer>
     )
 }
 

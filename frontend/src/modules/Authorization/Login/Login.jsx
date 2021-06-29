@@ -37,33 +37,38 @@ const Login = () => {
 
   return (
     <Fragment>
-      <div className={styles.loginCard}>
+        <header className={styles.companyHead}>
+        <p>Workplace</p>
+        </header>
+        <div className={styles.loginForm}>
       <Card className={styles.Card}>
         <Card.Body>
-          <h1 className={styles.signInHeading}>Log in</h1>
-          <p>Explore our community to find your community</p>
+          <h1 className={styles.signInHeading}>Sign in</h1>
+          <p className={styles.headerContent}>Stay updated in your professional world</p>
           <Form>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Email or Phone" name="email"
                 value={email}
                 onChange={(e) => handleChange(e)} />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" name="password"
                 minLength="6"
                 value={password}
                 onChange={(e) => handleChange(e)} />
             </Form.Group>
-            <Button className={styles.loginButton} variant="primary" type="submit" onClick={(e) => onSubmit(e)}>
+            <Button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
               Sign in
   </Button>
           </Form>
         </Card.Body>
       </Card>
-</div>
+      </div>
+
+      <div className={styles.loginFormFooter}>
       <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
+      </div>
+
 <div className={styles.footer}>
   <Footer />
 </div>
