@@ -10,17 +10,17 @@ const Landing = () => {
           <button className={styles.navButtonTerritory}> Join now</button>
           <button className={styles.navButtonSecondary}> Sign in</button>
         </div>
-       </nav>
-        <main className={styles.main} role="main" id="main-content">
-          <section className={`${styles.header} ${styles.section}`}>
-            <div className={styles.headline}>
-              Welcome to your professional community
-            </div>
-            <div className={styles.intentModule}>
-              <ul>
-                <li className={styles.linkButton}>Search for a job</li>
-                <li className={styles.linkButton}>Find a person you know</li>
-                <li className={styles.linkButton}> Learn a new skill</li>
+      </nav>
+      <main className={styles.main} role="main" id="main-content">
+        <section className={`${styles.header} ${styles.section}`}>
+          <div className={styles.headline}>
+            Welcome to your professional community
+          </div>
+          <div className={styles.intentModule}>
+            <ul>
+              <li className={styles.linkButton}>Search for a job</li>
+              <li className={styles.linkButton}>Find a person you know</li>
+              <li className={styles.linkButton}> Learn a new skill</li>
               </ul>
             </div>
             <div>

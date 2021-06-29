@@ -2,36 +2,21 @@
     font-family: sans-serif;
  .nav {
     padding: 12px 0 16px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     position: relative;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     max-width:1128px;
     margin: auto;
-
      .flexItems {
-        -webkit-box-ordinal-group: 4;
-        -ms-flex-order: 3;
         order: 3;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: end;
-        -ms-flex-pack: end;
         justify-content: flex-end;
         .navButtonTerritory {
             background-color: rgba(0,0,0,0);
             border: 0;
             border-radius: 2px;
-            -webkit-box-sizing: border-box;
             box-sizing: border-box;
             color: rgba(0,0,0,0.6);
             cursor: pointer;
@@ -47,9 +32,7 @@
             position: relative;
             text-align: center;
             text-decoration: none;
-            -webkit-transition-duration: 167ms;
             transition-duration: 167ms;
-            -webkit-transition-property: background-color,color,-webkit-box-shadow;
             transition-property: background-color,color,-webkit-box-shadow;
             transition-property: background-color,box-shadow,color;
             transition-property: background-color,box-shadow,color,-webkit-box-shadow;
