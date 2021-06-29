@@ -7,6 +7,7 @@ import { Card, Button } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './register.module.scss';
+import Footer from '../../../commonComponents/footer/Footer';
 
 const Register = () => {
 
@@ -39,64 +40,42 @@ const Register = () => {
 
   return (
     <Fragment>
-        <section className={styles.registerContent}>
-        <div className={styles.companyIntro}>
-          <div> Workplace</div>
-          <h2 className={styles.welcomeMessage}> Welcome to your professional world</h2>
-          <div className={styles.companyObjective}>
-          Workplace objective is to reduce the gap between developers and companies to build the next thing much faster !!
-          </div>
-          </div>
+        <main className={styles.main}>
+          <header>
+          <div className={styles.logoContainer}> Workplace</div>
+          <h1 className={styles.mainSubTitle}> Make the most of your professional life</h1>
+          </header>
       <Card className={styles.registerCard}>
         <Card.Body>
-          <h3 className={styles.intro}>Register</h3>
           <form className="form">
             <div className="form-group">
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={name}
-                onChange={(e) => onChange(e)}
-              />
-            </div>
-            <div className="form-group">
+              <label for="email">Email or phone number</label>
               <input
                 type="email"
-                placeholder="Email Address"
                 name="email"
                 value={email}
                 onChange={(e) => onChange(e)}
               />
             </div>
             <div className="form-group">
+              <label for="password">Password (6 or more characters</label>
               <input
                 type="password"
-                placeholder="Password"
                 name="password"
-                // minLength="6"
                 value={password}
                 onChange={(e) => onChange(e)}
               />
             </div>
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                name="password2"
-                // minLength="6"
-                value={password2}
-                onChange={(e) => onChange(e)}
-              />
-            </div>
-            <Button className={styles.registerButton} onClick={onSubmit} className="btn btn-primary">Agree & Submit </Button>
+       <span className={styles.userAgreement}>By clicking Agree & Join, you agree to the Workplace User Agreement, Privacy Policy, and Cookie Policy.</span>
+            <Button className={styles.registerButton} onClick={onSubmit}>Agree & Join </Button>
           </form>
-          <p className="my-1">
-            Already on Workplace ? <Link to="/login">Login</Link>
+          <p className={styles.mainSigninContainer}>
+            Already on Workplace ? <Link to="/login">Sign in</Link>
           </p>
         </Card.Body>
       </Card>
-</section>
+</main>
+<Footer />
     </Fragment>
   );
 };

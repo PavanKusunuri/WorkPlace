@@ -1,14 +1,14 @@
 import React from "react";
 import styles from './landing.module.scss';
 
-const Landing = () => {
+const Landing = ({ history }) => {
   return (
     <div className={styles.landingPage}>
       <nav className={styles.nav}>
         <div className={styles.workplace}>Workplace</div>
         <div className={styles.flexItems}>
-          <button className={styles.navButtonTerritory}> Join now</button>
-          <button className={styles.navButtonSecondary}> Sign in</button>
+          <button className={styles.navButtonTerritory} onClick={history.push("/register")}> Join now</button>
+          <button className={styles.navButtonSecondary} onClick={history.push("/login")}> Sign in</button>
         </div>
       </nav>
       <main className={styles.main} role="main" id="main-content">
