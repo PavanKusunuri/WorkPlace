@@ -14,11 +14,9 @@ const Login = () => {
     email: '',
     password: '',
   });
-
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin;
-
   const { email, password } = values;
 
   const handleChange = (event) => {
@@ -37,41 +35,47 @@ const Login = () => {
 
   return (
     <Fragment>
-        <header className={styles.companyHead}>
+      <header className={styles.companyHead}>
         <p>Workplace</p>
-        </header>
-        <div className={styles.loginForm}>
-      <Card className={styles.Card}>
-        <Card.Body>
-          <h1 className={styles.signInHeading}>Sign in</h1>
-          <p className={styles.headerContent}>Stay updated in your professional world</p>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Email or Phone" name="email"
-                value={email}
-                onChange={(e) => handleChange(e)} />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Password" name="password"
-                minLength="6"
-                value={password}
-                onChange={(e) => handleChange(e)} />
-            </Form.Group>
-            <Button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
-              Sign in
-  </Button>
-          </Form>
-        </Card.Body>
-      </Card>
+      </header>
+      <div className={styles.loginForm}>
+        <Card className={styles.Card}>
+          <Card.Body>
+            <h1 className={styles.signInHeading}>Sign in</h1>
+            <p className={styles.headerContent}>Stay updated in your professional world</p>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Control 
+                  type="email"
+                  placeholder="Email or Phone"
+                  name="email"
+                  value={email}
+                  onChange={(e) => handleChange(e)} 
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Control 
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  minLength="6"
+                  value={password}
+                  onChange={(e) => handleChange(e)}
+                />
+              </Form.Group>
+              <Button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
+                Sign in
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
       </div>
-
       <div className={styles.loginFormFooter}>
-      <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
+        <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
       </div>
-
-<div className={styles.footer}>
-  <Footer />
-</div>
+      <div className={styles.footer}>
+        <Footer />
+      </div>
     </Fragment >
   );
 };
@@ -79,9 +83,5 @@ const Login = () => {
 Login.propTypes = {
   login: PropTypes.func.isRequired,
 };
-
-// const mapStateToProps = (state) => ({
-//   isAuthenticated: state.auth.isAuthenticated,
-// });
 
 export default Login;
