@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import Experience from "./Experience";
 import Education from "./Education";
+import Home from '../../modules/home';
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import DashboardActions from "./DashboardActions";
+import styles from "./home.module.scss";
 
-const Dashboard = ({
+const HomeContainer = ({
   getCurrentProfile,
   auth: { user },
   profile: { profile, loading },
@@ -20,11 +22,29 @@ const Dashboard = ({
   return loading && profile === null ? (
     <Spinner />
   ) : (
-      <Fragment>
-        <p className="lead">
+      <div className={styles.homePage}>
+        <header className={styles.homeHeader}>
+        <nav className={styles.homeNavigation}>
+        <div className={styles.search}>
+            <input type="text" placeholder="Search"></input>
+          </div>
+          <ul className={styles.navigationMenu}>
+            <li className={styles.navigationItem}>Home</li>
+            <li className={styles.navigationItem}>My Network</li>
+            <li className={styles.navigationItem}>Jobs</li>
+            <li className={styles.navigationItem}>Messaging</li>
+            <li className={styles.navigationItem}>Notifications</li>
+            <li className={styles.navigationItem}>Me</li>
+          </ul>
+          <hr />
+          <span>post a job</span>
+        </nav>
+        </header>
+        <Home />
+        {/* <p className="lead">
           <i className="fas fa-user"></i> Welcome {user && user.name}
-        </p>
-        {profile !== null ? (
+        </p> */}
+        {/* {profile !== null ? (
           <Fragment>
             <DashboardActions />
             <Experience experience={profile.experience} />
@@ -43,12 +63,12 @@ const Dashboard = ({
                 Create Profile
           </Link>
             </Fragment>
-          )}
-      </Fragment>
+          )} */}
+      </div>
     );
 };
 
-Dashboard.propTypes = {
+HomeContainer.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
@@ -61,5 +81,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
+  HomeContainer
 );

@@ -1,0 +1,23 @@
+.homePage {
+    background-color: #e1f5fe;
+    max-width:1128px;
+    margin: 0 auto;
+.homeHeader {
+    background-color: #fff;
+    height:60px;
+    .homeNavigation {
+        padding:12px 0px;
+        display: flex;
+        margin: 0 auto;
+        .navigationMenu {
+            display: flex;
+            flex-direction: row;
+            margin: 0 auto;
+            justify-content: space-between;
+            .navigationItem {
+                padding-left: 8px;
+            }
+        }
+    }
+}
+}
