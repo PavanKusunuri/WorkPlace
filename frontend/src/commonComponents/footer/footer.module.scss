@@ -1,32 +1,22 @@
 .footer {
     .footerList {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         height: auto;
-        -webkit-box-pack: start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
         min-height: 50px;
         margin: 0 auto;
         width: 1128px;
         .footerItem {
             font-size: 12px;
-    line-height: 1.33333;
-    font-weight: 400;
-    color: rgba(0,0,0,0.6);
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    padding: 8px;
-    position: relative;
+            line-height: 1.33333;
+            font-weight: 400;
+            color: rgba(0,0,0,0.6);
+            display: flex;
+            flex-shrink: 0;
+            justify-content: center;
+            padding: 8px;
+            position: relative;
         }
     }
 }
