@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 // import Alert from "../layout/Alert";
 
 const Register = lazy(() => import("../../modules/Authorization/Registration"));
@@ -16,11 +16,11 @@ const Posts = lazy(() => import("../posts/Posts"));
 const Post = lazy(() => import("../post/Post"));
 const EmployersDashboard = lazy(() => import('../../modules/employers/Employers'))
 
-export const Routes = () => {
+export const Routess = () => {
   return (
     <section>
       {/* <Alert /> */}
-      <Switch>
+      <Routes>
         <Suspense fallback={<div>...Loading</div>}>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
@@ -44,9 +44,9 @@ export const Routes = () => {
           <PrivateRoute exact path="/posts/:id" component={Post} />
 
         </Suspense>
-      </Switch>
+      </Routes>
     </section>
   );
 };
 
-export default Routes;
+export default Routess;

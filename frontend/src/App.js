@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 
 // Redux
@@ -9,7 +9,7 @@ import "./App.scss";
 import setAuthToken from "./utils/setAuthToken";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
 const LandingPage = lazy(() => import("./components/layout/Landing.jsx"));
-const Routes = lazy(() => import("./components/routing/Routes"));
+const Routess = lazy(() => import("./components/routing/Routes"));
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -21,14 +21,14 @@ const App = () => {
       <Router>
         <Fragment>
           {/* <Navbar /> */}
-          <Switch>
+          <Routes>
             <ErrorBoundary>
               <Suspense fallback={<div>...Loading</div>}>
                 <Route exact path="/" component={LandingPage} />
-                <Route component={Routes} />
+                <Route component={Routess} />
               </Suspense>
             </ErrorBoundary>
-          </Switch>
+          </Routes>
         </Fragment>
       </Router>
     </Provider>
