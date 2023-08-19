@@ -13,15 +13,11 @@ import User from "../models/userModel.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body
-    console.log("This method should be called...")
     const userExists = await User.findOne({ email: email })
     if (userExists) {
         res.status(400)
         throw new Error('User already Exists')
     }
-console.log("***************")
-    console.log(name, email, password)
-    console.log("%%%%%%%%%%%%")
     const user = await User.create({
         name, email, password
     })

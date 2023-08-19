@@ -28,12 +28,10 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    console.log("On Submit is called here..")
     e.preventDefault();
     if (password !== password2) {
       setAlert("Passwords do not match", "danger");
         } else {
-            console.log("Else is called here..")
       dispatch(register(name, email, password));
     }
   };

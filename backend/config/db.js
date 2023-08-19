@@ -2,9 +2,6 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 const connectDB = async () => {
-
-    console.log("Env File")
-    console.log(process.env.MONGO_URI)
     try {
         const conn = await mongoose.connect(process.env.MONGO_URI, {
             useUnifiedTopology: true,
