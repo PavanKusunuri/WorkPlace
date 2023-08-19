@@ -37,6 +37,7 @@ const Login = () => {
   };
 
   const onSubmit = (e) => {
+    console.log("Submit is called..")
     e.preventDefault();
     dispatch(login(email, password));
   };
