@@ -29,10 +29,12 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
+    console.log("On Submit is called here..")
     e.preventDefault();
     if (password !== password2) {
       setAlert("Passwords do not match", "danger");
         } else {
+            console.log("Else is called here..")
       dispatch(register(name, email, password));
     }
   };
@@ -52,6 +54,15 @@ const Register = () => {
       <Card className={styles.registerCard}>
         <Card.Body>
           <form className="form">
+          <div className="form-group">
+              <label for="name">Name</label>
+              <input
+                type="test"
+                name="name"
+                value={name}
+                onChange={(e) => onChange(e)}
+              />
+            </div>
             <div className="form-group">
               <label for="email">Email or phone number</label>
               <input
@@ -70,6 +81,17 @@ const Register = () => {
                 onChange={(e) => onChange(e)}
               />
             </div>
+
+            <div className="form-group">
+              <label for="password">Password 2 (6 or more characters</label>
+              <input
+                type="password"
+                name="password2"
+                value={password2}
+                onChange={(e) => onChange(e)}
+              />
+            </div>
+
        <span className={styles.userAgreement}>By clicking Agree & Join, you agree to the Workplace User Agreement, Privacy Policy, and Cookie Policy.</span>
             <Button className={styles.registerButton} onClick={onSubmit}>Agree & Join </Button>
           </form>
