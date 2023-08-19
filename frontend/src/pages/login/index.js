@@ -84,7 +84,7 @@ const Login = () => {
         </Card>
       </div>
       <div className={styles.loginFormFooter}>
-        <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
+        <p className={styles.newToText}>New to Workplace ? <Link href="/register">Join now</Link></p>
       </div>
       <div className={styles.footer}>
         <Footer />
