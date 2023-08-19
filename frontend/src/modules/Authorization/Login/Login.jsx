@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
@@ -30,7 +30,7 @@ const Login = () => {
 
   //  Redirect if user logged in
   if (userInfo) {
-    return <Redirect to="/dashboard" />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (
