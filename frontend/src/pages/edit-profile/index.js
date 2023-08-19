@@ -1,9 +1,11 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { withRouter as BaseRouter } from "../../hocs/WithRouter";
+import { Link } from "next/link";
+// import { withRouter as BaseRouter } from "../../hocs/WithRouter";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
+
+
 const EditProfile = ({
   profile: { profile, loading },
   createProfile,
@@ -252,6 +254,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  BaseRouter(EditProfile)
-);
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(EditProfile);
