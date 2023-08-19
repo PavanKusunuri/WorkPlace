@@ -7,6 +7,8 @@ import styles from '../../components/layout/landing.module.scss';
 import Footer from '../../commonComponents/footer/Footer';
 
 const Landing = ({ history }) => {
+
+    const router = useRouter();
   return (
   <div className={styles.landingPage}>
     <nav className={styles.nav}>

@@ -11,7 +11,7 @@ import store from "../store";
 // import "../App.scss";
 import setAuthToken from "../utils/setAuthToken";
 // import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
-import LandingPage from "./landing/Landing.jsx";
+// import LandingPage from "./landing/Landing.jsx";
 const Routess = lazy(() => import("../components/routing/Routes"));
 
 if (typeof window !== 'undefined') {
@@ -21,9 +21,11 @@ if (localStorage.token) {
 }
 }
 
-const App = () => {
+const App = ({ Component, pageProps}) => {
   return (
     <Provider store={store}>
+              <Component {...pageProps} />
+
       {/* <Router> */}
           {/* <Navbar /> */}
           {/* <Routes> */}
