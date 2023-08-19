@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-// import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import { Card, Button } from 'react-bootstrap';

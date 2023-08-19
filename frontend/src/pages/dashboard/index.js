@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Link from 'next/link';
 // import { Link } from "react-router-dom";
 import Spinner from "../../components/layout/Spinner";
 import Experience from "../../components/dashboard/Experience";
@@ -41,10 +42,10 @@ const HomeContainer = ({
         </nav>
         </header>
         <Home />
-        {/* <p className="lead">
+        <p className="lead">
           <i className="fas fa-user"></i> Welcome {user && user.name}
-        </p> */}
-        {/* {profile !== null ? (
+        </p>
+        {profile !== null ? (
           <Fragment>
             <DashboardActions />
             <Experience experience={profile.experience} />
@@ -59,11 +60,11 @@ const HomeContainer = ({
             <Fragment>
               {" "}
           You have not yet setup a profile, please add some info
-              <Link to="/create-profile" className="btn btn-primary my-1">
+              <Link href="/create-profile" className="btn btn-primary my-1">
                 Create Profile
           </Link>
             </Fragment>
-          )} */}
+          )}
       </div>
     );
 };
