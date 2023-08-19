@@ -1,18 +1,24 @@
+'use client'
+
+
 import React, { lazy, Suspense, Fragment, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "../components/layout/Navbar";
 
 // Redux
 import { Provider } from "react-redux";
-import store from "./store";
-import "./App.scss";
-import setAuthToken from "./utils/setAuthToken";
+import store from "../store";
+// import "../App.scss";
+import setAuthToken from "../utils/setAuthToken";
 // import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
-import LandingPage from "./components/layout/Landing.jsx";
-const Routess = lazy(() => import("./components/routing/Routes"));
+import LandingPage from "./landing/Landing.jsx";
+const Routess = lazy(() => import("../components/routing/Routes"));
+
+if (typeof window !== 'undefined') {
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
+}
 }
 
 const App = () => {
@@ -20,18 +26,18 @@ const App = () => {
     <Provider store={store}>
       {/* <Router> */}
           {/* <Navbar /> */}
-          <Routes>
-          <Fragment>
+          {/* <Routes> */}
+          {/* <Fragment> */}
 
             {/* <ErrorBoundary> */}
-              <Suspense fallback={<div>...Loading</div>}>
-                <Route exact path="/" component={LandingPage} />
+              {/* <Suspense fallback={<div>...Loading</div>}> */}
+                {/* <Route path="/" element={LandingPage} /> */}
                 {/* <Route component={Routess} /> */}
-              </Suspense>
+              {/* </Suspense> */}
             {/* </ErrorBoundary> */}
-            </Fragment>
+            {/* </Fragment> */}
 
-          </Routes>
+          {/* </Routes> */}
       {/* </Router> */}
     </Provider>
   );

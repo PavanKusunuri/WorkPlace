@@ -4,7 +4,7 @@
   "description": "A website which bridges the gap between companies and employees to build their amazing next thing!!",
   "main": "server.js",
   "type": "module",
-  "scripts": {
+"scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",

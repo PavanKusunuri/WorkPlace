@@ -9,6 +9,9 @@ node_modules/
 # testing
 /coverage
 
+# Build 
+/frontend/.next
+
 # production
 /frontend/build
 

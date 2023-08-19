@@ -1,5 +1,9 @@
+'use client'
+
+
 import React from "react";
-import styles from './landing.module.scss';
+import { useRouter } from 'next/router'
+import styles from '../../components/layout/landing.module.scss';
 import Footer from '../../commonComponents/footer/Footer';
 
 const Landing = ({ history }) => {
@@ -8,8 +12,14 @@ const Landing = ({ history }) => {
     <nav className={styles.nav}>
       <div className={styles.workplace}>Workplace</div>
       <div className={styles.flexItems}>
-        <button className={styles.navButtonTerritory} onClick={history.push("/register")}> Join now</button>
-        <button className={styles.navButtonSecondary} onClick={history.push("/login")}> Sign in</button>
+        <button 
+        className={styles.navButtonTerritory}
+        onClick={() => router.push('/register')}         
+         > Join now</button>
+        <button
+         className={styles.navButtonSecondary} 
+         onClick={() => router.push('/login')}
+         > Sign in</button>
       </div>
     </nav>
     <main className={styles.main} role="main" id="main-content">
