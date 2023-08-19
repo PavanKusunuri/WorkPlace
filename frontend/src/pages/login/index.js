@@ -2,16 +2,9 @@
 
 // 'use client'
 import React, { Fragment, useState } from "react";
-// import { Link, Navigate } from "react-router-dom";
-
- 
 import { useRouter } from 'next/navigation'
- 
 import Link from 'next/link';
-import { Card, Form, Button } from 'react-bootstrap';
-
 import { useSelector, useDispatch } from "react-redux";
-
 import { login } from "../../actions/auth";
 import PropTypes from "prop-types";
 import Footer from "../../commonComponents/footer/Footer";
@@ -52,22 +45,22 @@ const Login = () => {
         <p>Workplace</p>
       </header>
       <div className={styles.loginForm}>
-        <Card className={styles.Card}>
-          <Card.Body>
+        <div className={styles.Card}>
+          <div>
             <h1 className={styles.signInHeading}>Sign in</h1>
             <p className={styles.headerContent}>Stay updated in your professional world</p>
-            <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control 
+            <div>
+              <div controlId="formBasicEmail">
+                <input 
                   type="email"
                   placeholder="Email or Phone"
                   name="email"
                   value={email}
                   onChange={(e) => handleChange(e)} 
                 />
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <Form.Control 
+              </div>
+              <div controlId="formBasicPassword">
+                <input 
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -75,13 +68,13 @@ const Login = () => {
                   value={password}
                   onChange={(e) => handleChange(e)}
                 />
-              </Form.Group>
-              <Button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
+              </div>
+              <button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
                 Sign in
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <div className={styles.loginFormFooter}>
         <p className={styles.newToText}>New to Workplace ? <Link href="/register">Join now</Link></p>
