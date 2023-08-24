@@ -20,11 +20,11 @@ import {
 
 import { protect } from '../../middleware/authMiddleware.js';
 
-// const auth = require("../../middleware/auth.js");
+// import auth from "../../middleware/authMiddleware.js";
 // const { check, validationResult } = require("express-validator/check");
 
 router.route('/me').get(protect, getUserProfileDetails)
-router.route('/me').post(protect, updateProfileDetails)
+router.route('/').post(protect, updateProfileDetails)
 router.route('/').get(protect, getAllRegisterUsers)
 router.route('/user/:user_id').get(protect, getUserProfileById)
 router.route('/').delete(protect, deleteProfile)
@@ -166,9 +166,9 @@ router.route('/github/:username').get(protect, getUserRepositories)
 //   }
 // });
 
-// // @route DELETE api/profile
-// // @desc  Delete profile, user & posts
-// // access Private
+// @route DELETE api/profile
+// @desc  Delete profile, user & posts
+// access Private
 // router.delete("/", auth, async (req, res) => {
 //   try {
 //     // remove user posts
@@ -183,9 +183,9 @@ router.route('/github/:username').get(protect, getUserRepositories)
 //   }
 // });
 
-// // @route  PUT api/profile/experience
-// // @desc   Add Profile experience
-// // @access Private
+// @route  PUT api/profile/experience
+// @desc   Add Profile experience
+// @access Private
 
 // router.put(
 //   "/experience",
@@ -236,9 +236,9 @@ router.route('/github/:username').get(protect, getUserRepositories)
 //   }
 // );
 
-// // @route  DELETE api/profile/experience/:exp_id
-// // @desc   DELETE experience from profile
-// // @access Private
+// @route  DELETE api/profile/experience/:exp_id
+// @desc   DELETE experience from profile
+// @access Private
 
 // router.delete("/experience/:exp_id", auth, async (req, res) => {
 //   try {
@@ -259,9 +259,9 @@ router.route('/github/:username').get(protect, getUserRepositories)
 //   }
 // });
 
-// // @route  PUT api/profile/education
-// // @desc   Add Profile education
-// // @access Private
+// @route  PUT api/profile/education
+// @desc   Add Profile education
+// @access Private
 
 // router.put(
 //   "/education",
@@ -313,9 +313,9 @@ router.route('/github/:username').get(protect, getUserRepositories)
 //   }
 // );
 
-// // @route  DELETE api/profile/education/:exp_id
-// // @desc   DELETE education from profile
-// // @access Private
+// @route  DELETE api/profile/education/:exp_id
+// @desc   DELETE education from profile
+// @access Private
 
 // router.delete("/education/:edu_id", auth, async (req, res) => {
 //   try {
@@ -336,9 +336,9 @@ router.route('/github/:username').get(protect, getUserRepositories)
 //   }
 // });
 
-// // @route   GET api/profile/github/:username
-// // @desc    Get user repos from Github
-// // @access Public
+// @route   GET api/profile/github/:username
+// @desc    Get user repos from Github
+// @access Public
 // router.get("/github/:username", async (req, res) => {
 //   try {
 //     const options = {

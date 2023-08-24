@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, NavDropdown } from 'react-bootstrap';
+// import { Navbar, NavDropdown } from 'react-bootstrap';
 import { logout } from "../../actions/auth";
 
 const Header = () => {
@@ -13,7 +13,7 @@ const Header = () => {
   }
   return (
     <header>
-      <Navbar
+      {/* <Navbar
         bg="dark"
         variant="dark"
         expand="lg"
@@ -52,10 +52,10 @@ const Header = () => {
                 Logout
                 </NavDropdown.Item>
             </>
-          )
-            : ''}
-        </Navbar.Collapse>
-      </Navbar>
+          ) */}
+            {/* : ''} */}
+        {/* </Navbar.Collapse> */}
+      {/* </Navbar> */}
     </header>
   )
 }

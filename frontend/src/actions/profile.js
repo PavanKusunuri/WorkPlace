@@ -126,12 +126,15 @@ export const createProfile = (formData, history, edit = false) => async (
   const {
     userLogin: { userInfo },
   } = getState()
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${userInfo.token}`,
     },
   }
+
+  console.log("Redux method")
   try {
 
     const res = await axios.post(`${backendUrl}/api/profile`, formData, config);
@@ -197,6 +200,7 @@ export const addExperience = (formData, history) => async (dispatch, getState) =
 
 //  Add Education
 export const addEducation = (formData, history) => async (dispatch, getState) => {
+  console.log("Hello")
   try {
     const {
       userLogin: { userInfo },

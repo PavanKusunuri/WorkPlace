@@ -13,10 +13,14 @@ import styles from "../../components/dashboard/home.module.scss";
 
 const HomeContainer = ({
   getCurrentProfile,
-  auth: { user },
+  auth,
   profile: { profile, loading },
   deleteAccount,
 }) => {
+
+  console.log("Auth"+ JSON.stringify(auth))
+
+
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
@@ -43,7 +47,7 @@ const HomeContainer = ({
         </header>
         <Home />
         <p className="lead">
-          <i className="fas fa-user"></i> Welcome {user && user.name}
+          <i className="fas fa-user"></i> Welcome {auth && auth.name}
         </p>
         {profile !== null ? (
           <Fragment>

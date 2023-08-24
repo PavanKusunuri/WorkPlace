@@ -12,7 +12,7 @@ import styles from "./home.module.scss";
 
 const HomeContainer = ({
   getCurrentProfile,
-  auth: { user },
+  auth,
   profile: { profile, loading },
   deleteAccount,
 }) => {

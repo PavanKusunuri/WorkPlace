@@ -91,6 +91,7 @@ const updateProfileDetails = asyncHandler(async (req, res) => {
         await profile.save();
         res.json(profile);
     } catch (err) {
+        console.log("Error"+ error)
         res.status(500).send("Server Error");
     }
 }
