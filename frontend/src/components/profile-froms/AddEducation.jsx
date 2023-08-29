@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { withRouter as BaseRouter } from "../../hocs/WithRouter";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addEducation } from "../../actions/profile";
 
-const AddEducation = ({ history }) => {
+const AddEducation = ({ addEducation, history }) => {
   const [formData, setFormData] = useState({
     school: "",
     degree: "",
@@ -42,8 +42,6 @@ const AddEducation = ({ history }) => {
         class="form"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("Add Education")
-          console.log(addEducation)
           addEducation(formData, history);
         }}
       >
@@ -132,4 +130,4 @@ AddEducation.propTypes = {
   addEducation: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addEducation})(AddEducation);
+export default connect(null, { addEducation })(withRouter(AddEducation));

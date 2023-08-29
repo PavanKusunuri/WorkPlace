@@ -1,5 +1,7 @@
 .landingPage{
     font-family: sans-serif;
+ 
+ }
  .nav {
     padding: 12px 0 16px;
     display: flex;
@@ -9,49 +11,16 @@
     flex-wrap: nowrap;
     max-width:1128px;
     margin: auto;
-     .flexItems {
-        order: 3;
-        display: flex;
-        justify-content: flex-end;
-        .navButtonTerritory {
-            background-color: rgba(0,0,0,0);
-            border: 0;
-            border-radius: 2px;
-            box-sizing: border-box;
-            color: rgba(0,0,0,0.6);
-            cursor: pointer;
-            display: inline-block;
-            font-size: 16px;
-            font-weight: 600;
-            font-family: inherit;
-            height: 40px;
-            line-height: 40px;
-            overflow: hidden;
-            outline-width: 2px;
-            padding: 0 12px;
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition-duration: 167ms;
-            transition-property: background-color,color,-webkit-box-shadow;
-            transition-property: background-color,box-shadow,color;
-            transition-property: background-color,box-shadow,color,-webkit-box-shadow;
-            -webkit-transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            vertical-align: middle;
-            z-index: 0;
-            border-radius: 4px;
-            color: rgba(0,0,0,0.6);
-            margin-left: 0;
-            margin-right: 12px;
-        }
-        .navButtonSecondary  {
-            background-color: rgba(0,0,0,0);
+   
+     
+       
+     }
+ .navButtonTerritory {
+    background-color: rgba(0,0,0,0);
     border: 0;
     border-radius: 2px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    color: #0073b1;
+    color: rgba(0,0,0,0.6);
     cursor: pointer;
     display: inline-block;
     font-size: 16px;
@@ -61,13 +30,11 @@
     line-height: 40px;
     overflow: hidden;
     outline-width: 2px;
-    padding: 0 24px;
+    padding: 0 12px;
     position: relative;
     text-align: center;
     text-decoration: none;
-    -webkit-transition-duration: 167ms;
     transition-duration: 167ms;
-    -webkit-transition-property: background-color,color,-webkit-box-shadow;
     transition-property: background-color,color,-webkit-box-shadow;
     transition-property: background-color,box-shadow,color;
     transition-property: background-color,box-shadow,color,-webkit-box-shadow;
@@ -75,39 +42,78 @@
     transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     vertical-align: middle;
     z-index: 0;
-    // -webkit-box-shadow: inset 0 0 0 1px #0073b1, inset 0 0 0 2px rgba(0 0 0 / 0%), inset 0 0 0 1px rgb(0 0 0 / 0%);
-    // box-shadow: inset 0 0 0 1px #0073b1, inset 0 0 0 2px rgb(0 0 0 / 0%), inset 0 0 0 1px rgb(0 0 0 / 0%);
-    border-radius: 24px;
-    -webkit-box-shadow: inset 0 0 0 1px #0a66c2;
-    box-shadow: inset 0 0 0 1px #0a66c2;
-    color: #0a66c2;
-        }
-     }
+    border-radius: 4px;
+    color: rgba(0,0,0,0.6);
+    margin-left: 0;
+    margin-right: 12px;
+}
+
+ .flexItems {
+    order: 3;
+    display: flex;
+    justify-content: flex-end;
  }
+ .navButtonSecondary  {
+    background-color: rgba(0,0,0,0);
+border: 0;
+border-radius: 2px;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+color: #0073b1;
+cursor: pointer;
+display: inline-block;
+font-size: 16px;
+font-weight: 600;
+font-family: inherit;
+height: 40px;
+line-height: 40px;
+overflow: hidden;
+outline-width: 2px;
+padding: 0 24px;
+position: relative;
+text-align: center;
+text-decoration: none;
+-webkit-transition-duration: 167ms;
+transition-duration: 167ms;
+-webkit-transition-property: background-color,color,-webkit-box-shadow;
+transition-property: background-color,color,-webkit-box-shadow;
+transition-property: background-color,box-shadow,color;
+transition-property: background-color,box-shadow,color,-webkit-box-shadow;
+-webkit-transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+vertical-align: middle;
+z-index: 0;
+box-shadow: inset 0 0 0 1px #0073b1, inset 0 0 0 2px rgb(0 0 0 / 0%), inset 0 0 0 1px rgb(0 0 0 / 0%);
+border-radius: 24px;
+-webkit-box-shadow: inset 0 0 0 1px #0a66c2;
+box-shadow: inset 0 0 0 1px #0a66c2;
+color: #0a66c2;
+}
+ .linkButtonList {
+    width: 100%;
+}
+
+.headline {
+    width:55%;
+    padding-bottom: 48px;
+    font-size: 56px;
+font-family: sans-serif;
+color: #2977c9;
+font-weight: 200;
+line-height: 70px;
+ }
+
  .main {
      display: flex;
      align-items: center;
      flex-direction: column;
      overflow: hidden;
-   
-    .header {
-        .headline {
-           width:55%;
-           padding-bottom: 48px;
-           font-size: 56px;
-       font-family: sans-serif;
-       color: #2977c9;
-       font-weight: 200;
-       line-height: 70px;
-        }
-    }
+ }
     .intentModule {
         display:flex;
         flex-direction: row;
     }
-    .linkButtonList {
-        width: 100%;
-    }
+
     .linkButton {
         font-size: 20px;
     line-height: 1.4;
@@ -132,34 +138,33 @@
     line-height: 1.4;
     font-weight: 400;
     color: rgba(0,0,0,0.9);
-    // box-shadow: 0px -1px 1px rgb(0 0 0 / 8%), 1px 0px 1px rgb(0 0 0 / 8%), -1px 0px 1px rgb(0 0 0 / 8%), 0px 1px 1px rgb(0 0 0 / 8%);
-    // -webkit-box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 0px 0px 2px rgb(0 0 0 / 15%);
-    // box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 0px 0px 2px rgb(0 0 0 / 15%);
+    box-shadow: 0px -1px 1px rgb(0 0 0 / 8%), 1px 0px 1px rgb(0 0 0 / 8%), -1px 0px 1px rgb(0 0 0 / 8%), 0px 1px 1px rgb(0 0 0 / 8%);
+    -webkit-box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 0px 0px 2px rgb(0 0 0 / 15%);
+    box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 0px 0px 2px rgb(0 0 0 / 15%);
     padding: 16px;
     margin-bottom: 16px;
 }
 
-//  Open Job Styles 
 .openJobs {
     padding-top: 60px;
     padding-bottom: 120px;
+}
     .search {
         display: flex;
         flex-direction: row;
         width: 100%;
+    }
         .jobFinder {
             min-width:408px;
             margin-right:72px;
             align-self: flex-start;
+        }
             .jobFinderHeader {
                 font-size: 48px;
                 font-weight: 200;
                 color: rgba(0,0,0,0.9);
                 line-height: 60px;
             }
-        }
-        .suggestedSearch {
-            .suggestSearchList {
                 .suggestedSearchHeader {
                     font-size: 16px;
                     line-height: 1.5;
@@ -174,23 +179,16 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-bottom: 15px;
-                    .suggestedListItem {
-                      
-                    }
                 }
+               
                 .showMore {
                     font-size: 16px;
     line-height: 1.5;
     font-weight: 600;
     color: rgba(0,0,0,0.6);
                 }
-            }
-        }
-    }
-}
+      
 
-//  Styles for Post Job Section 
-.postJob {
     .talentFinder{
         width: 100%;
         display: -webkit-box;
@@ -204,6 +202,7 @@
         -ms-flex-align: center;
         align-items: center;
         padding: 70px 0;
+    }
         .talentFinderHeader {
             width: calc(408px + 5px);
             margin-right: calc(72px - 5px);
@@ -225,8 +224,7 @@
             background-color: #f1ece5;
             right: calc((1128px - 100vw) / 2);
         }
-    }
-}
+
 
 //  Styles for Open To Work
 .openToWork {
@@ -249,22 +247,11 @@
 
 }
 
-//  Styles for Connect People
-.connectAndLearn {
     .connectContainer {
         display: flex;
-        .connectPeople {
-            
-        }
-    } 
-}
-
- }
+    }
 
 
-//  Footer
-
-}
 
 .noMinHeight {
     min-height: 0;

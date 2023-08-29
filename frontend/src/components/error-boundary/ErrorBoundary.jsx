@@ -1,9 +1,9 @@
 import React from "react";
-// import {
-//   ErrorImageOverlay,
-//   ErrorImageContainer,
-//   ErrorImageText,
-// } from "./ErrorBoundary.styles";
+import {
+  ErrorImageOverlay,
+  ErrorImageContainer,
+  ErrorImageText,
+} from "./ErrorBoundary.styles";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -23,14 +23,11 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div>
-          Error is there in Application
-        </div>
-        // <ErrorImageOverlay>
-        //   <ErrorImageContainer imageUrl="https://i.imgur.com/A040Lxr.png">
-        //     <ErrorImageText>Sorry, this page is broken</ErrorImageText>
-        //   </ErrorImageContainer>
-        // </ErrorImageOverlay>
+        <ErrorImageOverlay>
+          <ErrorImageContainer imageUrl="https://i.imgur.com/A040Lxr.png">
+            <ErrorImageText>Sorry, this page is broken</ErrorImageText>
+          </ErrorImageContainer>
+        </ErrorImageOverlay>
       );
     }
     return this.props.children;

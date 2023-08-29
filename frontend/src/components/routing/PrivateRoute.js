@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
@@ -16,7 +16,7 @@ const PrivateRoute = ({
       {...rest}
       render={(props) =>
         !userInfo ? (
-          <Navigate to="/login" />
+          <Redirect to="/login" />
         ) : (
             <Component {...props} />
           )

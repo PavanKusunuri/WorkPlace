@@ -1,25 +1,19 @@
-
-
-// 'use client'
 import React, { Fragment, useState } from "react";
-import { useRouter } from 'next/navigation'
-import Link from 'next/link';
+import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../../actions/auth";
+import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
-import Footer from "../../commonComponents/footer/Footer";
+import { Card, Form, Button } from 'react-bootstrap';
+import { userLoginReducer } from "../../../reducers/auth";
+import Footer from '../../../commonComponents/footer/Footer';
 import styles from './login.module.scss';
 
 
 const Login = () => {
-
-   const router = useRouter();
-
   const [values, setValues] = useState({
     email: '',
     password: '',
   });
-
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin;
@@ -36,7 +30,7 @@ const Login = () => {
 
   //  Redirect if user logged in
   if (userInfo) {
-    router.push("/dashboard")
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -45,22 +39,22 @@ const Login = () => {
         <p>Workplace</p>
       </header>
       <div className={styles.loginForm}>
-        <div className={styles.Card}>
-          <div>
+        <Card className={styles.Card}>
+          <Card.Body>
             <h1 className={styles.signInHeading}>Sign in</h1>
             <p className={styles.headerContent}>Stay updated in your professional world</p>
-            <div>
-              <div controlId="formBasicEmail">
-                <input 
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Control 
                   type="email"
                   placeholder="Email or Phone"
                   name="email"
                   value={email}
                   onChange={(e) => handleChange(e)} 
                 />
-              </div>
-              <div controlId="formBasicPassword">
-                <input 
+              </Form.Group>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Control 
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -68,16 +62,16 @@ const Login = () => {
                   value={password}
                   onChange={(e) => handleChange(e)}
                 />
-              </div>
-              <button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
+              </Form.Group>
+              <Button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
                 Sign in
-              </button>
-            </div>
-          </div>
-        </div>
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
       </div>
       <div className={styles.loginFormFooter}>
-        <p className={styles.newToText}>New to Workplace ? <Link href="/register">Join now</Link></p>
+        <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
       </div>
       <div className={styles.footer}>
         <Footer />

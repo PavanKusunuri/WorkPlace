@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { withRouter as BaseRouter } from "../../hocs/WithRouter";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addExperience } from "../../actions/profile";
@@ -116,4 +116,4 @@ AddExperience.propTypes = {
   AddExperience: PropTypes.func.isRequired,
 };
 
-export default AddExperience;
+export default connect(null, { addExperience })(withRouter(AddExperience));
