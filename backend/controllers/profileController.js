@@ -12,10 +12,13 @@ import User from '../models/userModel.js';
 // const registerUser =  => {
 
 const getUserProfileDetails = asyncHandler(async (req, res) => {
+    console.log("Get user Details is being calledd...")
     try {
         const profile = await Profile.findOne({
             user: req.user.id,
         }).populate("user", ["name", "avatar"]);
+
+        console.log("Profile"+ profile)
 
         if (!profile) {
             return res.status(400).json({ msg: "There is no profile for this user" });
@@ -75,6 +78,7 @@ const updateProfileDetails = asyncHandler(async (req, res) => {
         let profile = await Profile.findOne({ user: req.user.id });
 
         if (profile) {
+
             //    Update
             profile = await Profile.findOneAndUpdate(
                 { user: req.user.id },
@@ -85,11 +89,14 @@ const updateProfileDetails = asyncHandler(async (req, res) => {
             return res.json(profile);
         }
 
+        else {
+
         //    Create
         profile = new Profile(profileFields);
 
         await profile.save();
         res.json(profile);
+        }
     } catch (err) {
         console.log("Error"+ error)
         res.status(500).send("Server Error");

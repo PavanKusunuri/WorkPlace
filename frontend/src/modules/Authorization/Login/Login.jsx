@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
 // import { Card, Form, Button } from 'react-bootstrap';
-import { userLoginReducer } from "../../../reducers/auth";
+// import { userLoginReducer } from "../../../reducers/auth";
 import Footer from '../../../commonComponents/footer/Footer';
 import styles from './login.module.css';
 

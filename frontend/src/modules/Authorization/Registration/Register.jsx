@@ -13,30 +13,24 @@ const Register = () => {
 
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
-    password2: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { firstName, lastName, email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2) {
-      setAlert("Passwords do not match", "danger");
-        } else {
-      dispatch(register(name, email, password));
-    }
+   
+      dispatch(register(firstName, lastName, email, password));
+    // }
   };
 
-
-  // if (isAuthenticated) {
-  //   return <Redirect to="/dashboard" />;
-  // }
 
   return (
     <Fragment>
@@ -48,8 +42,27 @@ const Register = () => {
       <div className={styles.registerCard}>
         <div>
           <form className="form">
+          <div className="form-group">
+              <label for="name">Name</label>
+              <input
+                type="firstName"
+                name="firstName"
+                value={firstName}
+                onChange={(e) => onChange(e)}
+              />
+            </div>
             <div className="form-group">
-              <label for="email">Email or phone number</label>
+              <label for="name">Name</label>
+              <input
+                type="lastName"
+                name="lastName"
+                value={lastName}
+                onChange={(e) => onChange(e)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label for="email">Email</label>
               <input
                 type="email"
                 name="email"
@@ -57,6 +70,7 @@ const Register = () => {
                 onChange={(e) => onChange(e)}
               />
             </div>
+
             <div className="form-group">
               <label for="password">Password (6 or more characters</label>
               <input
