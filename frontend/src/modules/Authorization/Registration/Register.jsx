@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
-import { Card, Button } from 'react-bootstrap';
+// import { Card, Button } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from 'react-redux';
-import styles from './register.module.scss';
+import styles from './register.module.css';
 import Footer from '../../../commonComponents/footer/Footer';
 
 const Register = () => {
@@ -45,8 +45,8 @@ const Register = () => {
           <div className={styles.logoContainer}> Workplace</div>
           <h1 className={styles.mainSubTitle}> Make the most of your professional life</h1>
           </header>
-      <Card className={styles.registerCard}>
-        <Card.Body>
+      <div className={styles.registerCard}>
+        <div>
           <form className="form">
             <div className="form-group">
               <label for="email">Email or phone number</label>
@@ -67,13 +67,13 @@ const Register = () => {
               />
             </div>
        <span className={styles.userAgreement}>By clicking Agree & Join, you agree to the Workplace User Agreement, Privacy Policy, and Cookie Policy.</span>
-            <Button className={styles.registerButton} onClick={onSubmit}>Agree & Join </Button>
+            <button className={styles.registerButton} onClick={onSubmit}>Agree & Join </button>
           </form>
           <p className={styles.mainSigninContainer}>
             Already on Workplace ? <Link to="/login">Sign in</Link>
           </p>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 </main>
 <Footer />
     </Fragment>

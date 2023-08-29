@@ -3,10 +3,10 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
-import { Card, Form, Button } from 'react-bootstrap';
+// import { Card, Form, Button } from 'react-bootstrap';
 import { userLoginReducer } from "../../../reducers/auth";
 import Footer from '../../../commonComponents/footer/Footer';
-import styles from './login.module.scss';
+import styles from './login.module.css';
 
 
 const Login = () => {
@@ -39,22 +39,22 @@ const Login = () => {
         <p>Workplace</p>
       </header>
       <div className={styles.loginForm}>
-        <Card className={styles.Card}>
-          <Card.Body>
+        <div className={styles.Card}>
+          <div>
             <h1 className={styles.signInHeading}>Sign in</h1>
             <p className={styles.headerContent}>Stay updated in your professional world</p>
-            <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control 
+            <form>
+              <div controlId="formBasicEmail">
+                <input 
                   type="email"
                   placeholder="Email or Phone"
                   name="email"
                   value={email}
                   onChange={(e) => handleChange(e)} 
                 />
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <Form.Control 
+              </div>
+              <div controlId="formBasicPassword">
+                <input 
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -62,13 +62,13 @@ const Login = () => {
                   value={password}
                   onChange={(e) => handleChange(e)}
                 />
-              </Form.Group>
-              <Button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
+              </div>
+              <button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
                 Sign in
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
       <div className={styles.loginFormFooter}>
         <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>

@@ -5,7 +5,7 @@ import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
 import PostForm from "./PostForm";
 import { getPosts } from "../../actions/post";
-// import styles from './posts.scss';
+import styles from './posts.module.css';
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {

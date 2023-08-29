@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './landing.module.scss';
+import styles from './landing.module.css';
 import Footer from '../../commonComponents/footer/Footer';
 
 const Landing = ({ history }) => {

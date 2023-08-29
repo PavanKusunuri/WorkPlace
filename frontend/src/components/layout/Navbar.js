@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, NavDropdown } from 'react-bootstrap';
+// import { Navbar, NavDropdown } from 'react-bootstrap';
 import { logout } from "../../actions/auth";
 
 const Header = () => {
@@ -13,49 +13,49 @@ const Header = () => {
   }
   return (
     <header>
-      <Navbar
+      <div
         bg="dark"
         variant="dark"
         expand="lg"
         collapseOnSelect
         style={{ height: 50 }}>
         <LinkContainer to="/">
-          <Navbar.Brand>Workplace</Navbar.Brand>
+          <div>Workplace</div>
         </LinkContainer>
-        <Navbar.Collapse id="basic-navbar-nav">
+        <div id="basic-navbar-nav">
           {userInfo ? (
             <>
-              <NavDropdown.Item>
+              <span>
                 {userInfo.name}
-              </NavDropdown.Item>
+              </span>
               <LinkContainer to="/profiles">
-                <NavDropdown.Item>
+                <span>
                   Developers
-                </NavDropdown.Item>
+                </span>
               </LinkContainer>
               <LinkContainer to="/employers">
-                <NavDropdown.Item>
+                <span>
                   For Employers
-                </NavDropdown.Item>
+                </span>
               </LinkContainer>
               <LinkContainer to="/posts">
-                <NavDropdown.Item>
+                <span>
                   NewsFeed
-                </NavDropdown.Item>
+                </span>
               </LinkContainer>
               <LinkContainer to="/home">
-                <NavDropdown.Item>
+                <span>
                   Home
-                </NavDropdown.Item>
+                </span>
               </LinkContainer>
-              <NavDropdown.Item onClick={logoutHandler}>
+              <span onClick={logoutHandler}>
                 Logout
-                </NavDropdown.Item>
+                </span>
             </>
           )
             : ''}
-        </Navbar.Collapse>
-      </Navbar>
+        </div>
+      </div>
     </header>
   )
 }

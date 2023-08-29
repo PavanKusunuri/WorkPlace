@@ -8,7 +8,7 @@ import Education from "./Education";
 import Home from '../../modules/home';
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import DashboardActions from "./DashboardActions";
-import styles from "./home.module.scss";
+import styles from "./home.module.css";
 
 const HomeContainer = ({
   getCurrentProfile,
