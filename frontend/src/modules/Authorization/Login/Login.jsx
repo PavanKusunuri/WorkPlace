@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+// import connect from 'react-redux';
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
@@ -8,13 +9,24 @@ import styles from './login.module.css';
 
 
 const Login = () => {
+  console.log("Login Component is called here...")
+  const history = useHistory();
+
   const [values, setValues] = useState({
     email: '',
     password: '',
   });
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin;
+  const { userInfo, loading, status, error } = userLogin;
+
+  console.log("User Login Info here ********")
+
+// console.log("userinfo"+ JSON.stringify(userInfo))
+// console.log("status"+ status)
+// console.log("loading"+ loading)
+  console.log("User Login Info Ends here ********")
+
   const { email, password } = values;
 
   const handleChange = (event) => {
@@ -26,17 +38,24 @@ const Login = () => {
     dispatch(login(email, password));
   };
 
+  // if (status==="success") {
+  //   history.push("/")
+  // } else {
+  //   console.log(error)
+  // }
+
   return (
     <Fragment>
       <header className={styles.companyHead}>
         <p>Workplace</p>
       </header>
+      { status === 'success' ? history.push('/'): ''}
       <div className={styles.loginForm}>
         <div className={styles.Card}>
           <div>
             <h1 className={styles.signInHeading}>Sign in</h1>
             <p className={styles.headerContent}>Stay updated in your professional world</p>
-            <form className="space-y-6">
+          <form className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -84,4 +103,13 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
 };
 
+// const mapStateToProps = (state) => {
+//   userInfo: state.auth.userInfo
+// }
+
+// const mapDispatchToProps = () => {
+  
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Login);
 export default Login;

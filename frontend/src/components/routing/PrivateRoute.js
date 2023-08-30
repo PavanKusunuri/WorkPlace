@@ -11,17 +11,17 @@ const PrivateRoute = ({
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-    // !userInfo ? (
-        //   <Redirect to="/login" />
-        // ) : (
-        //     <Component {...props} />
-        //   )
-
+  
   return (
     <Route
       {...rest}
       render={(props) =>
+        !userInfo ? (
+          <Redirect to="/login" />
+      ) : (
         <Component {...props} />
+    )
+
       }
     />
   )

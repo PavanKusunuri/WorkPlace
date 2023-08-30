@@ -1,15 +1,4 @@
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  ACCOUNT_DELETED,
-} from "../actions/types";
-
-import {
   USER_REGISTER_FAIL,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_REQUEST,
@@ -19,30 +8,69 @@ import {
   USER_LOGOUT
 } from '../constants/userConstants';
 
-export const userLoginReducer = (state = {}, action) => {
-  switch (action.type) {
+const initialState = {
+  userInfo: null,
+  loading: false,
+  error: {},
+  status: null
+};
+
+export const userLoginReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+  switch (type) {
     case USER_LOGIN_REQUEST:
-      return { loading: true }
+      return { 
+        ...state,
+        loading: true, 
+        status: 'pending',
+        error: null 
+      }
     case USER_LOGIN_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { 
+        ...state,
+        loading: false,
+        status: 'success',
+        error: null,
+        userInfo: payload 
+      }
     case USER_LOGIN_FAIL:
-      return { loading: false, error: action.payload }
+      return { 
+        ...state,
+        loading: false,
+        status: 'fail',
+        error: payload 
+      }
     case USER_LOGOUT:
-      return {}
+      return { ...state, userInfo: null}
     default:
       return state
   }
 }
 
 //  Reducer Function for user registration
-export const userRegisterReducer = (state = {}, action) => {
-  switch (action.type) {
+export const userRegisterReducer = (state = { initialState }, action) => {
+  const { type, payload } = action
+  switch (type) {
     case USER_REGISTER_REQUEST:
-      return { loading: true }
+      return { 
+        ...state,
+        loading: true,
+        status: 'pending'
+      }
     case USER_REGISTER_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { 
+        ...state,
+        loading: false,
+        userInfo: payload,
+        status: 'success'
+      }
     case USER_REGISTER_FAIL:
-      return { loading: false, error: action.payload }
+      return { 
+        ...state,
+        loading: false,
+        error: action.payload,
+        status: 'fail'
+      }
     default:
       return state
   }

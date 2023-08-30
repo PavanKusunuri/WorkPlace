@@ -8,8 +8,8 @@ const Landing = ({ history }) => {
     <nav className={styles.nav}>
       <div className={styles.workplace}>Workplace</div>
       <div className={styles.flexItems}>
-        <button className={styles.navButtonTerritory} onClick={history.push("/register")}> Join now</button>
-        <button className={styles.navButtonSecondary} onClick={history.push("/login")}> Sign in</button>
+        <button className={styles.navButtonTerritory} onClick={() => history.push("/register")}> Join now</button>
+        <button className={styles.navButtonSecondary} onClick={() => history.push("/login")}> Sign in</button>
       </div>
     </nav>
     <main className={styles.main} role="main" id="main-content">

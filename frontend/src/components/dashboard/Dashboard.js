@@ -41,10 +41,10 @@ const HomeContainer = ({
         </nav>
         </header>
         <Home />
-        {/* <p className="lead">
+        <p className="lead">
           <i className="fas fa-user"></i> Welcome {user && user.name}
-        </p> */}
-        {/* {profile !== null ? (
+        </p> 
+         {profile !== null ? (
           <Fragment>
             <DashboardActions />
             <Experience experience={profile.experience} />
@@ -63,7 +63,7 @@ const HomeContainer = ({
                 Create Profile
           </Link>
             </Fragment>
-          )} */}
+          )}
       </div>
     );
 };
