@@ -20,7 +20,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          {/* <Navbar /> */}
+          <Navbar />
           <Switch>
             <ErrorBoundary>
               <Suspense fallback={<div>...Loading</div>}>

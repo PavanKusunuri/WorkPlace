@@ -3,8 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
-// import { Card, Form, Button } from 'react-bootstrap';
-// import { userLoginReducer } from "../../../reducers/auth";
 import Footer from '../../../commonComponents/footer/Footer';
 import styles from './login.module.css';
 
@@ -27,11 +25,6 @@ const Login = () => {
     e.preventDefault();
     dispatch(login(email, password));
   };
-
-  //  Redirect if user logged in
-  if (userInfo) {
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <Fragment>
