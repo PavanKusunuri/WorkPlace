@@ -34,7 +34,7 @@ const Register = () => {
 
   return (
     <Fragment>
-        <main className={styles.main}>
+        <main className="border">
           <header>
           <div className={styles.logoContainer}> Workplace</div>
           <h1 className={styles.mainSubTitle}> Make the most of your professional life</h1>
@@ -43,7 +43,7 @@ const Register = () => {
         <div>
           <form className="form">
           <div className="form-group">
-              <label for="name">Name</label>
+              <label for="name">First Name</label>
               <input
                 type="firstName"
                 name="firstName"
@@ -52,7 +52,7 @@ const Register = () => {
               />
             </div>
             <div className="form-group">
-              <label for="name">Name</label>
+              <label for="name">Last Name</label>
               <input
                 type="lastName"
                 name="lastName"

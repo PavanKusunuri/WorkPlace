@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className={styles.footer}>
         <ul className={`${styles.footerList}`}>
-      <li className={styles.footerItem}>Workplace @2021</li>
+      <li className={styles.footerItem}>Workplace @2023</li>
       <li className={styles.footerItem}>About</li>
       <li className={styles.footerItem}>Accessibility</li>
       <li className={styles.footerItem}>User Agreement</li>
