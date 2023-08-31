@@ -5,11 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import PropTypes from "prop-types";
 import Footer from '../../../commonComponents/footer/Footer';
-import styles from './login.module.css';
+// import styles from './login.module.css';
 
 
 const Login = () => {
-  console.log("Login Component is called here...")
   const history = useHistory();
 
   const [values, setValues] = useState({
@@ -20,12 +19,12 @@ const Login = () => {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo, loading, status, error } = userLogin;
 
-  console.log("User Login Info here ********")
+  // console.log("User Login Info here ********")
 
 // console.log("userinfo"+ JSON.stringify(userInfo))
 // console.log("status"+ status)
 // console.log("loading"+ loading)
-  console.log("User Login Info Ends here ********")
+  // console.log("User Login Info Ends here ********")
 
   const { email, password } = values;
 
@@ -46,15 +45,12 @@ const Login = () => {
 
   return (
     <Fragment>
-      <header className={styles.companyHead}>
-        <p>Workplace</p>
-      </header>
       { status === 'success' ? history.push('/'): ''}
-      <div className={styles.loginForm}>
-        <div className={styles.Card}>
-          <div>
-            <h1 className={styles.signInHeading}>Sign in</h1>
-            <p className={styles.headerContent}>Stay updated in your professional world</p>
+      <div className="">
+        <div className="flex justify-center">
+          <div className="border">
+            <h1 className="text-indigo text-lg">Sign in</h1>
+            <p className="text-rose">Stay updated in your professional world</p>
           <form className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
@@ -82,17 +78,17 @@ const Login = () => {
                   onChange={(e) => handleChange(e)}
                 />
               </div>
-              <button className={styles.loginButton} type="submit" onClick={(e) => onSubmit(e)}>
+              <button className="py-2 mt-2 bg-#818cf8" type="submit" onClick={(e) => onSubmit(e)}>
                 Sign in
               </button>
             </form>
           </div>
         </div>
       </div>
-      <div className={styles.loginFormFooter}>
-        <p className={styles.newToText}>New to Workplace ? <Link to="/register">Join now</Link></p>
+      <div className="">
+        <p className="">New to Workplace ? <Link to="/register">Join now</Link></p>
       </div>
-      <div className={styles.footer}>
+      <div className="">
         <Footer />
       </div>
     </Fragment >

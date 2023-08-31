@@ -29,7 +29,7 @@ const Header = () => {
                 {userInfo.name}
               </span>
               <LinkContainer to="/profiles">
-                <span>
+                <span className="bg-violet-600 hover:bg-violet-700">
                   Developers
                 </span>
               </LinkContainer>

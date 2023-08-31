@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { deleteComment } from "../../actions/post";
 
 const CommentItem = ({
-  auth,
   postId,
   comment: { _id, name, text, avatar, user, date },
-  deleteComment,
 }) => {
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo, loading, status, error } = userLogin;
+
+console.log("User Info"+ JSON.stringify(userInfo))
+console.log("User"+ user)
   return (
     <div class="post bg-white p-1 my-1">
       <div>
@@ -24,11 +28,11 @@ const CommentItem = ({
         <p class="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>{" "}
         </p>
-        {!auth.loading && user === auth.user._id && (
+        {!userInfo.loading && user == userInfo._id && (
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => deleteComment(postId, _id)}
+            onClick={() => dispatch(deleteComment(postId, _id))}
           >
             <i className="fas fa-times"></i>
           </button>
@@ -45,8 +49,8 @@ CommentItem.propTypes = {
   deleteComment: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+// const mapStateToProps = (state) => ({
+//   auth: state.auth.userInfo
+// });
 
-export default connect(mapStateToProps, { deleteComment })(CommentItem);
+export default CommentItem;

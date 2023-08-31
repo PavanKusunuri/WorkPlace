@@ -1,6 +1,6 @@
-import asyncHandler from 'express-async-handler'
-import Profile from '../models/profileModel.js';
+import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
+import Profile from '../models/profileModel.js';
 
 // const Profile = require("../../models/profileModel.js");
 // const User = require("../../models/userModel.js");
@@ -12,13 +12,15 @@ import User from '../models/userModel.js';
 // const registerUser =  => {
 
 const getUserProfileDetails = asyncHandler(async (req, res) => {
+
+    console.log("Req"+ JSON.stringify(req.user.id))
     console.log("Get user Details is being calledd...")
     try {
         const profile = await Profile.findOne({
             user: req.user.id,
         }).populate("user", ["name", "avatar"]);
 
-        console.log("Profile"+ profile)
+        console.log("Profile found"+ profile)
 
         if (!profile) {
             return res.status(400).json({ msg: "There is no profile for this user" });
@@ -26,6 +28,7 @@ const getUserProfileDetails = asyncHandler(async (req, res) => {
 
         res.json(profile);
     } catch (err) {
+        console.log("Err"+ err)
         res.status(500).send("Server Error");
     }
 });
