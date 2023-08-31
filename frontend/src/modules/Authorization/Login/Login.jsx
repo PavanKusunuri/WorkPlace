@@ -18,14 +18,6 @@ const Login = () => {
   const dispatch = useDispatch()
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo, loading, status, error } = userLogin;
-
-  // console.log("User Login Info here ********")
-
-// console.log("userinfo"+ JSON.stringify(userInfo))
-// console.log("status"+ status)
-// console.log("loading"+ loading)
-  // console.log("User Login Info Ends here ********")
-
   const { email, password } = values;
 
   const handleChange = (event) => {
@@ -36,12 +28,6 @@ const Login = () => {
     e.preventDefault();
     dispatch(login(email, password));
   };
-
-  // if (status==="success") {
-  //   history.push("/")
-  // } else {
-  //   console.log(error)
-  // }
 
   return (
     <Fragment>
