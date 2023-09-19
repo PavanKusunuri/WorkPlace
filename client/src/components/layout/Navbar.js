@@ -29,11 +29,11 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   );
 
   const guestLinks = (
-    <ul>
-      <li>
+    <ul className='flex '>
+      <li className='mr-4'>
         <Link to="/profiles">Developers</Link>
       </li>
-      <li>
+      <li className="mr-4">
         <Link to="/register">Register</Link>
       </li>
       <li>
@@ -43,10 +43,10 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   );
 
   return (
-    <nav className="navbar bg-dark">
+    <nav className="flex basis-1/2 border-2 border-black">
       <h1>
         <Link to="/">
-          <i className="fas fa-code" /> DevConnector
+          WorkPlace
         </Link>
       </h1>
       <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
