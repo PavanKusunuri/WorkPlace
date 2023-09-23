@@ -11,8 +11,16 @@ const Posts = ({ getPosts, post: { posts } }) => {
   }, [getPosts]);
 
   return (
-    <section className="container">
-      <h1 className="large text-primary">Posts</h1>
+    <section className="container bg-primaryBgColor">
+      <div class="grid grid-cols-3">
+        {/* First Grid for Profile information */}
+        <div>
+          First Grid
+        </div>
+        {/* Ends Here*/}
+        <div>
+
+        <h1 className="large text-primary">Posts</h1>
       <p className="lead">
         <i className="fas fa-user" /> Welcome to the community
       </p>
@@ -22,6 +30,14 @@ const Posts = ({ getPosts, post: { posts } }) => {
           <PostItem key={post._id} post={post} />
         ))}
       </div>
+    </div>
+
+    <div>
+      Third Grid
+    </div>
+     
+      </div>
+      
     </section>
   );
 };
