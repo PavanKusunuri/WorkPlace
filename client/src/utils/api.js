@@ -3,8 +3,10 @@ import store from '../store';
 import { LOGOUT, ORG_LOGOUT } from '../actions/types';
 
 // Create an instance of axios
+// In production (Netlify), REACT_APP_API_URL should be set to your Heroku backend URL (e.g. https://your-app.herokuapp.com/api)
+// In development, we fall back to '/api' so the CRA proxy can forward to http://localhost:5000
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: process.env.REACT_APP_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json'
   }

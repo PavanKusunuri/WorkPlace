@@ -1,11 +1,24 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 
 // Connect Database
 connectDB();
+
+// CORS configuration for Netlify (frontend) + local dev
+const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:3000'].filter(
+  Boolean
+);
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'x-auth-token', 'x-org-token']
+  })
+);
 
 // Init Middleware
 app.use(express.json());
