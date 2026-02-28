@@ -9,7 +9,9 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_REPOS,
-  NO_REPOS
+  NO_REPOS,
+  FOLLOW_USER,
+  UNFOLLOW_USER
 } from './types';
 
 /*
@@ -203,6 +205,50 @@ export const deleteEducation = (id) => async (dispatch) => {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Follow a user
+export const followUser = (userId) => async (dispatch) => {
+  try {
+    const res = await api.put(`/profile/follow/${userId}`);
+
+    dispatch({
+      type: FOLLOW_USER,
+      payload: { userId, followers: res.data.followers }
+    });
+
+    dispatch(setAlert('You are now following this user', 'success'));
+  } catch (err) {
+    dispatch(
+      setAlert(err.response?.data?.msg || 'Could not follow user', 'danger')
+    );
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response?.statusText, status: err.response?.status }
+    });
+  }
+};
+
+// Unfollow a user
+export const unfollowUser = (userId) => async (dispatch) => {
+  try {
+    const res = await api.put(`/profile/unfollow/${userId}`);
+
+    dispatch({
+      type: UNFOLLOW_USER,
+      payload: { userId, followers: res.data.followers }
+    });
+
+    dispatch(setAlert('You have unfollowed this user', 'success'));
+  } catch (err) {
+    dispatch(
+      setAlert(err.response?.data?.msg || 'Could not unfollow user', 'danger')
+    );
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response?.statusText, status: err.response?.status }
     });
   }
 };

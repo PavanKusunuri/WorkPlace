@@ -27,7 +27,10 @@
     "watch:css": "postcss src/index.css -o src/app.css"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "unicode-bom": "off"
+    }
   },
   "browserslist": {
     "production": [

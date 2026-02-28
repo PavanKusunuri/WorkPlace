@@ -5,7 +5,9 @@ import {
   UPDATE_PROFILE,
   GET_PROFILES,
   GET_REPOS,
-  NO_REPOS
+  NO_REPOS,
+  FOLLOW_USER,
+  UNFOLLOW_USER
 } from '../actions/types';
 
 const initialState = {
@@ -56,6 +58,28 @@ function profileReducer(state = initialState, action) {
       return {
         ...state,
         repos: []
+      };
+    case FOLLOW_USER:
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        // Update the single profile view
+        profile:
+          state.profile && state.profile.user._id === action.payload.userId
+            ? {
+                ...state.profile,
+                user: {
+                  ...state.profile.user,
+                  followers: action.payload.followers
+                }
+              }
+            : state.profile,
+        // Update the profiles list card
+        profiles: state.profiles.map((p) =>
+          p.user._id === action.payload.userId
+            ? { ...p, user: { ...p.user, followers: action.payload.followers } }
+            : p
+        )
       };
     default:
       return state;
