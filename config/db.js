@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURI');
+
+// Prefer environment variable (for .env / Heroku), fallback to config
+const db = process.env.MONGO_URI || require('config').get('mongoURI');
 
 const connectDB = async () => {
   try {
