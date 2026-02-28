@@ -1093,6 +1093,9 @@ video {
 .border-white\/\[0\.06\] {
   border-color: rgb(255 255 255 / 0.06);
 }
+.border-yellow-500\/20 {
+  border-color: rgb(234 179 8 / 0.2);
+}
 .border-yellow-500\/30 {
   border-color: rgb(234 179 8 / 0.3);
 }
@@ -1534,6 +1537,13 @@ video {
   --tw-text-opacity: 1;
   color: rgb(253 224 71 / var(--tw-text-opacity));
 }
+.text-yellow-400 {
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity));
+}
+.text-yellow-400\/80 {
+  color: rgb(250 204 21 / 0.8);
+}
 .text-zinc-400 {
   --tw-text-opacity: 1;
   color: rgb(161 161 170 / var(--tw-text-opacity));
@@ -1669,6 +1679,11 @@ video {
   --tw-backdrop-blur: blur(24px);
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1735,6 +1750,9 @@ video {
 .hover\:bg-white\/\[0\.07\]:hover {
   background-color: rgb(255 255 255 / 0.07);
 }
+.hover\:bg-yellow-500\/20:hover {
+  background-color: rgb(234 179 8 / 0.2);
+}
 .hover\:from-blue-500:hover {
   --tw-gradient-from: #3b82f6 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(59 130 246 / 0) var(--tw-gradient-to-position);
@@ -1778,6 +1796,10 @@ video {
 }
 .hover\:text-white\/50:hover {
   color: rgb(255 255 255 / 0.5);
+}
+.hover\:text-yellow-300:hover {
+  --tw-text-opacity: 1;
+  color: rgb(253 224 71 / var(--tw-text-opacity));
 }
 .hover\:shadow-lg:hover {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

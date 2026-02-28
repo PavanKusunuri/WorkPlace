@@ -11,7 +11,12 @@ import {
   GET_REPOS,
   NO_REPOS,
   FOLLOW_USER,
-  UNFOLLOW_USER
+  UNFOLLOW_USER,
+  SEND_FOLLOW_REQUEST,
+  CANCEL_FOLLOW_REQUEST,
+  GET_FOLLOW_REQUESTS,
+  ACCEPT_FOLLOW_REQUEST,
+  REJECT_FOLLOW_REQUEST
 } from './types';
 
 /*
@@ -209,17 +214,26 @@ export const deleteEducation = (id) => async (dispatch) => {
   }
 };
 
-// Follow a user
+// Follow a user (handles both public direct-follow and private follow-request)
 export const followUser = (userId) => async (dispatch) => {
   try {
     const res = await api.put(`/profile/follow/${userId}`);
 
-    dispatch({
-      type: FOLLOW_USER,
-      payload: { userId, followers: res.data.followers }
-    });
-
-    dispatch(setAlert('You are now following this user', 'success'));
+    if (res.data.requested) {
+      // Private profile — request was sent
+      dispatch({
+        type: SEND_FOLLOW_REQUEST,
+        payload: { userId, followRequests: res.data.followRequests }
+      });
+      dispatch(setAlert('Follow request sent', 'success'));
+    } else {
+      // Public profile — directly followed
+      dispatch({
+        type: FOLLOW_USER,
+        payload: { userId, followers: res.data.followers }
+      });
+      dispatch(setAlert('You are now following this user', 'success'));
+    }
   } catch (err) {
     dispatch(
       setAlert(err.response?.data?.msg || 'Could not follow user', 'danger')
@@ -250,6 +264,77 @@ export const unfollowUser = (userId) => async (dispatch) => {
       type: PROFILE_ERROR,
       payload: { msg: err.response?.statusText, status: err.response?.status }
     });
+  }
+};
+
+// Cancel outgoing follow request
+export const cancelFollowRequest = (userId) => async (dispatch) => {
+  try {
+    await api.put(`/profile/cancel-request/${userId}`);
+
+    dispatch({
+      type: CANCEL_FOLLOW_REQUEST,
+      payload: { userId }
+    });
+
+    dispatch(setAlert('Follow request cancelled', 'success'));
+  } catch (err) {
+    dispatch(
+      setAlert(err.response?.data?.msg || 'Could not cancel request', 'danger')
+    );
+  }
+};
+
+// Get incoming follow requests for the current user
+export const getFollowRequests = () => async (dispatch) => {
+  try {
+    const res = await api.get('/profile/follow-requests');
+
+    dispatch({
+      type: GET_FOLLOW_REQUESTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response?.statusText, status: err.response?.status }
+    });
+  }
+};
+
+// Accept a follow request
+export const acceptFollowRequest = (userId) => async (dispatch) => {
+  try {
+    const res = await api.put(`/profile/accept-request/${userId}`);
+
+    dispatch({
+      type: ACCEPT_FOLLOW_REQUEST,
+      payload: { userId, followRequests: res.data.followRequests }
+    });
+
+    dispatch(setAlert('Follow request accepted', 'success'));
+  } catch (err) {
+    dispatch(
+      setAlert(err.response?.data?.msg || 'Could not accept request', 'danger')
+    );
+  }
+};
+
+// Reject a follow request
+export const rejectFollowRequest = (userId) => async (dispatch) => {
+  try {
+    const res = await api.put(`/profile/reject-request/${userId}`);
+
+    dispatch({
+      type: REJECT_FOLLOW_REQUEST,
+      payload: { userId, followRequests: res.data.followRequests }
+    });
+
+    dispatch(setAlert('Follow request rejected', 'success'));
+  } catch (err) {
+    dispatch(
+      setAlert(err.response?.data?.msg || 'Could not reject request', 'danger')
+    );
   }
 };
 

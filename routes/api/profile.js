@@ -131,12 +131,15 @@ router.get(
       if (!profile) return res.status(400).json({ msg: 'Profile not found' });
 
       // Attach followers/following from the User model so the frontend can render follow state
-      const user = await User.findById(user_id).select('followers following');
+      const user = await User.findById(user_id).select(
+        'followers following followRequests'
+      );
       const profileObj = profile.toObject();
       profileObj.user = {
         ...profileObj.user,
         followers: user ? user.followers : [],
-        following: user ? user.following : []
+        following: user ? user.following : [],
+        followRequests: user ? user.followRequests : []
       };
 
       return res.json(profileObj);
@@ -293,7 +296,7 @@ router.get('/github/:username', async (req, res) => {
 });
 
 // @route    PUT api/profile/follow/:user_id
-// @desc     Follow a user
+// @desc     Follow a user (or send request if profile is private)
 // @access   Private
 router.put(
   '/follow/:user_id',
@@ -322,9 +325,30 @@ router.put(
           .json({ msg: 'You are already following this user' });
       }
 
-      // Add to target's followers
+      // Check if request already sent
+      const alreadyRequested = targetUser.followRequests.some(
+        (r) => r.user.toString() === req.user.id
+      );
+      if (alreadyRequested) {
+        return res.status(400).json({ msg: 'Follow request already sent' });
+      }
+
+      // Check target profile privacy
+      const targetProfile = await Profile.findOne({ user: req.params.user_id });
+      const isPrivate = targetProfile && targetProfile.isPrivate;
+
+      if (isPrivate) {
+        // Send follow request instead of directly following
+        targetUser.followRequests.unshift({ user: req.user.id });
+        await targetUser.save();
+        return res.json({
+          requested: true,
+          followRequests: targetUser.followRequests
+        });
+      }
+
+      // Public profile — follow directly
       targetUser.followers.unshift({ user: req.user.id });
-      // Add to current user's following
       currentUser.following.unshift({ user: req.params.user_id });
 
       await targetUser.save();
@@ -431,6 +455,127 @@ router.get(
       if (!user) return res.status(404).json({ msg: 'User not found' });
 
       res.json(user.following);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route    GET api/profile/follow-requests
+// @desc     Get current user's incoming follow requests
+// @access   Private
+router.get('/follow-requests', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id)
+      .populate('followRequests.user', ['name', 'avatar'])
+      .select('-password');
+
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
+    res.json(user.followRequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    PUT api/profile/accept-request/:user_id
+// @desc     Accept a follow request
+// @access   Private
+router.put(
+  '/accept-request/:user_id',
+  auth,
+  checkObjectId('user_id'),
+  async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id);
+      const requester = await User.findById(req.params.user_id);
+
+      if (!requester) return res.status(404).json({ msg: 'User not found' });
+
+      // Check the request exists
+      const requestExists = currentUser.followRequests.some(
+        (r) => r.user.toString() === req.params.user_id
+      );
+      if (!requestExists) {
+        return res
+          .status(400)
+          .json({ msg: 'No follow request from this user' });
+      }
+
+      // Remove from followRequests
+      currentUser.followRequests = currentUser.followRequests.filter(
+        (r) => r.user.toString() !== req.params.user_id
+      );
+
+      // Add to followers/following
+      currentUser.followers.unshift({ user: req.params.user_id });
+      requester.following.unshift({ user: req.user.id });
+
+      await currentUser.save();
+      await requester.save();
+
+      res.json({
+        followRequests: currentUser.followRequests,
+        followers: currentUser.followers
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route    PUT api/profile/reject-request/:user_id
+// @desc     Reject a follow request
+// @access   Private
+router.put(
+  '/reject-request/:user_id',
+  auth,
+  checkObjectId('user_id'),
+  async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id);
+
+      // Remove from followRequests
+      currentUser.followRequests = currentUser.followRequests.filter(
+        (r) => r.user.toString() !== req.params.user_id
+      );
+
+      await currentUser.save();
+
+      res.json({ followRequests: currentUser.followRequests });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route    PUT api/profile/cancel-request/:user_id
+// @desc     Cancel an outgoing follow request
+// @access   Private
+router.put(
+  '/cancel-request/:user_id',
+  auth,
+  checkObjectId('user_id'),
+  async (req, res) => {
+    try {
+      const targetUser = await User.findById(req.params.user_id);
+
+      if (!targetUser) return res.status(404).json({ msg: 'User not found' });
+
+      targetUser.followRequests = targetUser.followRequests.filter(
+        (r) => r.user.toString() !== req.user.id
+      );
+
+      await targetUser.save();
+
+      res.json({
+        msg: 'Follow request cancelled',
+        followRequests: targetUser.followRequests
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');

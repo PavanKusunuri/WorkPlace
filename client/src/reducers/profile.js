@@ -7,13 +7,19 @@ import {
   GET_REPOS,
   NO_REPOS,
   FOLLOW_USER,
-  UNFOLLOW_USER
+  UNFOLLOW_USER,
+  SEND_FOLLOW_REQUEST,
+  CANCEL_FOLLOW_REQUEST,
+  GET_FOLLOW_REQUESTS,
+  ACCEPT_FOLLOW_REQUEST,
+  REJECT_FOLLOW_REQUEST
 } from '../actions/types';
 
 const initialState = {
   profile: null,
   profiles: [],
   repos: [],
+  followRequests: [],
   loading: true,
   error: {}
 };
@@ -79,6 +85,55 @@ function profileReducer(state = initialState, action) {
           p.user._id === action.payload.userId
             ? { ...p, user: { ...p.user, followers: action.payload.followers } }
             : p
+        )
+      };
+    case SEND_FOLLOW_REQUEST:
+      // Mark the profile's user as having a pending request from current user
+      return {
+        ...state,
+        profile:
+          state.profile && state.profile.user._id === action.payload.userId
+            ? {
+                ...state.profile,
+                user: {
+                  ...state.profile.user,
+                  followRequests: action.payload.followRequests
+                }
+              }
+            : state.profile
+      };
+    case CANCEL_FOLLOW_REQUEST:
+      // Remove pending request indicator
+      return {
+        ...state,
+        profile:
+          state.profile && state.profile.user._id === action.payload.userId
+            ? {
+                ...state.profile,
+                user: {
+                  ...state.profile.user,
+                  followRequests: state.profile.user.followRequests
+                    ? state.profile.user.followRequests.filter(
+                        (r) =>
+                          r.user && r.user.toString() !== action.payload.userId
+                      )
+                    : []
+                }
+              }
+            : state.profile
+      };
+    case GET_FOLLOW_REQUESTS:
+      return {
+        ...state,
+        followRequests: action.payload,
+        loading: false
+      };
+    case ACCEPT_FOLLOW_REQUEST:
+    case REJECT_FOLLOW_REQUEST:
+      return {
+        ...state,
+        followRequests: state.followRequests.filter(
+          (r) => r.user && r.user._id !== action.payload.userId
         )
       };
     default:

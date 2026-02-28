@@ -21,7 +21,8 @@ const initialState = {
   facebook: '',
   linkedin: '',
   youtube: '',
-  instagram: ''
+  instagram: '',
+  isPrivate: false
 };
 
 const ProfileForm = ({
@@ -71,11 +72,15 @@ const ProfileForm = ({
     facebook,
     linkedin,
     youtube,
-    instagram
+    instagram,
+    isPrivate
   } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onTogglePrivate = () =>
+    setFormData({ ...formData, isPrivate: !isPrivate });
 
   const onSubmit = (e) => {
     const editing = profile ? true : false;
@@ -183,6 +188,67 @@ const ProfileForm = ({
             onChange={onChange}
           />
           <small className="form-text">Tell us a little about yourself</small>
+        </div>
+
+        {/* Privacy Toggle */}
+        <div className="form-group">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '12px',
+              padding: '14px 18px',
+              cursor: 'pointer'
+            }}
+            onClick={onTogglePrivate}
+          >
+            <div
+              style={{
+                width: '44px',
+                height: '24px',
+                borderRadius: '12px',
+                background: isPrivate
+                  ? 'linear-gradient(to right, #7c3aed, #2563eb)'
+                  : 'rgba(255,255,255,0.15)',
+                transition: 'background 0.3s',
+                position: 'relative',
+                flexShrink: 0
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '3px',
+                  left: isPrivate ? '23px' : '3px',
+                  width: '18px',
+                  height: '18px',
+                  borderRadius: '50%',
+                  background: 'white',
+                  transition: 'left 0.3s',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
+                }}
+              />
+            </div>
+            <div>
+              <strong style={{ color: 'white', fontSize: '14px' }}>
+                {isPrivate ? '🔒 Private Profile' : '🌐 Public Profile'}
+              </strong>
+              <p
+                style={{
+                  color: 'rgba(255,255,255,0.5)',
+                  fontSize: '12px',
+                  margin: '2px 0 0'
+                }}
+              >
+                {isPrivate
+                  ? 'Only approved followers can see your posts and details'
+                  : 'Anyone can see your profile and posts'}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="my-2">

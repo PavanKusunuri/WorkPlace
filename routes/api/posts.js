@@ -41,11 +41,27 @@ router.post(
 );
 
 // @route    GET api/posts
-// @desc     Get all posts
+// @desc     Get all posts (respects privacy — hides posts from private profiles you don't follow)
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
-    const posts = await Post.find().sort({ date: -1 });
+    // Find all private profiles
+    const privateProfiles = await require('../../models/Profile').find({ isPrivate: true }).select('user');
+    const privateUserIds = privateProfiles.map((p) => p.user.toString());
+
+    // Find which of those private users the current user follows
+    const currentUser = await User.findById(req.user.id).select('following');
+    const followingIds = currentUser.following.map((f) => f.user.toString());
+
+    // Private users whose posts should be hidden: private AND current user not following AND not own posts
+    const blockedUserIds = privateUserIds.filter(
+      (uid) => uid !== req.user.id && !followingIds.includes(uid)
+    );
+
+    const posts = await Post.find({
+      user: { $nin: blockedUserIds }
+    }).sort({ date: -1 });
+
     res.json(posts);
   } catch (err) {
     console.error(err.message);

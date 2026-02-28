@@ -1,403 +1,327 @@
-# DevConnector 2.0
+# WorkPlace
 
-> Social network for developers
-
-This is a MERN stack application from the "MERN Stack Front To Back" course on [Udemy](https://www.udemy.com/mern-stack-front-to-back/?couponCode=TRAVERSYMEDIA). It is a small social network app that includes authentication, profiles and forum posts.
-
-# Updates since course published
-
-Such is the nature of software; things change frequently, newer more robust paradigms emerge and packages are continuously evolving.
-Hopefully the below will help you adjust your course code to manage the most notable changes.
-
-The master branch of this repository contains all the changes and updates, so if you're following along with the lectures in the Udemy course and need reference code to compare against please checkout the [origionalcoursecode](https://github.com/bradtraversy/devconnector_2.0/tree/originalcoursecode) branch. Much of the code in this master branch is compatible with course code but be aware that if you adopt some of the changes here, it may require other changes too.
-
-After completing the course you may want to look through this branch and play about with the changes.
-
-## Changes to GitHub API authentication
-
-Since the course was published, GitHub has [deprecated authentication via URL query parameters](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters)
-You can get an access token by following [these instructions](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
-For this app we don't need to add any permissions so don't select any in the _scopes_.
-**DO NOT SHARE ANY TOKENS THAT HAVE PERMISSIONS**
-This would leave your account or repositories vulnerable, depending on permissions set.
-
-It would also be worth adding your `default.json` config file to `.gitignore`
-If git has been previously tracking your `default.json` file then...
-
-```bash
-git rm --cached config/default.json
-```
-
-Then add your token to the config file and confirm that the file is untracked with `git status` before pushing to GitHub.
-GitHub does have your back here though. If you accidentally push code to a repository that contains a valid access token, GitHub will revoke that token. Thanks GitHub 🙏
-
-You'll also need to change the options object in `routes/api/profile.js` where we make the request to the GitHub API to...
-
-```javascript
-const options = {
-  uri: encodeURI(
-    `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
-  ),
-  method: 'GET',
-  headers: {
-    'user-agent': 'node.js',
-    Authorization: `token ${config.get('githubToken')}`
-  }
-};
-```
-
-### npm package request deprecated
-
-As of 11th February 2020 [request](https://www.npmjs.com/package/request) has been deprecated and is no longer maintained.
-We already use [axios](https://www.npmjs.com/package/axios) in the client so we can easily change the above fetching of a users GitHub repositories to use axios.
-
-Install axios in the root of the project
-
-```bash
-npm i axios
-```
-
-We can then remove the client installation of axios.
-
-```bash
-cd client
-npm uninstall axios
-```
-
-Client use of the axios module will be resolved in the root, so we can still use it in client.
-
-Change the above GitHub API request to..
-
-```javascript
-const uri = encodeURI(
-  `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
-);
-const headers = {
-  'user-agent': 'node.js',
-  Authorization: `token ${config.get('githubToken')}`
-};
-
-const gitHubResponse = await axios.get(uri, { headers });
-```
-
-You can see the full change in [routes/api/profile.js](https://github.com/bradtraversy/devconnector_2.0/blob/4be414c6a54994c18397dba9c927ad67b878508b/routes/api/profile.js#L324)
-
-## uuid no longer has a default export
-
-The npm package [uuid](https://www.npmjs.com/package/uuid) no longer has a default export, so in our [client/src/actions/alert.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/actions/alert.js) we need to change the import and use of this package.
-
-change
-
-```javascript
-import uuid from 'uuid';
-```
-
-to
-
-```javascript
-import { v4 as uuidv4 } from 'uuid';
-```
-
-And where we use it from
-
-```javascript
-const id = uuid();
-```
-
-to
-
-```javascript
-const id = uuidv4();
-```
-
-## Addition of normalize-url package 🌎
-
-Depending on what a user enters as their website or social links, we may not get a valid clickable url.
-For example a user may enter _**traversymedia.com**_ or _**www.traversymedia.com**_ which won't be a clickable valid url in the UI on the users profile page.
-To solve this we brought in [normalize-url](https://www.npmjs.com/package/normalize-url) to well.. normalize the url.
-
-Regardless of what the user enters it will ammend the url accordingly to make it valid (assuming the site exists).
-You can see the use here in [routes/api/profile.js](https://github.com/bradtraversy/devconnector_2.0/blob/31e5318592b886add58923c751dba73274c711de/routes/api/profile.js#L71)
-
-## Fix broken links in gravatar 🔗
-
-There is an unresolved [issue](https://github.com/emerleite/node-gravatar/issues/47) with the [node-gravatar](https://github.com/emerleite/node-gravatar#readme) package, whereby the url is not valid. Fortunately we added normalize-url so we can use that to easily fix the issue. If you're not seeing Gravatar avatars showing in your app then most likely you need to implement this change.
-You can see the code use here in [routes/api/users.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/routes/api/users.js#L44)
-
-## Redux subscription to manage local storage 📥
-
-The rules of redux say that our [reducers should be pure](https://redux.js.org/basics/reducers#handling-actions) and do just one thing.
-
-If you're not familiar with the concept of pure functions, they must do the following..
-
-1. Return the same output given the same input.
-2. Have no side effects.
-
-So our reducers are not the best place to manage local storage of our auth token.
-Ideally our action creators should also just dispatch actions, nothing else. So using these for additional side effects like setting authentication headers is not the best solution here.
-
-Redux provides us with a [`store.subscribe`](https://redux.js.org/api/store#subscribelistener) listener that runs every time a state change occurs.
-
-We can use this listener to **_watch_** our store and set our auth token in local storage and axios headers accordingly.
-
-- if there is a token - store it in local storage and set the headers.
-- if there is no token - token is null - remove it from storage and delete the headers.
-
-The subscription can be seen in [client/src/store.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/store.js)
-
-We also need to change our [client/src/utils/setAuthToken.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/utils/setAuthToken.js) so it now handles both the setting of the token in local storage and in axios headers.
-`setauthToken.js` in turn depends on [client/src/utils/api.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/utils/api.js) where we create an instance of axios. So you will also need to grab that file.
-
-With those two changes in place we can remove all setting of local storage from [client/src/reducers/auth.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/reducers/auth.js). And remove setting of the token in axios headers from [client/src/actions/auth.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/actions/auth.js). This helps keep our code predictable, manageable and ultimately bug free.
-
-## Component reuse ♻️
-
-The EditProfile and CreateProfile have been reduced to one component [ProfileForm.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/profile-forms/ProfileForm.js)  
-The majority of this logic came from the refactrored EditProfile Component, which was initially changed to fix the issues with the use of useEffect we see in this component.
-
-If you want to address the linter warnings in EditProfile then this is the component you are looking for.
-
-## Log user out on token expiration 🔐
-
-If the Json Web Token expires then it should log the user out and end the authentication of their session.
-
-We can do this using a [axios interceptor](https://github.com/axios/axios#interceptors) together paired with creating an instance of axios.  
-The interceptor, well... intercepts any response and checks the response from our api for a `401` status in the response.  
-ie. the token has now expired and is no longer valid, or no valid token was sent.  
-If such a status exists then we log out the user and clear the profile from redux state.
-
-**You can see the implementation of the interceptor and axios instance in [utils/api.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/utils/api.js)**
-
-Creating an instance of axios also cleans up our action creators in [actions/auth.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/actions/auth.js), [actions/profile.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/actions/profile.js) and [actions/post.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/actions/post.js)
-
-Note that implementing this change also requires that you use the updated code in [utils/setAuthToken.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/utils/setAuthToken.js)
-Which also in turn depends on [utils/api.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/utils/api.js)
-I would also recommending updating to use a [ redux subscription ](https://github.com/bradtraversy/devconnector_2.0#redux-subscription-to-manage-local-storage-) to mange setting of the auth token in headers and local storage.
-
-## Remove Moment 🗑️
-
-As some of you may be aware, [Moment.js](https://www.npmjs.com/package/moment) which [ react-moment ](https://www.npmjs.com/package/react-moment) depends on has since become _legacy code_.\
-The maintainers of Moment.js now recommend finding an alternative to their package.
-
-> Moment.js is a legacy project, now in maintenance mode.\
->  In most cases, you should choose a different library.\
->  For more details and recommendations, please see Project Status in the docs.\
->  Thank you.
-
-Some of you in the course have been having problems installing both packages and meeting peer dependencies.\
- We can instead use the browsers built in [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl) API.\
- First create a [ utils/formatDate.js ](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/utils/formatDate.js) file, with the following code...
-
-```javascript
-function formatDate(date) {
-  return new Intl.DateTimeFormat().format(new Date(date));
-}
-
-export default formatDate;
-```
-
-Then in our [Education.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/dashboard/Education.js) component, import the new function...
-
-```javascript
-import formatDate from '../../utils/formatDate';
-```
-
-And use it instead of Moment...
-
-```jsx
-<td>
-  {formatDate(edu.from)} - {edu.to ? formatDate(edu.to) : 'Now'}
-</td>
-```
-
-So wherever you use `<Moment />` you can change to use the `formatDate` function.\
-Files to change would be...
-
-- [Education.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/dashboard/Education.js)
-- [Experience.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/dashboard/Experience.js)
-- [CommentItem.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/post/CommentItem.js)
-- [PostItem.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/posts/PostItem.js)
-- [ProfileEducation.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/profile/ProfileEducation.js)
-- [ProfileExperience.js](https://github.com/bradtraversy/devconnector_2.0/blob/master/client/src/components/profile/ProfileExperience.js)
-
-If you're updating your project you will now be able to uninstall **react-moment** and **moment** as project dependencies.
-
-## React Router V6 🧭
-
-Since the course was released [React Router](https://reactrouter.com) has been updated to version 6
-which includes some breaking changes.
-You can see the official migration guide from version 5 [ here ](https://reactrouter.com/docs/en/v6/upgrading/v5).
-
-### To summarize the changes to the course code
-
-Instead of a `<Switch />` we now use a [ `<Routes />` ](https://reactrouter.com/docs/en/v6/api#routes-and-route) component.
-
-The [ `<Route />` ](https://reactrouter.com/docs/en/v6/api#routes-and-route) component no longer receives a **_component_** prop, instead we
-pass a **_element_** prop which should be a React element i.e. JSX. Routing is
-also now relative to the component.
-
-For redirection and Private routing we can no longer use `<Redirect />`, we now
-have available a [ `<Navigate />` ](https://reactrouter.com/docs/en/v6/api#navigate) component.
-
-We no longer have access to the **_match_** and **_history_** objects in our
-component props. Instead of the match object for routing parameters we can use
-the [**useParams**](https://reactrouter.com/docs/en/v6/api#useparams) hook, and in place of using the history object to _push_
-onto the router we can use the [**useNavigate**](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.
-
-The above changes do actually clean up the routing considerably with all
-application routing in one place in [App.js](client/src/App.js).
-Our [PrivateRoute](client/src/components/routing/PrivateRoute.js) is a good deal
-simpler now and no longer needs to use a render prop.
-
-With moving all of the routing to App.js this did affect the styling as all
-routes needed to be inside the original `<section className="container">`.
-To solve this each page component in App.js (any child of a `<Route />`) gets
-wrapped in it's own `<section className="container">`, So we no longer need that
-in App.js. In most cases this just replaces the outer `<Fragment />` in the
-component.
-
-The styling also affected the [ `<Alert />`
-](client/src/components/layout/Alert.js) component as this will show in
-addition to other page components adding it's own `<section>` would mean extra
-content shift when the alerts show. To solve this the alerts have been given
-their [ own styling ](https://github.com/bradtraversy/devconnector_2.0/blob/c5b1fc48ccfecf30b6ed85f228a337f82d93e3f9/client/src/App.css#L579) so they are `position: fixed;` and we get no content shift,
-which additionally makes for a smoother UI with the alerts popping up in the top
-right of the screen.
+> A full-stack professional social network for developers. Built with the MERN stack, featuring a dual-auth system, social graph, privacy controls, and an organisation + job board platform.
 
 ---
 
-# Quick Start 🚀
+## Table of Contents
 
-### Add a default.json file in config folder with the following
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Key Design Decisions](#key-design-decisions)
+- [Getting Started](#getting-started)
+- [API Reference](#api-reference)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Author](#author)
+
+---
+
+## Overview
+
+WorkPlace is a production-grade social network for developers. Users build rich profiles, follow colleagues, write posts, join organisations, and apply for jobs — all in one platform.
+
+The project extends a base MERN scaffold with original features: a **dual JWT authentication system** (users and organisations as separate actors), a **social graph with privacy controls**, and a **full job-board workflow** — backed by a custom Apple-inspired dark UI built entirely with Tailwind CSS.
+
+---
+
+## Features
+
+### User Authentication and Profiles
+
+- Register and login with JWT — token stored in localStorage, injected via Axios interceptor on every request
+- Automatic session logout on token expiration via a 401 response interceptor in api.js
+- Gravatar-based avatar generation via email hash
+- Full profile CRUD: status, skills, bio, company, website, location, GitHub username
+- Social links (Twitter, LinkedIn, Facebook, YouTube, Instagram) with URL normalisation
+- GitHub latest repositories fetched live via the GitHub API
+
+### Social Graph — Follow System
+
+- Follow / Unfollow any developer (public profiles — instant)
+- **Follow Requests** for private profiles (like Instagram): the target user must accept before content is visible
+- Cancel outgoing follow requests
+- Accept or Reject incoming follow requests from the Dashboard
+- Follower and following counts shown on every profile card
+
+### Profile Privacy
+
+- **Public** — visible to all authenticated users
+- **Private** — experience, education, GitHub repos, and posts locked behind a wall; only accepted followers can view content
+- Toggle Public / Private from the Edit Profile form with an animated toggle switch
+- Posts feed filters out content from private accounts server-side using MongoDB $nin
+- Privacy is enforced at the API layer — not client-side only
+
+### Organisation System (Dual Auth)
+
+- Organisations register and log in with a **separate JWT** (x-org-token) — fully isolated from user auth
+- Organisation dashboard: post, edit, and delete jobs; view all applications per role
+- Navbar adapts dynamically to three states: Guest | Developer | Organisation
+
+### Jobs Board
+
+- Organisations post jobs: title, description, location, salary, type (Full-time / Part-time / Contract), and required skills
+- Developers browse and filter the jobs listing
+- One-click apply with a cover letter
+- Developers track all their applications from their dashboard
+- Organisations update application status: Pending > Reviewed > Accepted / Rejected
+
+### Posts and Community Feed
+
+- Create, like, and delete posts
+- Nested comment threads on every post
+- Feed respects privacy — posts from private accounts hidden server-side unless the viewer follows them
+
+### Apple-Inspired Dark UI
+
+- Custom design system built with **Tailwind CSS v3** — zero external component libraries
+- Glassmorphism cards using a .glass utility class (backdrop-blur + translucent background)
+- Gradient text, glowing ambient gradient orbs, and animated hero sections
+- CSS keyframe animations: fadeIn, slideUp, float, pulseGlow, shimmer
+- Frosted-glass Navbar with three-state link sets (Guest / Developer / Organisation)
+- Fully responsive layout
+
+---
+
+## Tech Stack
+
+### Backend
+
+| Technology | Purpose |
+|---|---|
+| **Node.js** + **Express.js** | REST API server |
+| **MongoDB Atlas** + **Mongoose** | Cloud database + ODM |
+| **JSON Web Tokens** | Stateless auth — dual token system |
+| **bcryptjs** | Password hashing |
+| **express-validator** | Request body validation |
+| **axios** | Server-side HTTP calls (GitHub API) |
+| **normalize-url** | URL sanitisation |
+| **gravatar** | Avatar generation |
+| **config** | Environment config management |
+| **nodemon** | Dev hot-reload |
+
+### Frontend
+
+| Technology | Purpose |
+|---|---|
+| **React 18** | UI component library |
+| **Redux** + **Redux Thunk** | Global state management + async actions |
+| **React Router v6** | Client-side routing |
+| **Tailwind CSS v3** | Utility-first styling |
+| **Axios** | HTTP client with request/response interceptors |
+| **PostCSS** | CSS processing pipeline |
+| **concurrently** | Run server + client in one command |
+
+---
+
+## Architecture
+
+```
+WorkPlace/
+├── server.js                 Entry point — mounts all API routes
+├── config/
+│   ├── db.js                 Mongoose connection
+│   └── default.json          Secrets (gitignored)
+├── middleware/
+│   ├── auth.js               User JWT middleware
+│   ├── orgAuth.js            Organisation JWT middleware
+│   └── checkObjectId.js      ObjectId validation
+├── models/
+│   ├── User.js               followers[], following[], followRequests[]
+│   ├── Profile.js            isPrivate, experience[], education[], social{}
+│   ├── Post.js               likes[], comments[]
+│   ├── Organization.js       Org accounts (separate auth)
+│   ├── Job.js                Job listings
+│   └── Application.js        Applications with status workflow
+├── routes/api/
+│   ├── users.js              Register, load user
+│   ├── auth.js               Login
+│   ├── profile.js            Profile CRUD + follow/request/accept/reject
+│   ├── posts.js              Posts CRUD + likes + comments (privacy-gated)
+│   ├── organizations.js      Org register/login/dashboard
+│   └── jobs.js               Jobs CRUD + applications
+└── client/src/
+    ├── actions/              Redux action creators (auth, profile, post, org, job)
+    ├── reducers/             Redux reducers — 6 slices
+    ├── components/
+    │   ├── auth/             Login, Register
+    │   ├── dashboard/        Dashboard + follow requests panel
+    │   ├── layout/           Navbar (3-state), Alert, Landing, Spinner
+    │   ├── profile/          Profile view with privacy wall + 4-state follow button
+    │   ├── profile-forms/    ProfileForm with animated privacy toggle
+    │   ├── profiles/         Developer directory
+    │   ├── posts/            Feed + create post
+    │   ├── post/             Single post + comments
+    │   ├── org/              Org dashboard, post job, applications
+    │   ├── jobs/             Job listing, detail, apply
+    │   └── routing/          PrivateRoute, OrgPrivateRoute
+    └── utils/
+        ├── api.js            Axios instance — dual 401 interceptor
+        ├── setAuthToken.js   User token into headers
+        └── setOrgAuthToken.js  Org token into headers
+```
+
+---
+
+## Key Design Decisions
+
+**Dual JWT System**
+
+User auth and Organisation auth are completely separate actors. Each has its own token header (x-auth-token vs x-org-token), its own Express middleware, its own Redux slice, and its own Navbar link set. The Axios 401 interceptor inspects the request URL to dispatch the correct logout action — preventing one actor from killing the other's session.
+
+**Privacy Enforced at the API Layer**
+
+Private profile filtering happens server-side, not in the client. The GET /api/posts endpoint fetches all private profiles, diffs against the requester's following[] array, then uses MongoDB's $nin operator to exclude blocked posts before the data is sent to the browser.
+
+**Follow Request Workflow**
+
+When a user follows a private profile, the server detects profile.isPrivate, adds the requester to targetUser.followRequests[] instead of followers[], and returns { requested: true }. The Redux action creator branches on this flag to dispatch either FOLLOW_USER or SEND_FOLLOW_REQUEST. The UI renders four distinct button states: Follow / Request Follow / Requested (Cancel) / Following.
+
+**Redux State Shape**
+
+The profile reducer stores followRequests[] as top-level state so the Dashboard renders incoming requests without a separate API call on mount — it dispatches getFollowRequests() alongside getCurrentProfile() in a single useEffect.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v16+
+- MongoDB Atlas cluster URI
+- GitHub personal access token (for the GitHub repos feature)
+
+### 1 — Configuration
+
+Create `config/default.json`:
 
 ```json
 {
-  "mongoURI": "<your_mongoDB_Atlas_uri_with_credentials>",
-  "jwtSecret": "secret",
-  "githubToken": "<yoursecrectaccesstoken>"
+  "mongoURI": "<your_mongodb_atlas_uri>",
+  "jwtSecret": "<any_long_random_string>",
+  "githubToken": "<your_github_personal_access_token>"
 }
 ```
 
-### Install server dependencies
+### 2 — Install dependencies
 
 ```bash
 npm install
+cd client && npm install
 ```
 
-### Install client dependencies
-
-```bash
-cd client
-npm install
-```
-
-### Run both Express & React from root
+### 3 — Run in development
 
 ```bash
 npm run dev
 ```
 
-### Build for production
+Starts Express on port 5000 and React on port 3000 concurrently.
+
+### 4 — Production build
 
 ```bash
-cd client
-npm run build
+cd client && npm run build
 ```
 
-### Test production before deploy
-
-After running a build in the client 👆, cd into the root of the project.  
-And run...
-
-Linux/Unix
+Then from root:
 
 ```bash
+# Windows
+$env:NODE_ENV="production"; node server.js
+
+# Linux / macOS
 NODE_ENV=production node server.js
 ```
 
-Windows Cmd Prompt or Powershell
+---
 
-```bash
-$env:NODE_ENV="production"
-node server.js
-```
+## API Reference
 
-Check in browser on [http://localhost:5000/](http://localhost:5000/)
+### Authentication
 
-### Deploy to Heroku
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| GET | /api/auth | Load authenticated user | User JWT |
+| POST | /api/auth | Login — returns JWT | Public |
+| POST | /api/users | Register new user | Public |
 
-If you followed the sensible advice above and included `config/default.json` and `config/production.json` in your .gitignore file, then pushing to Heroku will omit your config files from the push.  
-However, Heroku needs these files for a successful build.  
-So how to get them to Heroku without commiting them to GitHub?
+### Profiles
 
-What I suggest you do is create a local only branch, lets call it _production_.
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| GET | /api/profile | All profiles | Public |
+| GET | /api/profile/me | Current user profile | User JWT |
+| POST | /api/profile | Create / update profile | User JWT |
+| DELETE | /api/profile | Delete account | User JWT |
+| GET | /api/profile/user/:id | Profile by user ID | Public |
+| PUT | /api/profile/experience | Add experience | User JWT |
+| DELETE | /api/profile/experience/:id | Remove experience | User JWT |
+| PUT | /api/profile/education | Add education | User JWT |
+| DELETE | /api/profile/education/:id | Remove education | User JWT |
+| GET | /api/profile/github/:username | GitHub repos | Public |
+| PUT | /api/profile/follow/:id | Follow or send request | User JWT |
+| PUT | /api/profile/unfollow/:id | Unfollow | User JWT |
+| PUT | /api/profile/cancel-request/:id | Cancel follow request | User JWT |
+| GET | /api/profile/follow-requests | Incoming requests | User JWT |
+| PUT | /api/profile/accept-request/:id | Accept request | User JWT |
+| PUT | /api/profile/reject-request/:id | Reject request | User JWT |
+| GET | /api/profile/followers/:id | Followers list | User JWT |
+| GET | /api/profile/following/:id | Following list | User JWT |
 
-```bash
-git checkout -b production
-```
+### Posts
 
-We can use this branch to deploy from, with our config files.
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| GET | /api/posts | All posts (privacy-gated) | User JWT |
+| POST | /api/posts | Create post | User JWT |
+| GET | /api/posts/:id | Single post | User JWT |
+| DELETE | /api/posts/:id | Delete post | User JWT |
+| PUT | /api/posts/like/:id | Like | User JWT |
+| PUT | /api/posts/unlike/:id | Unlike | User JWT |
+| POST | /api/posts/comment/:id | Add comment | User JWT |
+| DELETE | /api/posts/comment/:id/:comment_id | Remove comment | User JWT |
 
-Add the config file...
+### Organisations and Jobs
 
-```bash
-git add -f config/production.json
-```
-
-This will track the file in git on this branch only. **DON'T PUSH THE PRODUCTION BRANCH TO GITHUB**
-
-Commit...
-
-```bash
-git commit -m 'ready to deploy'
-```
-
-Create your Heroku project
-
-```bash
-heroku create
-```
-
-And push the local production branch to the remote heroku main branch.
-
-```bash
-git push heroku production:main
-```
-
-Now Heroku will have the config it needs to build the project.
-
-> **Don't forget to make sure your production database is not whitelisted in MongoDB Atlas, otherwise the database connection will fail and your app will crash.**
-
-After deployment you can delete the production branch if you like.
-
-```bash
-git checkout main
-git branch -D production
-```
-
-Or you can leave it to merge and push updates from another branch.  
-Make any changes you need on your main branch and merge those into your production branch.
-
-```bash
-git checkout production
-git merge main
-```
-
-Once merged you can push to heroku as above and your site will rebuild and be updated.
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| POST | /api/organizations/register | Register org | Public |
+| POST | /api/organizations/login | Org login | Public |
+| GET | /api/organizations/me | Load org | Org JWT |
+| GET | /api/jobs | All jobs | Public |
+| POST | /api/jobs | Post a job | Org JWT |
+| PUT | /api/jobs/:id | Update job | Org JWT |
+| DELETE | /api/jobs/:id | Delete job | Org JWT |
+| GET | /api/jobs/org/my-jobs | Org job listings | Org JWT |
+| POST | /api/jobs/:id/apply | Apply | User JWT |
+| GET | /api/jobs/my-applications | My applications | User JWT |
+| GET | /api/jobs/org/applications | Org applications | Org JWT |
+| PUT | /api/jobs/applications/:id/status | Update status | Org JWT |
 
 ---
 
-## App Info
+## Skills Demonstrated
 
-### Author
+- **Full-Stack JavaScript** — Node.js/Express REST API consumed by a React 18 SPA with Redux
+- **Database Design** — MongoDB schema modelling with embedded arrays (followers, followRequests, experience) and Mongoose population
+- **State Management** — Redux + Thunk; normalised state shape across 6 slices: auth, profile, post, org, job, alert
+- **Authentication** — Stateless JWT; bcrypt password hashing; dual-actor auth; protected routes on client and server
+- **REST API Design** — Resource-oriented routes, correct HTTP semantics, middleware composition, input validation
+- **UI Engineering** — Custom design system with Tailwind CSS; CSS animations; glassmorphism; zero external UI libraries
+- **Async Patterns** — async/await throughout; Axios interceptors; error boundaries; loading states
+- **Security** — Tokens never stored in Redux state; ObjectId validation middleware; URL sanitisation; per-route auth guards
+- **Code Organisation** — Feature-based folder structure; separation of concerns across models, routes, middleware, Redux, and components
 
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
+---
 
-### Version
+## Author
 
-2.0.0
+**Pavan**
 
-### License
+---
 
-This project is licensed under the MIT License
+## License
+
+MIT
