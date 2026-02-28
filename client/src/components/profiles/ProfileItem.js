@@ -75,9 +75,7 @@ const ProfileItem = ({
 
         {!isOwnProfile && auth.isAuthenticated && (
           <button
-            onClick={() =>
-              isFollowing ? unfollowUser(_id) : followUser(_id)
-            }
+            onClick={() => (isFollowing ? unfollowUser(_id) : followUser(_id))}
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
               isFollowing
                 ? 'bg-white/5 hover:bg-red-500/20 text-white/70 hover:text-red-400 border border-white/10 hover:border-red-500/30'
@@ -103,5 +101,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { followUser, unfollowUser })(ProfileItem);
+export default connect(mapStateToProps, { followUser, unfollowUser })(
+  ProfileItem
+);
 
