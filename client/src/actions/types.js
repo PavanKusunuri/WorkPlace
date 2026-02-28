@@ -25,3 +25,28 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const FOLLOW_USER = 'FOLLOW_USER';
 export const UNFOLLOW_USER = 'UNFOLLOW_USER';
+
+// Organization auth
+export const ORG_LOADED = 'ORG_LOADED';
+export const ORG_AUTH_ERROR = 'ORG_AUTH_ERROR';
+export const ORG_LOGIN_SUCCESS = 'ORG_LOGIN_SUCCESS';
+export const ORG_LOGIN_FAIL = 'ORG_LOGIN_FAIL';
+export const ORG_REGISTER_SUCCESS = 'ORG_REGISTER_SUCCESS';
+export const ORG_REGISTER_FAIL = 'ORG_REGISTER_FAIL';
+export const ORG_LOGOUT = 'ORG_LOGOUT';
+
+// Jobs
+export const GET_JOBS = 'GET_JOBS';
+export const GET_JOB = 'GET_JOB';
+export const GET_ORG_JOBS = 'GET_ORG_JOBS';
+export const ADD_JOB = 'ADD_JOB';
+export const UPDATE_JOB = 'UPDATE_JOB';
+export const DELETE_JOB = 'DELETE_JOB';
+export const JOB_ERROR = 'JOB_ERROR';
+
+// Applications
+export const GET_ORG_APPLICATIONS = 'GET_ORG_APPLICATIONS';
+export const GET_MY_APPLICATIONS = 'GET_MY_APPLICATIONS';
+export const APPLY_JOB = 'APPLY_JOB';
+export const UPDATE_APPLICATION_STATUS = 'UPDATE_APPLICATION_STATUS';
+export const APPLICATION_ERROR = 'APPLICATION_ERROR';

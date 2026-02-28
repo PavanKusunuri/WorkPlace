@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import { LOGOUT } from '../actions/types';
+import { LOGOUT, ORG_LOGOUT } from '../actions/types';
 
 // Create an instance of axios
 const api = axios.create({
@@ -20,8 +20,18 @@ const api = axios.create({
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response.status === 401) {
-      store.dispatch({ type: LOGOUT });
+    if (err.response?.status === 401) {
+      const url = err.config?.url || '';
+      // If the request was to an org endpoint, log out the org, not the user
+      if (
+        url.startsWith('/organizations') ||
+        url.startsWith('/jobs/org') ||
+        url.startsWith('/jobs/applications/org')
+      ) {
+        store.dispatch({ type: ORG_LOGOUT });
+      } else {
+        store.dispatch({ type: LOGOUT });
+      }
     }
     return Promise.reject(err);
   }

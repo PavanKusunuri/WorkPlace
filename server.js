@@ -15,6 +15,11 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/organizations', require('./routes/api/organizations'));
+app.use('/api/jobs', require('./routes/api/jobs'));
+
+// Serve uploaded org logos
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
