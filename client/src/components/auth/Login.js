@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 
 const Login = ({ login, isAuthenticated }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [focused, setFocused] = useState('');
 
   const { email, password } = formData;
 
@@ -20,130 +18,120 @@ const Login = ({ login, isAuthenticated }) => {
     login(email, password);
   };
 
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
-  }
+  if (isAuthenticated) return <Navigate to="/dashboard" />;
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
-          className="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
-        />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
+    <div className="relative min-h-screen bg-black flex items-center justify-center overflow-hidden px-4 py-16">
+
+      {/* Ambient orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+        <div className="absolute -top-24 left-1/4 w-[420px] h-[420px] bg-purple-700 rounded-full blur-[130px] opacity-25 animate-pulse-glow" />
+        <div className="absolute -bottom-24 right-1/4 w-[380px] h-[380px] bg-blue-700 rounded-full blur-[110px] opacity-20 animate-pulse-glow-slow" />
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={onSubmit}>
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Email address
-            </label>
-            <div className="mt-2">
+      {/* Card */}
+      <div
+        className="relative z-10 w-full max-w-sm opacity-0 animate-slide-up"
+        style={{ animationFillMode: 'forwards' }}
+      >
+        {/* Logo mark */}
+        <div
+          className="flex justify-center mb-8 opacity-0 animate-fade-in"
+          style={{ animationFillMode: 'forwards', animationDelay: '0.25s' }}
+        >
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-xl shadow-purple-600/30">
+            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Glass card */}
+        <div className="p-8 rounded-3xl glass shadow-2xl">
+          <h2 className="text-[22px] font-semibold text-white mb-1 tracking-tight">
+            Welcome back
+          </h2>
+          <p className="text-white/40 text-sm mb-8">
+            Sign in to your developer account
+          </p>
+
+          <form onSubmit={onSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-white/50 mb-1.5 tracking-wide uppercase">
+                Email
+              </label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                autoComplete="email"
                 value={email}
                 onChange={onChange}
+                onFocus={() => setFocused('email')}
+                onBlur={() => setFocused('')}
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="you@example.com"
+                className={`glass-input w-full px-4 py-3 rounded-xl text-white text-sm placeholder-white/20 transition-all duration-200 ${focused === 'email' ? 'ring-1 ring-white/20' : ''}`}
               />
             </div>
-          </div>
 
-          <div>
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="text-sm">
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-medium text-white/50 tracking-wide uppercase">
+                  Password
+                </label>
                 <button
                   type="button"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  className="text-xs text-purple-400 hover:text-purple-300 transition-colors duration-150"
                 >
-                  Forgot password?
+                  Forgot?
                 </button>
               </div>
-            </div>
-            <div className="mt-2">
               <input
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
                 value={password}
                 onChange={onChange}
+                onFocus={() => setFocused('password')}
+                onBlur={() => setFocused('')}
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder=""
+                className={`glass-input w-full px-4 py-3 rounded-xl text-white text-sm placeholder-white/20 transition-all duration-200 ${focused === 'password' ? 'ring-1 ring-white/20' : ''}`}
               />
             </div>
-          </div>
 
-          <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold hover:from-purple-500 hover:to-blue-500 hover:shadow-lg hover:shadow-purple-500/25 active:scale-[0.98] transition-all duration-200"
             >
               Sign in
             </button>
-          </div>
-        </form>
+          </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
-          Not a member?{' '}
+          <p className="mt-6 text-center text-xs text-white/30">
+            Don't have an account?{' '}
+            <Link
+              to="/register"
+              className="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-150"
+            >
+              Get started
+            </Link>
+          </p>
+        </div>
+
+        <div className="mt-6 flex justify-center">
           <Link
-            to="/register"
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs text-white/25 hover:text-white/50 transition-colors duration-150"
           >
-            Start here
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to home
           </Link>
-        </p>
+        </div>
       </div>
     </div>
-
-    // <div className="flex min-h-full flex-1 flex-col justify-center px-6">
-    //   <h1 className="mt-3">Sign In</h1>
-    //   <p className="">
-    //     <i className="" /> Sign Into Your Account
-    //   </p>
-    //   <form className="" onSubmit={onSubmit}>
-    //     <div className="">
-    //       <input
-    //         type="email"
-    //         placeholder="Email Address"
-    //         name="email"
-    //         value={email}
-    //         onChange={onChange}
-    //       />
-    //     </div>
-    //     <div className="">
-    //       <input
-    //         type="password"
-    //         placeholder="Password"
-    //         name="password"
-    //         value={password}
-    //         onChange={onChange}
-    //         minLength="6"
-    //       />
-    //     </div>
-    //     <input type="submit" className="" value="Login" />
-    //   </form>
-    //   <p className="my-1">
-    //     Don't have an account? <Link to="/register">Sign Up</Link>
-    //   </p>
-    // </section>
   );
 };
 

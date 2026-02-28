@@ -4,98 +4,89 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated }}) => {
+const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   const authLinks = (
-    <ul className="flex space-x-4">
-      <form>
-       <input type="text" placeholder="Search.." />
-       </form>
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/posts">Home</Link>
-      </li>
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/developers">My Network</Link>
-      </li>
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/jobs">Jobs</Link>
-      </li>
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/messages">Messaging</Link>
-      </li>
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/notifications">Notifications</Link>
-      </li>
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/me">Me</Link>
-      </li>
-      <hr />
-      <li className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
-        <Link to="/business">
-          <span className="hide-sm">Business</span>
-        </Link>
-      </li>
-    </ul>
+    <Fragment>
+      <Link
+        to="/feed"
+        className="text-white/60 hover:text-white text-sm transition-colors duration-150"
+      >
+        Feed
+      </Link>
+      <Link
+        to="/profiles"
+        className="text-white/60 hover:text-white text-sm transition-colors duration-150"
+      >
+        Developers
+      </Link>
+      <Link
+        to="/dashboard"
+        className="text-white/60 hover:text-white text-sm transition-colors duration-150"
+      >
+        Dashboard
+      </Link>
+      <button
+        onClick={logout}
+        className="px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/70 text-sm hover:bg-white/10 hover:text-white hover:border-white/30 transition-all duration-200"
+      >
+        Sign out
+      </button>
+    </Fragment>
   );
 
-     const guestLinks = (
-    <ul>
-
-<li class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
-<Link to="/profiles">Developers</Link>
-
-  </li>
-            <li  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-            <Link to="/register">Register</Link> 
-            
-              </li>
-            <li class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-             <Link to="/login">Login</Link> 
-            </li>
-
-
-    </ul>
+  const guestLinks = (
+    <Fragment>
+      <Link
+        to="/profiles"
+        className="text-white/60 hover:text-white text-sm transition-colors duration-150"
+      >
+        Developers
+      </Link>
+      <Link
+        to="/login"
+        className="text-white/60 hover:text-white text-sm transition-colors duration-150"
+      >
+        Sign in
+      </Link>
+      <Link
+        to="/register"
+        className="px-4 py-1.5 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 active:scale-95 transition-all duration-150"
+      >
+        Get started
+      </Link>
+    </Fragment>
   );
 
   return (
-    <nav className="bg-white-800 text-black">
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="relative flex min-height-full items-center justify-between align-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-      <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open main menu</span>
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-          {/* <!--
-            Icon when menu is open.
-
-            Menu open: "block", Menu closed: "hidden"
-          --> */}
-          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
-        </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-          <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+    <nav
+      className="fixed top-0 inset-x-0 z-50 border-b border-white/[0.06] bg-black/60 backdrop-blur-xl opacity-0 animate-slide-down"
+      style={{ animationFillMode: 'forwards' }}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-md shadow-purple-600/20 group-hover:scale-105 transition-transform duration-150">
+            <svg
+              className="w-3.5 h-3.5 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+              />
+            </svg>
           </div>
+          <span className="text-white font-semibold text-sm tracking-tight">
+            WorkPlace
+          </span>
+        </Link>
+        <div className="flex items-center gap-6">
+          {isAuthenticated ? authLinks : guestLinks}
         </div>
       </div>
-
-  
-   
-
-     
-
-      </div>
-</div>
     </nav>
   );
 };
