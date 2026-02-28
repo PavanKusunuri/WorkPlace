@@ -74,11 +74,26 @@ const App = () => {
           <Route path="jobs/:id" element={<JobDetail />} />
 
           {/* Developer private */}
-          <Route path="dashboard" element={<PrivateRoute component={Dashboard} />} />
-          <Route path="create-profile" element={<PrivateRoute component={ProfileForm} />} />
-          <Route path="edit-profile" element={<PrivateRoute component={ProfileForm} />} />
-          <Route path="add-experience" element={<PrivateRoute component={AddExperience} />} />
-          <Route path="add-education" element={<PrivateRoute component={AddEducation} />} />
+          <Route
+            path="dashboard"
+            element={<PrivateRoute component={Dashboard} />}
+          />
+          <Route
+            path="create-profile"
+            element={<PrivateRoute component={ProfileForm} />}
+          />
+          <Route
+            path="edit-profile"
+            element={<PrivateRoute component={ProfileForm} />}
+          />
+          <Route
+            path="add-experience"
+            element={<PrivateRoute component={AddExperience} />}
+          />
+          <Route
+            path="add-education"
+            element={<PrivateRoute component={AddEducation} />}
+          />
           <Route path="feed" element={<PrivateRoute component={Feed} />} />
           <Route path="posts/:id" element={<PrivateRoute component={Post} />} />
 
@@ -87,9 +102,18 @@ const App = () => {
           <Route path="org/register" element={<OrgRegister />} />
 
           {/* Organization private */}
-          <Route path="org/dashboard" element={<OrgPrivateRoute component={OrgDashboard} />} />
-          <Route path="org/post-job" element={<OrgPrivateRoute component={PostJob} />} />
-          <Route path="org/applications" element={<OrgPrivateRoute component={OrgApplications} />} />
+          <Route
+            path="org/dashboard"
+            element={<OrgPrivateRoute component={OrgDashboard} />}
+          />
+          <Route
+            path="org/post-job"
+            element={<OrgPrivateRoute component={PostJob} />}
+          />
+          <Route
+            path="org/applications"
+            element={<OrgPrivateRoute component={OrgApplications} />}
+          />
 
           <Route path="/*" element={<NotFound />} />
         </Routes>

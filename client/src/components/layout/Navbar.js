@@ -17,10 +17,18 @@ const Navbar = ({
   // ── Organization logged-in links ─────────────────────────────────────────
   const orgLinks = (
     <Fragment>
-      <Link to="/org/dashboard" className={navLink}>Dashboard</Link>
-      <Link to="/org/post-job" className={navLink}>Post a Job</Link>
-      <Link to="/org/applications" className={navLink}>Applications</Link>
-      <Link to="/jobs" className={navLink}>Browse Jobs</Link>
+      <Link to="/org/dashboard" className={navLink}>
+        Dashboard
+      </Link>
+      <Link to="/org/post-job" className={navLink}>
+        Post a Job
+      </Link>
+      <Link to="/org/applications" className={navLink}>
+        Applications
+      </Link>
+      <Link to="/jobs" className={navLink}>
+        Browse Jobs
+      </Link>
       <button
         onClick={logoutOrg}
         className="px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/70 text-sm hover:bg-white/10 hover:text-white hover:border-white/30 transition-all duration-200"
@@ -33,10 +41,18 @@ const Navbar = ({
   // ── Developer logged-in links ─────────────────────────────────────────────
   const authLinks = (
     <Fragment>
-      <Link to="/feed" className={navLink}>Feed</Link>
-      <Link to="/profiles" className={navLink}>Developers</Link>
-      <Link to="/jobs" className={navLink}>Jobs</Link>
-      <Link to="/dashboard" className={navLink}>Dashboard</Link>
+      <Link to="/feed" className={navLink}>
+        Feed
+      </Link>
+      <Link to="/profiles" className={navLink}>
+        Developers
+      </Link>
+      <Link to="/jobs" className={navLink}>
+        Jobs
+      </Link>
+      <Link to="/dashboard" className={navLink}>
+        Dashboard
+      </Link>
       <button
         onClick={logout}
         className="px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/70 text-sm hover:bg-white/10 hover:text-white hover:border-white/30 transition-all duration-200"
@@ -49,13 +65,16 @@ const Navbar = ({
   // ── Guest links ───────────────────────────────────────────────────────────
   const guestLinks = (
     <Fragment>
-      <Link to="/profiles" className={navLink}>Developers</Link>
-      <Link to="/jobs" className={navLink}>Jobs</Link>
-      <Link to="/login" className={navLink}>Sign in</Link>
-      <Link
-        to="/org/login"
-        className={navLink + ' hidden sm:inline'}
-      >
+      <Link to="/profiles" className={navLink}>
+        Developers
+      </Link>
+      <Link to="/jobs" className={navLink}>
+        Jobs
+      </Link>
+      <Link to="/login" className={navLink}>
+        Sign in
+      </Link>
+      <Link to="/org/login" className={navLink + ' hidden sm:inline'}>
         For Organizations
       </Link>
       <Link
