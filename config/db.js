@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
-// Prefer environment variable (for .env / Heroku), fallback to config
-const db = process.env.MONGO_URI || require('config').get('mongoURI');
+// Use only the environment variable for Mongo connection (Render / .env)
+const db = process.env.MONGO_URI;
 
 const connectDB = async () => {
+  if (!db) {
+    console.error('MONGO_URI environment variable is not set');
+    process.exit(1);
+  }
+
   try {
     await mongoose.connect(db, {
       useNewUrlParser: true,
