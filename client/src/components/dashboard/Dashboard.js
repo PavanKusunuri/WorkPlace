@@ -22,6 +22,9 @@ const Dashboard = ({
   auth: { user },
   profile: { profile, followRequests }
 }) => {
+  const safeFollowRequests = Array.isArray(followRequests)
+    ? followRequests
+    : [];
   useEffect(() => {
     getCurrentProfile();
     getFollowRequests();
@@ -40,7 +43,7 @@ const Dashboard = ({
           <Education education={profile.education} />
 
           {/* Follow Requests Section */}
-          {followRequests && followRequests.length > 0 && (
+          {safeFollowRequests.length > 0 && (
             <div
               style={{
                 background: 'rgba(255,255,255,0.03)',
@@ -72,7 +75,7 @@ const Dashboard = ({
                     padding: '2px 8px'
                   }}
                 >
-                  {followRequests.length}
+                  {safeFollowRequests.length}
                 </span>
               </h2>
               <div
@@ -82,7 +85,7 @@ const Dashboard = ({
                   gap: '12px'
                 }}
               >
-                {followRequests.map((req) => (
+                {safeFollowRequests.map((req) => (
                   <div
                     key={req._id}
                     style={{

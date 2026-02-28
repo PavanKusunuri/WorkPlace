@@ -5,7 +5,8 @@ import { deleteExperience } from '../../actions/profile';
 import formatDate from '../../utils/formatDate';
 
 const Experience = ({ experience, deleteExperience }) => {
-  const experiences = experience.map((exp) => (
+  const list = Array.isArray(experience) ? experience : [];
+  const experiences = list.map((exp) => (
     <tr key={exp._id}>
       <td>{exp.company}</td>
       <td className="hide-sm">{exp.title}</td>
