@@ -8,7 +8,11 @@ import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import ProfileGithub from './ProfileGithub';
-import { getProfileById, followUser, unfollowUser } from '../../actions/profile';
+import {
+  getProfileById,
+  followUser,
+  unfollowUser
+} from '../../actions/profile';
 
 const Profile = ({
   getProfileById,
@@ -37,8 +41,12 @@ const Profile = ({
       (f) => f.user && f.user.toString() === auth.user._id
     );
 
-  const followerCount = profile.user.followers ? profile.user.followers.length : 0;
-  const followingCount = profile.user.following ? profile.user.following.length : 0;
+  const followerCount = profile.user.followers
+    ? profile.user.followers.length
+    : 0;
+  const followingCount = profile.user.following
+    ? profile.user.following.length
+    : 0;
 
   return (
     <section className="min-h-screen bg-black pt-24 pb-16 px-4">
@@ -55,8 +63,18 @@ const Profile = ({
             to="/profiles"
             className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             All Developers
           </Link>
@@ -65,11 +83,17 @@ const Profile = ({
             {/* Follower stats */}
             <div className="glass rounded-2xl px-4 py-2 flex items-center gap-4 text-sm">
               <span className="text-white/60">
-                <span className="text-white font-semibold">{followerCount}</span> followers
+                <span className="text-white font-semibold">
+                  {followerCount}
+                </span>{' '}
+                followers
               </span>
               <span className="w-px h-4 bg-white/20" />
               <span className="text-white/60">
-                <span className="text-white font-semibold">{followingCount}</span> following
+                <span className="text-white font-semibold">
+                  {followingCount}
+                </span>{' '}
+                following
               </span>
             </div>
 
@@ -110,11 +134,16 @@ const Profile = ({
           </div>
 
           <div className="glass rounded-3xl p-6 border border-white/10">
-            <h2 className="text-lg font-semibold text-white mb-4">Experience</h2>
+            <h2 className="text-lg font-semibold text-white mb-4">
+              Experience
+            </h2>
             {profile.experience.length > 0 ? (
               <Fragment>
                 {profile.experience.map((experience) => (
-                  <ProfileExperience key={experience._id} experience={experience} />
+                  <ProfileExperience
+                    key={experience._id}
+                    experience={experience}
+                  />
                 ))}
               </Fragment>
             ) : (
@@ -159,4 +188,8 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfileById, followUser, unfollowUser })(Profile);
+export default connect(mapStateToProps, {
+  getProfileById,
+  followUser,
+  unfollowUser
+})(Profile);
